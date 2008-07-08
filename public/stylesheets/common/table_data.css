@@ -1,0 +1,136 @@
+/******* table data style *******/
+table.table-data {
+  margin-top: 2px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  text-align: left;
+  border-spacing: 1px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #BBB;
+  border-collapse: collapse;
+}
+.table-data .even {
+  background-color: #FFF;
+}
+.table-data .odd {
+  background-color: #EBEBEB;
+}
+.table-data th {
+  color: #777;
+  background-color: #FFF;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+  height: 25px;
+  font-size: 0.95em;
+  font-weight: bold;
+  border-color: #AAA;
+  border-style: solid;
+  border-width: 1px;
+  background-color: #CCC;
+}
+.table-data .sort-up {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+  font-weight: bold;
+  border-color: #AAA;
+  border-style: solid;
+  border-width: 1px;
+  background-color: #CCC;
+}
+.table-data .sort-down {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+  font-weight: bold;
+  border-color: #AAA;
+  border-style: solid;
+  border-width: 1px;
+  background-color: #CCC;
+}
+.table-data td {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 20px;
+  text-align: center;
+  font-size: 0.75em;
+  font-weight: normal;
+  border-color: #BBB;
+  border-style: solid;
+  border-width: 1px;
+}
+.table-data td a {
+  color: #367da6;
+  text-decoration: none;
+}
+.table-data td a:visited {
+  color: #367da6;
+  text-decoration: none;
+}
+.table-data td a:hover {
+  color: #367da6;
+  text-decoration: none;
+}
+.table-data td a:visited:hover {
+  color: #367da6;
+  text-decoration: none;
+}
+.table-data th a {
+  color: #777;
+  text-decoration: none;
+}
+.table-data th a:visited {
+  color: #777;
+  text-decoration: none;
+}
+.table-data th a:hover {
+  color: #777;
+  text-decoration: none;
+}
+.table-data th a:visited:hover {
+  color: #777;
+  text-decoration: none;
+}
+.table-data .sort-up a {
+  color: #367da6;
+  text-decoration: none;
+}
+.table-data .sort-up a:visited {
+  color: #367da6;
+  text-decoration: none;
+}
+.table-data .sort-up a:hover {
+  color: #367da6;
+  text-decoration: none;
+}
+.table-data .sort-up a:visited:hover {
+  color: #367da6;
+  text-decoration: none;
+}
+.table-data .sort-down a {
+  color: #367da6;
+  text-decoration: none;
+}
+.table-data .sort-down a:visited {
+  color: #367da6;
+  text-decoration: none;
+}
+.table-data .sort-down a:hover {
+  color: #367da6;
+  text-decoration: none;
+}
+.table-data .sort-down a:visited:hover {
+  color: #367da6;
+  text-decoration: none;
+}

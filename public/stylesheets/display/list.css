@@ -1,0 +1,67 @@
+/******* display list style *******/
+.display-list-wrapper {
+  margin-top: 2px;
+  margin-bottom: 2px;  
+  margin-left: 0px;
+  margin-right: 0px;  
+}
+.display-list {
+  margin-top: 2px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  text-align: left;
+  border-spacing: 1px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #BBB;
+  border-collapse: collapse;
+}
+.display-list-value {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 20px;
+  text-align: left;
+  font-weight: normal;
+  font-size: 0.85em;
+  border-color: #BBB;
+  border-style: solid;
+  border-width: 1px;
+}
+.display-list-attribute {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 20px;
+  text-align: left;
+  font-weight: bold;
+  font-size: 0.85em;
+  border-color: #BBB;
+  border-style: solid;
+  border-width: 1px;
+}
+.display-list .even {
+  background-color: #FFF;
+}
+.display-list .odd {
+  background-color: #EBEBEB;
+}
+.display-list a {
+  color: #367da6;
+  text-decoration: none;
+}
+.display-list a:visited {
+  color: #367da6;
+  text-decoration: none;
+}
+.display-list a:hover {
+  color: #367da6;
+  text-decoration: none;
+}
+.display-list a:visited:hover {
+  color: #367da6;
+  text-decoration: none;
+}

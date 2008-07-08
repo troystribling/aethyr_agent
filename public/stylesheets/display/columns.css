@@ -1,0 +1,17 @@
+/******* display double column *******/
+#display-double-column-wrapper {
+  margin-top: 2px;
+  margin-bottom: 2px;  
+  margin-left: 0px;
+  margin-right: 0px;  
+}
+#display-left-column {
+  width: 275px;
+  text-align: left;
+  float: left;
+}
+#display-right-column {
+  width: 600px;
+  text-align: left;
+  float: right;
+}

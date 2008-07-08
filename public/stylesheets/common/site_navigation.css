@@ -1,0 +1,46 @@
+/******* site navigation style *******/
+#site-navigation-wrapper {
+  color: #777;
+  background-color: #000;
+  background: url(/images/black_navigation.png) repeat-x left top;
+  padding-top: 0px;
+  padding-bottom: 10px;
+  height: 35px;
+  font-size: 1.25em;
+  font-weight: lighter;
+  letter-spacing: -1px;
+}
+#site-navigation strong {
+  color: #367da6;
+}
+#site-navigation a {
+  color: #888;
+  text-decoration: none;
+}
+#site-navigation a:visited {
+  color: #888;
+  text-decoration: none;
+}
+#site-navigation a:hover {
+  color: #367da6;
+  text-decoration: none;
+}
+#site-navigation a:visited:hover {
+  color: #367da6;
+  text-decoration: none;
+}
+#site-navigation img {
+  float: left;
+}
+#site-navigation ul {
+  list-style-type: none;
+  display: inline;
+  float: right;
+  margin-top: 3px;
+}
+#site-navigation li {
+  display: inline;
+  padding: 0px;
+  margin: 0px;
+  margin-right: 10px;
+}

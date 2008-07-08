@@ -1,0 +1,42 @@
+@import url('../common/site_navigation.css');
+@import url('../common/messages.css');
+@import url('../common/footer.css');
+@import url('../common/active_record_validation_errors.css');
+@import url('../authentication/authentication_control.css');
+
+/******* define dimensions *******/
+#page-wrapper {
+  margin: 0 auto;
+  margin-top: 75px;
+  width: 1000px;
+  text-align: left;
+  color: #000;
+  background-color: #FFF;
+  border-width: thin;
+  border-color: #DDD;
+  border-style: none;
+}
+#page {
+  margin-left: 45px;
+  margin-right: 45px;
+  min-height: 50px;
+}
+#site-navigation {
+  margin: 0 auto;
+  width: 1000px;
+  text-align: left;
+}
+#footer-wrapper {
+  margin: 0 auto;
+  margin-top: 5px;
+  width: 1000px;
+  text-align: left;
+}
+#footer {
+  margin-left: 11.3em;
+  margin-right: 11.3em;  
+  width: 30%;
+  border-top-width: thin;
+  border-top-color: #BBB;
+  border-top-style: dotted;
+}

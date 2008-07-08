@@ -1,0 +1,92 @@
+@import url('../page/page.css');
+@import url('../dashboard/dashboard.css');
+@import url('../display/display.css');
+@import url('../display/control.css');
+@import url('../display/menu.css');
+@import url('../display/navigation.css');
+@import url('../display/list.css');
+@import url('../display/columns.css');
+@import url('../display/click_path.css');
+@import url('../common/toolbar.css');
+@import url('../common/pagination.css');
+@import url('../common/indication.css');
+@import url('../common/messages.css');
+@import url('../common/site.css');
+@import url('../common/footer.css');
+@import url('../common/site_navigation.css');
+@import url('../common/table_data.css');
+
+/******* define areas *******/
+#page-wrapper {
+  margin: 0 auto;
+  margin-top: 2px;
+  width: 1000px;
+  text-align: left;
+  color: #000;
+  background-color: #EBEBEB;
+  border-width: thin;
+  border-color: #DDD;
+  border-style: solid;
+}
+#page {
+  margin-left: 45px;
+  margin-right: 45px;
+  min-height: 625px;
+}
+#site-navigation {
+  margin: 0 auto;
+  width: 1000px;
+  text-align: left;
+}
+.display-menu-wrapper {
+  color: #777;
+  margin: 0 auto;
+  margin-top: 20px;
+  background-color: #EBEBEB;
+  width: 1000px;
+  text-align: left;
+  border-width: thin;
+  border-color: #DDD;
+  border-style: solid;
+}
+.display-navigation-wrapper {
+  color: #777;
+  margin: 0 auto;
+  margin-top: 20px;
+  background-color: #EBEBEB;
+  width: 1000px;
+  text-align: left;
+  border-width: thin;
+  border-color: #DDD;
+  border-style: solid;
+}
+#display-click-path-wrapper {
+  color: #777;
+  margin: 0 auto;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  background-color: #EBEBEB;
+  width: 1000px;
+  text-align: left;
+  border-width: thin;
+  border-color: #DDD;
+  border-style: solid;
+}
+#footer-wrapper {
+  margin: 0 auto;
+  margin-top: 15px;
+  width: 1000px;
+  text-align: left;
+}
+#footer {
+  width: 30%;
+  float: left;
+  border-top-width: thin;
+  border-top-color: #BBB;
+  border-top-style: dotted;
+}
+#indication-wrapper {
+  margin: 0 auto;
+  width: 1000px;
+  height: 2px;
+}

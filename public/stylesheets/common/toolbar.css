@@ -1,0 +1,47 @@
+/******* toolbar style *******/
+.bottom-toolbar {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 0px;
+  margin-right: 0px;
+  font-size: .85em;
+  text-align: left;
+}
+.top-toolbar {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 0px;
+  margin-right: 0px;
+  font-size: .85em;
+  text-align: left;
+}
+.top-toolbar-search {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  text-align: left;
+}
+/******* edit-bar style *******/
+.button-bar {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 0px;
+  margin-right: 0px;
+  text-align: left;
+  border-collapse: collapse;
+}
+.button-bar-buttons {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 5px;
+  text-align: left;
+}
+.button-bar-search {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  text-align: left;
+}

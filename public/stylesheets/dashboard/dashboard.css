@@ -1,0 +1,48 @@
+/******* dashboard style *******/
+.dashboard-container {
+  margin-left: 0px;
+  margin-right: 0px;  
+  margin-top: 0px;
+  margin-bottom: 0px;  
+  padding-top: 0px;
+  font-size: 1.2em;
+  font-weight: normal;
+}
+.dashboard-divide {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 0px;
+  margin-right: 0px;  
+  height: 3px;
+  background-color: #FFF;
+  color: #FFF;
+  border: 1px solid #DDD;
+}
+.dashboard-label {
+  margin-top: 9px;
+  margin-bottom: 0px;  
+  margin-left: 0px;
+  margin-right: 0px;  
+  float: left;
+  text-align: right;
+}
+.dashboard-control {
+  margin-top: 5px;
+  margin-bottom: 5px;  
+  margin-left: 0px;
+  margin-right: 0px;  
+  font-size: 1.1em;
+  font-weight: normal;
+}
+.dashboard-buttons {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 0px;
+  margin-right: 0px;  
+}
+.dashboard-buttons input {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+}

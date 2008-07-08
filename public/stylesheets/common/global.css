@@ -1,0 +1,24 @@
+/******* global selectors *******/
+html {
+  overflow:-moz-scrollbars-vertical;
+}
+a:active, a:focus{
+  outline:none;
+}
+body {
+  background-color: #FFF;
+  font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+.hidden {
+  display: none;
+}
+.clear {
+  clear: both;
+}
+.spacer {
+  height: 5px;
+}
+img {  
+  border-style: none;
+}

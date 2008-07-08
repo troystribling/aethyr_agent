@@ -1,0 +1,17 @@
+/******* pagination *******/
+.pagination a {
+  color: #367da6;
+  text-decoration: none;
+}
+.pagination a:visited {
+  color: #367da6;
+  text-decoration: none;
+}
+pagination a:hover {
+  color: #367da6;
+  text-decoration: none;
+}
+.pagination a:visited:hover {
+  color: #367da6;
+  text-decoration: none;
+}

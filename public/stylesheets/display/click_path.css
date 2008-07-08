@@ -1,0 +1,42 @@
+/******* display click path *******/
+#display-click-path {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 45px;
+  margin-right: 45px;
+}
+#display-click-path a {
+  color: #367da6;
+  text-decoration: none;
+}
+#display-click-path a:visited {
+  color: #367da6;
+  text-decoration: none;
+}
+#display-click-path a:hover {
+  color: #367da6;
+  text-decoration: none;
+}
+#display-click-path a:visited:hover {
+  color: #367da6;
+  text-decoration: none;
+}
+#display-click-path ul {
+  list-style-type: none;
+  display: inline;
+  margin: 0px;
+  padding: 0px;
+}
+#display-click-path li {
+  display: inline;
+  padding: 0px;
+  margin: 0px;
+  margin-right: 0px;
+  margin-left: -1px;
+  padding-right: 5px;
+  padding-left: 0px;
+  font-size: .85em;
+  font-weight: normal;
+  letter-spacing: -1px;
+  background-color: #EBEBEB;
+}

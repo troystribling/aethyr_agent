@@ -1,0 +1,46 @@
+/******* active_record error style *******/
+.fieldWithErrors {
+  background-color: #CD5C5C;
+  padding-bottom: 0px;
+  padding-top: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+  display: table;
+}
+/******* active_record error style *******/
+#errorExplanation {
+  margin: 0;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  background-color: #FFB6C1;
+  border-width: thin;
+  border-color: #CD5C5C;
+  border-style: solid;
+ }
+ 
+#errorExplanation h2 {
+  color: #fff;
+  background-color: #CD5C5C;
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  margin: 0px;
+  font-size: .95em;
+}
+#errorExplanation p {
+  color: #333;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 15px;
+  margin-right: 15px;
+  font-size: .85em;
+}
+#errorExplanation ul {
+  list-style: disk;
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+#errorExplanation li {
+  font-size: .85em;
+  list-style: disk;
+}
