@@ -1,14 +1,13 @@
 ########################################################################################################
 ########################################################################################################
-class AgentsController < ApplicationController
+class InventoryController < ApplicationController
 
   ######################################################################################################
   #### mixins
-  layout 'agent'
 
   ######################################################################################################
   #### default layout
-  layout :set_layout
+  layout 'agent'
 
   ######################################################################################################
   #### filters
@@ -23,7 +22,7 @@ class AgentsController < ApplicationController
       format.html {redirect_to(agent_path)}
       format.js do
         render :update do |page|
-          page['services-display'].replace_html :partial => 'dashboard'
+          page['agent-display'].replace_html :partial => 'dashboard'
           page['display-click-path-wrapper'].hide
         end
       end
