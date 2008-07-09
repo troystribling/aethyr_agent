@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html>
+
+  <head>
+    <title><%= @page_title || "aethyr" %></title>
+    <%= stylesheet_link_tag "common/global" , :media => "all" %>
+    <%= stylesheet_link_tag "config/page_display" , :media => "all" %>
+    <%= javascript_include_tag "prototype" %>
+    <%= javascript_include_tag "lowpro" %>
+    <%= javascript_include_tag "effects" %>
+    <%= javascript_include_tag "menu" %>
+    <%= javascript_include_tag "prompt_text" %>
+    <%= javascript_include_tag "application" %>
+    <link rel="shortcut icon" href="/favicon.ico" />	  
+  </head>
+
+  <body>
+              
+    <div id="site-navigation-wrapper">
+      <div id="site-navigation">
+        <%= image_tag 'aethyr-logo-alpha-1-small.png' %>
+        <%= yield :navigation %>
+      </div>
+    </div>
+        
+    <div id="indication-wrapper" class="clear">
+      <div id="loading-indication" class="indication" style="display:none">loading...</div>
+      <div id="synchronizing-indication" class="indication" style="display:none">synchronizing...</div>
+    </div>
+
+    <div id="services-menu-wrapper" class="display-menu-wrapper clear">
+      <div id="services-menu" class="display-menu">
+        <%= yield :services_navigation %>
+      </div>
+    </div>
+
+    <div id="display-click-path-wrapper" style="display:none;">
+      <div id="display-click-path">
+      </div> 
+    </div>   
+
+    <div id="page-wrapper">
+      <div id="page">
+        <%= yield %>  
+      </div>            
+    </div>
+
+    <div id="footer-wrapper">
+      <div id="footer">
+        <%= render(:file => "common/footer") %>
+      </div>
+    </div>
+
+  </body>
+
+</html>
