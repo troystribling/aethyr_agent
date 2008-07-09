@@ -1,0 +1,10 @@
+<% content_for(:navigation) do -%>
+  <ul>
+    <li><%= link_to "account", show_current_user_path %></li>
+    <li><%= link_to "services", services_path %></li>
+    <li><%= link_to "administration", users_path if current_user.administrator %></li>
+    <li><%= link_to "logout", logout_path %></li>
+    <li><%= link_to "help", HELP_URL %></li>
+  </ul>
+<% end %>
+
