@@ -1,12 +1,13 @@
 ########################################################################################################
 ########################################################################################################
-module ApplicationHelper
+module AccessLogsHelper
 
   ######################################################################################################
   #### mixins
-  include Aethyr::Mixins::Helpers
-  include Aethyr::Aln::Helpers
-  include Aethyr::Mixins::Navigator::Helper
-  include Aethyr::Mixins::Menu::Helper
+  extend Aethyr::Mixins::SortableTable::Helper
+
+  ######################################################################################################
+  #### declare sortable tables
+  has_sortable_table :model => :access_log  
 
 end
