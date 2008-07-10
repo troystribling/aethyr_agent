@@ -31,12 +31,12 @@ class AccessLog < ActiveRecord::Base
   
     ####################################################################################################
     def to_log(request)
-      parameters = request.parameters.to_yaml
-      self.new(:action => request.path_parameters[:action], :controller => request.path_parameters[:controller], 
-               :ip_address => request.remote_ip, :uri => request.request_uri, 
-               :session => request.session.session_id,
-               :http_user_agent => request.env['HTTP_USER_AGENT'], :http_referer => request.env['HTTP_REFERER'],
-               :parameters => parameters).save
+      log_record = self.new(:action => request.path_parameters[:action], :controller => request.path_parameters[:controller], 
+       :ip_address => request.remote_ip, :uri => request.request_uri, 
+       :session => request.session.session_id,
+       :http_user_agent => request.env['HTTP_USER_AGENT'], :http_referer => request.env['HTTP_REFERER'],
+       :parameters => request.parameters)
+      log_record.save
     end
     
     ####################################################################################################

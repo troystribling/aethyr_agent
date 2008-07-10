@@ -12,6 +12,5 @@ class Log < ActiveRecord::Base
 
   ######################################################################################################
   #### valdators
-  validates_presence_of :name
    
 end

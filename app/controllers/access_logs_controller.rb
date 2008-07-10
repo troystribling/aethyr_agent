@@ -31,13 +31,12 @@ class AccessLogsController < ApplicationController
   end
 
   ######################################################################################################
-  def access_log_summary
+  def access_logs_summary
     initialize_access_logs_list(:column => 'created_at', :sort => 'sort-up', :force => false)
     respond_to do |format|
       format.js do
         render :update do |page|
           page['agent-display'].replace_html :partial => 'access_logs_summary'
-          page['agent-navigation'].replace_html :partial => 'users/navigation'
           page['display-click-path-wrapper'].hide
           page << "SearchInputMgr.loadSearchInput('/access_logs/access_logs_search');"
         end
