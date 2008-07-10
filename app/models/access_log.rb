@@ -19,7 +19,6 @@ class AccessLog < ActiveRecord::Base
   validates_presence_of :ip_address
   validates_presence_of :uri
   validates_presence_of :session
-  validates_presence_of :session_start
   validates_presence_of :parameters
 
   ######################################################################################################
@@ -31,17 +30,11 @@ class AccessLog < ActiveRecord::Base
   class << self
   
     ####################################################################################################
-    def to_log(resource, request)
-      if resource.eql?(:false)
-        resource_name, resource_id = 'UNKNOWN', nil
-      else 
-        resource_name, resource_id = resource.name, resource.resource_with_log_id
-      end
-      parameters = request.parameters.to_yaml.sub(/password: ".*?"/, 'password: "*"')
-      parameters.sub!(/password_confirmation: ".*?"/, 'password_confirmation: "*"')
-      self.new(:name => resource_name, :resource_with_log_id => resource_id, :action => request.path_parameters[:action],   
-               :controller => request.path_parameters[:controller], :ip_address => request.remote_ip, :uri => request.request_uri, 
-               :session => request.session.session_id, :session_start => request.session.model.created_at,
+    def to_log(request)
+      parameters = request.parameters.to_yaml
+      self.new(:action => request.path_parameters[:action], :controller => request.path_parameters[:controller], 
+               :ip_address => request.remote_ip, :uri => request.request_uri, 
+               :session => request.session.session_id,
                :http_user_agent => request.env['HTTP_USER_AGENT'], :http_referer => request.env['HTTP_REFERER'],
                :parameters => parameters).save
     end
@@ -62,18 +55,18 @@ class AccessLog < ActiveRecord::Base
     
     ####################################################################################################
     def previous_request(request)
-      this_request = {:controller => request.path_parameters[:controller], :action => request.path_parameters[:action]} 
-      previous_request = this_request
+      current_request = {:controller => request.path_parameters[:controller], :action => request.path_parameters[:action]} 
+      last_request = current_request
       count = 2     
-      while  previous_request == this_request
+      while  last_request == current_request
         access_record = self.find_by_session(request, count).last
-        previous_request = access_record.parameters
-        previous_request.delete(:authenticity_token)
+        last_request = access_record.parameters
+        last_request.delete(:authenticity_token)
         count += 1
-        previous_request = {:controller => 'services', :action =>'show_dashboard'} \
-          if count > 10 or previous_request == {:controller=>"services", :action=>"index"} 
+        last_request = {:controller => 'services', :action =>'show_dashboard'} \
+          if count > 10 or last_request == {:controller=>"services", :action=>"index"} 
       end
-      previous_request
+      last_request
     end
         
   end  

@@ -1,0 +1,13 @@
+<% error_count = validation_errors.errors.count %>
+<h2> 
+  <%= "#{error_count}" %>
+  <%= error_count.eql?(1) ? "error" : "errors" %>
+    occured when saving <%= "#{validation_errors.class.name.underscore.humanize.downcase}" %>
+</h2>
+<ul>
+  <% validation_errors.errors.each do |k,v| %>
+    <li>
+      <%= "#{k.humanize.downcase} #{v}" %>
+    </li>
+  <% end %>
+</ul>

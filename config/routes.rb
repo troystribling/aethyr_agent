@@ -4,7 +4,8 @@ ActionController::Routing::Routes.draw do |map|
   #### REST routes
   map.resource  :inventory, :controller => 'inventory'
   map.resource  :performance, :controller => 'performance'
-  map.resource  :administration, :controller => 'administration'
+  map.resource  :users
+  map.resource  :messages
 
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'

@@ -4,7 +4,7 @@ class AccessLogsController < ApplicationController
 
   ######################################################################################################
   #### default layout
-  layout 'single_column'
+  layout 'agent'
 
   ######################################################################################################
   #### declare sortable tables
@@ -13,17 +13,8 @@ class AccessLogsController < ApplicationController
   ######################################################################################################
   #### filters
   before_filter :find_access_log, :only => [:show]
-  before_filter :admin_required, :only => [:show, :index, :access_logs_summary]
   before_filter :add_page_to_click_path, :only => [:show]
   before_filter :set_root_page_of_click_path, :only => [:access_logs_summary]
-
-  ######################################################################################################
-  def index
-    initialize_access_logs_list(:column => 'created_at', :sort => 'sort-up', :force => true)
-    respond_to do |format|
-      format.html    
-    end
-  end
 
   ######################################################################################################
   def show
@@ -33,7 +24,7 @@ class AccessLogsController < ApplicationController
         render :update do |page|
           page['display-click-path-wrapper'].show
           page['display-click-path'].replace_html :partial => 'common/click_path'
-          page['administration-display'].replace_html :partial => 'common/display_list', :object => @access_log
+          page['agent-display'].replace_html :partial => 'common/display_list', :object => @access_log
         end
       end
     end

@@ -1,0 +1,26 @@
+<% row = display_list -%>
+<% action = "#{row.class.name.tableize}_summary" -%>
+
+<div class="display-control-wrapper">
+
+  <h1><%= row.class.name.underscore.humanize.downcase %>: <em><%= row.name %></em></h1>
+  <hr class="display-top"> 
+  <hr class="display-top"> 
+
+  <div class="display-list-wrapper">
+    <table class="display-list">
+      <% row.class.column_names_hierarchy.each do |c| -%>
+        <% unless c =~ /_id$/ or c =~ /descendant/ -%>
+            <% value = row.send(c.to_sym) -%>
+            <% value = value.inspect if value.class.eql?(HashWithIndifferentAccess) %>
+            <%= display_list_attribute c.humanize.downcase, value, :class=>cycle("even", "odd")%>
+          </tr>
+        <% end -%>
+      <% end -%>
+    </table>
+  </div>
+  
+  <hr class="display-divide"> 
+  <hr class="display-bottom"> 
+
+</div>

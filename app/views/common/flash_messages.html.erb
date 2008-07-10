@@ -1,0 +1,11 @@
+<% unless flash[:notice].blank? -%>
+  <div id="notice">
+    <p><%= flash[:notice] %></p>
+  </div>
+<% end -%>
+<% unless flash[:error].blank? -%>
+  <div id="errors">
+     <h2>error</h2>
+     <p><%= flash[:error] %></p>
+  </div>
+<% end -%>

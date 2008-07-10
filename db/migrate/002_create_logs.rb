@@ -5,8 +5,6 @@ class CreateLogs < ActiveRecord::Migration
     create_table :logs, :primary_key => :log_id, :force => true do |t|
       t.column :log_descendant_id, :integer
       t.column :log_descendant_type, :string
-      t.column :resource_with_log_id, :string
-      t.column :name, :string
       t.column :created_at, :datetime
     end
 
@@ -16,7 +14,6 @@ class CreateLogs < ActiveRecord::Migration
       t.column :uri, :string
       t.column :ip_address, :string
       t.column :session, :string
-      t.column :session_start, :string
       t.column :dns_name, :string
       t.column :http_user_agent, :string
       t.column :http_referer, :string
