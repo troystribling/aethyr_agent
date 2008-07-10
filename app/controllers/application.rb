@@ -38,7 +38,7 @@ protected
 
   ######################################################################################################
   def to_access_log 
-    AccessLog.to_log(self.current_user, request)
+    AccessLog.to_log(request)
   end
   
 end
