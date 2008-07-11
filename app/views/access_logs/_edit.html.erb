@@ -1,0 +1,24 @@
+<div class="display-control-wrapper">
+
+  <h1>access log</h1>
+  <hr class="display-top"> 
+  <hr class="display-top"> 
+
+  <div class="display-list-wrapper">
+    <table class="display-list">
+      <%= display_list_attribute 'dns', @access_log.dns_name, :class=>'even'%>
+      <%= display_list_attribute 'ip address', @access_log.ip_address, :class=>'odd'%>
+      <%= display_list_attribute 'created at', @access_log.created_at, :class=>'even'%>
+      <%= display_list_attribute 'uri', @access_log.uri, :class=>'odd'%>
+      <%= display_list_attribute 'controller', @access_log.controller, :class=>'even'%>
+      <%= display_list_attribute 'action', @access_log.action, :class=>'odd'%>
+      <%= display_list_attribute 'http user agent', @access_log.http_user_agent, :class=>'even'%>
+      <%= display_list_attribute 'http refeerer', @access_log.http_referer, :class=>'odd'%>
+      <%= display_list_attribute 'parameters', @access_log.parameters.inspect, :class=>'even'%>
+    </table>
+  </div>
+  
+  <hr class="display-divide"> 
+  <hr class="display-bottom"> 
+
+</div>

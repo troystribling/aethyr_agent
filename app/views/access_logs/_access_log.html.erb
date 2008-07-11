@@ -1,5 +1,5 @@
 <tr class=<%= cycle("even", "odd") %>>
-  <td><%= link_to_remote_with_load_notifier(format_timestamp(access_log.created_at), :url => {:action => 'show', :access_log_id => access_log.access_log_id}) %></td>
+  <td><%= link_to_remote_with_load_notifier(format_timestamp(access_log.created_at), :url => {:action => 'edit', :access_log_id => access_log.access_log_id}) %></td>
   <td><%=h access_log.controller %></td>
   <td><%=h access_log.action %></td>
   <td><%=h access_log.dns_name %></td>

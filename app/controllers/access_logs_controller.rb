@@ -12,19 +12,19 @@ class AccessLogsController < ApplicationController
 
   ######################################################################################################
   #### filters
-  before_filter :find_access_log, :only => [:show]
-  before_filter :add_page_to_click_path, :only => [:show]
+  before_filter :find_access_log, :only => [:edit]
+  before_filter :add_page_to_click_path, :only => [:edit]
   before_filter :set_root_page_of_click_path, :only => [:access_logs_summary]
 
   ######################################################################################################
-  def show
+  def edit
     respond_to do |format|
       format.html {redirect_to(access_logs_path)}
       format.js do
         render :update do |page|
           page['display-click-path-wrapper'].show
           page['display-click-path'].replace_html :partial => 'common/click_path'
-          page['agent-display'].replace_html :partial => 'common/display_list', :object => @access_log
+          page['agent-display'].replace_html :partial => 'edit'
         end
       end
     end

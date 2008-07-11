@@ -2,10 +2,14 @@ ActionController::Routing::Routes.draw do |map|
   # The priority is based upon order of creation: first created -> highest priority.
 
   #### REST routes
-  map.resource  :inventory, :controller => 'inventory'
-  map.resource  :performance, :controller => 'performance'
-  map.resource  :users
-  map.resource  :messages
+  map.resources  :inventory, :controller => 'inventory'
+  map.resources  :performance, :controller => 'performance'
+  map.resources  :users
+  map.resources  :access_logs
+  map.resources  :messages
+
+  #### sortable table pagination
+  map.access_logs_change_page         '/access_logs/access_logs_change_page/:page',         :controller => 'access_logs', :action => 'access_logs_change_page'
 
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
