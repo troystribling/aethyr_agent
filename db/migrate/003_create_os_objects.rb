@@ -50,12 +50,8 @@ class CreateOsObjects < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :files, :primary_key => :file_id, :force => true do |t|
-      t.integer :size
-      t.timestamps
-    end
-
     create_table :file_terminations, :primary_key => :file_termination_id, :force => true do |t|
+      t.integer :size
       t.timestamps
     end
 
@@ -98,7 +94,6 @@ class CreateOsObjects < ActiveRecord::Migration
     drop_table :memory_terminations
     drop_table :disk_partitions
     drop_table :file_systems
-    drop_table :files
     drop_table :file_terminations
     drop_table :application_processes
     drop_table :application_threads
