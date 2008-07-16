@@ -10,6 +10,11 @@ class ApplicationProcess < ActiveRecord::Base
   #### validation
   validates_presence_of  :name,    :if => :name_required?
 
+  ####################################################################################################
+  def add_associations(supporter)
+    
+  end
+
   ######################################################################################################
   #### class methods
   class << self

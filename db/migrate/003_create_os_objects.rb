@@ -24,10 +24,8 @@ class CreateOsObjects < ActiveRecord::Migration
     #######################################################################################################
     ####  cpu
     create_table :cpus, :primary_key => :cpu_id, :force => true do |t|
-      t.string  :model
+      t.integer :count
       t.string  :frequency
-      t.integer :number
-      
       t.timestamps
     end
 
@@ -89,7 +87,7 @@ class CreateOsObjects < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :group, :primary_key => :group_id, :force => true do |t|
+    create_table :groups, :primary_key => :group_id, :force => true do |t|
       t.timestamps
     end
 
