@@ -83,6 +83,16 @@ class CreateOsObjects < ActiveRecord::Migration
       t.timestamps
     end
 
+    #######################################################################################################
+    #### users
+    create_table :users, :primary_key => :user_id, :force => true do |t|
+      t.timestamps
+    end
+
+    create_table :group, :primary_key => :group_id, :force => true do |t|
+      t.timestamps
+    end
+
   end
 
   #######################################################################################################
@@ -100,6 +110,8 @@ class CreateOsObjects < ActiveRecord::Migration
     drop_table :unix_socket_terminations
     drop_table :nics
     drop_table :tcp_socket_terminations
+    drop_table :users
+    drop_table :groups
   end
   
 end
