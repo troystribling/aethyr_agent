@@ -32,7 +32,8 @@ module Aethyr
         ##########################################################################################################
         def memory
           Memory.destroy_all
-          `cat /proc/meminfo`.split("\n").first
+          attrs = /MemTotal:\s*(\d+)\s(\w+)/.match(`cat /proc/meminfo`)
+          Memory.new(:name => 'Memory', :installed => attrs[1], :units => attrs[2]).add_associations(self.find_system)
         end
   
         ##########################################################################################################

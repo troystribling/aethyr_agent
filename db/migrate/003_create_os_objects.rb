@@ -91,6 +91,20 @@ class CreateOsObjects < ActiveRecord::Migration
       t.timestamps
     end
 
+    #######################################################################################################
+    #### software
+    create_table :software_repositories, :primary_key => :software_repository_id, :force => true do |t|
+      t.timestamps
+    end
+
+    create_table :packages, :primary_key => :package_id, :force => true do |t|
+      t.timestamps
+    end
+
+    create_table :gems, :primary_key => :gem_id, :force => true do |t|
+      t.timestamps
+    end
+
   end
 
   #######################################################################################################
@@ -110,6 +124,9 @@ class CreateOsObjects < ActiveRecord::Migration
     drop_table :tcp_socket_terminations
     drop_table :users
     drop_table :groups
+    drop_table :software_repositories
+    drop_table :packages
+    drop_table :gems
   end
   
 end
