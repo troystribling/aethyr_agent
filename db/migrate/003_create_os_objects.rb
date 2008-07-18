@@ -12,7 +12,7 @@ class CreateOsObjects < ActiveRecord::Migration
     #######################################################################################################
     ####  memory
     create_table :memory, :primary_key => :memory_id, :force => true do |t|
-      t.string :installed
+      t.string :machine
       t.string :units
       t.timestamps
     end
@@ -26,6 +26,9 @@ class CreateOsObjects < ActiveRecord::Migration
     create_table :cpus, :primary_key => :cpu_id, :force => true do |t|
       t.integer :count
       t.string  :frequency
+      t.string  :frequency_units
+      t.string  :vendor
+      t.string  :model
       t.timestamps
     end
 

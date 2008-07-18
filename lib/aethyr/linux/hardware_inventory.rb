@@ -13,6 +13,7 @@ module Aethyr
 
         ##########################################################################################################
         def build_database
+          AlnConnection.destroy_all
           self.system
           self.memory
           self.cpu
@@ -32,14 +33,17 @@ module Aethyr
         ##########################################################################################################
         def memory
           Memory.destroy_all
+          MemoryTermination.destroy_all
           attrs = /MemTotal:\s*(\d+)\s(\w+)/.match(`cat /proc/meminfo`)
-          Memory.new(:name => 'Memory', :installed => attrs[1], :units => attrs[2]).add_associations(self.find_system)
+          Memory.new(:name => 'Memory', :machine => attrs[1], :units => attrs[2]).add_associations(self.find_system)
         end
   
         ##########################################################################################################
         def cpu
           Cpu.destroy_all
-          `cat /proc/cpuinfo`
+          rows = `cat /proc/cpuinfo`.split("\n")
+          count = rows.length/20 + 1
+          Cpu.new(:name => 'CPU', :count => count, :frequency => freq, :frequency_units => freq_units,  :model =>  model, :vendor => vendor).add_associations(self.find_system)
         end
   
         ##########################################################################################################

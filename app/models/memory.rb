@@ -25,8 +25,6 @@ class Memory < ActiveRecord::Base
     self << [term, xc]
     term.reload
 
-self.save
-
     #### connection relations
     xc << term
     
