@@ -12,42 +12,29 @@ module Aethyr
       class << self
 
         ##########################################################################################################
-        def build_database(args = nil)
-          AlnConnection.destroy_all
-          self.system
-          self.memory
-          self.cpu
-          self.nic
+        def synchronize
+          self.system_synchronize
+          self.memory_synchronize
+          self.cpu_synchronize
+          self.nic_synchronize
         end
-    
-      ######################################################################################################
-      end  
-
-    ######################################################################################################
-    protected
-
-      ######################################################################################################
-      #### class methods
-      class << self
-
+        
         ##########################################################################################################
-        def system
-          System.destroy_all
+        def system_synchronize
+          
           @@system = System.new(:name => `hostname`, :os => `uname -a`)
           @@system.save
         end
   
         ##########################################################################################################
-        def memory
-          Memory.destroy_all
+        def memory_synchronize
           MemoryTermination.destroy_all
           attrs = /MemTotal:\s*(\d+)\s(\w+)/.match(`cat /proc/meminfo`)
           Memory.new(:name => 'Memory', :machine => attrs[1], :units => attrs[2]).add_associations(@@system)
         end
   
         ##########################################################################################################
-        def cpu
-          Cpu.destroy_all
+        def cpu_synchronize
           get_val = lambda{|r| /^.+:\s(.+)/.match(r).to_a.last}
           get_units = lambda{|r| /^cpu(\w+):/.match(r).to_a.last}
           rows = `cat /proc/cpuinfo`.split("\n")
@@ -56,7 +43,7 @@ module Aethyr
         end
   
         ##########################################################################################################
-        def nic
+        def nic_synchronize
           hw = XmlSimple.xml_in(`lshw -xml`, {'KeyAttr' => {'node' => 'id', 'capability' => 'id', 'setting' => 'id'}, 'forcearray' => false})
           network = hw['node']['node']['pci']['node']['pci:1']['node']['network']
           Nic.new(:name => network['logicalname'], :mac_address => network['serial'], 

@@ -14,8 +14,9 @@ module Aethyr
       class << self
 
         ##########################################################################################################
-        def build_database
-          Aethyr::Linux::HardwareInventory.build_database
+        def synchronize
+          Aethyr::Linux::HardwareInventory.synchronize
+          Aethyr::Linux::NetworkInventory.synchronize
         end
     
       ######################################################################################################
