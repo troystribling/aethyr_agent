@@ -3,6 +3,10 @@
 class Cpu < ActiveRecord::Base
 
   ######################################################################################################
+  #### need to specify table name
+  set_table_name 'cpu'
+
+  ######################################################################################################
   #### inheritance relations
   has_ancestor :named => :aln_resource   
 
@@ -16,7 +20,7 @@ class Cpu < ActiveRecord::Base
     supporter << self
 
     #### termination and connection support relations
-    xc = AlnConnection.new(:name => self.name, :termination_type => 'MemoryTermination')
+    xc = AlnConnection.new(:name => self.name, :termination_type => 'CpuTermination')
     term = CpuTermination.new(:name => self.name, :directionality => 'ingress')
     self << [term, xc]
     term.reload

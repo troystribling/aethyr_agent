@@ -23,7 +23,7 @@ class CreateOsObjects < ActiveRecord::Migration
 
     #######################################################################################################
     ####  cpu
-    create_table :cpus, :primary_key => :cpu_id, :force => true do |t|
+    create_table :cpu, :primary_key => :cpu_id, :force => true do |t|
       t.integer :count
       t.string  :frequency
       t.string  :frequency_units
@@ -76,7 +76,12 @@ class CreateOsObjects < ActiveRecord::Migration
     #### network
     create_table :nics, :primary_key => :nic_id, :force => true do |t|
       t.string :mac_address
-      t.integer :ip_address
+      t.string :ip_address
+      t.integer :physical_id
+      t.timestamps
+    end
+
+    create_table :network_interfaces, :primary_key => :network_interface_id, :force => true do |t|
       t.timestamps
     end
 
