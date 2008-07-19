@@ -22,24 +22,25 @@ module Aethyr
         def self.included(base) 
           base.extend(ClassMethods)  
           base.send(:include, InstanceMethods)  
+          base.send(:attr_accessor, :synched)
         end
                      
         ########################################################################################################
         #### model class methods
         ########################################################################################################
         module ClassMethods 
-    
+              
           ######################################################################################################
           def sync_key(params)
             params[:name]
           end
                      
           ######################################################################################################
-          def synchronize(supporter, interface)
+          def synchronize(interface, supporter = nil)
             local_models = self.find_local_models(supporter)
             begin
               remote_models = interface.find
-              self.synchronize_models(supporter, local_models, remote_models, interface.credential)
+              self.synchronize_models(supporter, local_models, remote_models)
               delete_models(local_models)
             rescue
               raise
@@ -49,7 +50,8 @@ module Aethyr
           ######################################################################################################
           def find_local_models(supporter)
             models = {}
-            supporter.find_supported_by_model(self, :all).each do |m|
+            supporter.nil? ? local_models = self.find(:all) : local_models = supporter.find_supported_by_model(self, :all)
+            local_models.each do |m|
               m.synched = false 
               models[m.sync_key] = m
             end
@@ -57,20 +59,20 @@ module Aethyr
           end
       
           ######################################################################################################
-          def synchronize_models(supporter, local_models, remote_models, credential = nil) 
+          def synchronize_models(supporter, local_models, remote_models) 
             remote_models.each do |params|
-              synchronize_model(supporter, local_models, params, credential)
+              synchronize_model(supporter, local_models, params)
             end
           end
     
           ######################################################################################################
-          def synchronize_model(supporter, local_models, params, credential = nil) 
+          def synchronize_model(supporter, local_models, params) 
             model_sync_key = self.sync_key(params)
             model = local_models[model_sync_key]
             if model.nil?
               model = self.new(params)
               model.add_associations(supporter)
-              supporter.reload
+              supporter.reload unless supporter.nil?
             else 
               model.reload
               model.attributes = params
@@ -83,7 +85,7 @@ module Aethyr
           def delete_models(local_models)          
             local_models.each_value {|m| m.delete_model unless m.synched}
           end
-    
+
         ########################################################################################################
         end #### ClassMethods
         ########################################################################################################
@@ -98,11 +100,6 @@ module Aethyr
             self.name
           end
   
-          ####################################################################################################
-          def credential
-            self.supporter.to_descendant
-          end
-          
           ######################################################################################################
           def raise_association_missing(model, assoc, msg) 
             if assoc.nil?
@@ -111,12 +108,11 @@ module Aethyr
             end
           end
   
-          ######################################################################################################
+          ####################################################################################################
           def delete_model
-            self.delete!
-            self.save
+            self.destroy_support_hierarchy
           end
-    
+            
         ########################################################################################################
         end #### InstanceMethods
         ########################################################################################################

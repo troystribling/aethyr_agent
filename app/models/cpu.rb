@@ -7,6 +7,11 @@ class Cpu < ActiveRecord::Base
   set_table_name 'cpu'
 
   ######################################################################################################
+  #### mixins
+  include Aethyr::Mixins::Synchronizer::Model
+  extend Aethyr::Aln::ConnectedModelHelper  
+
+  ######################################################################################################
   #### inheritance relations
   has_ancestor :named => :aln_resource   
 

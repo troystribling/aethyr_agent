@@ -7,6 +7,11 @@ class System < ActiveRecord::Base
   set_table_name 'system'
 
   ######################################################################################################
+  #### mixins
+  include Aethyr::Mixins::Synchronizer::Model
+  extend Aethyr::Aln::ConnectedModelHelper  
+
+  ######################################################################################################
   #### inheritance relations
   has_ancestor :named => :aln_resource   
 
@@ -15,8 +20,8 @@ class System < ActiveRecord::Base
   validates_presence_of  :name,    :if => :name_required?
 
   ####################################################################################################
-  def add_associations(supporter)
-    
+  def add_associations(supporter)  
+    self.save
   end
 
   ######################################################################################################
