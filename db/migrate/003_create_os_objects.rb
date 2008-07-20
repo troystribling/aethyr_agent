@@ -91,11 +91,23 @@ class CreateOsObjects < ActiveRecord::Migration
 
     #######################################################################################################
     #### users
-    create_table :users, :primary_key => :user_id, :force => true do |t|
+    create_table :system_users, :primary_key => :system_user_id, :force => true do |t|
+      t.integer :uid
+      t.string :full_name
+      t.string :office
+      t.string :extension
+      t.string :home_phone
+      t.string :home_directory
+      t.string :login_shell
       t.timestamps
     end
 
-    create_table :groups, :primary_key => :group_id, :force => true do |t|
+    create_table :system_user_terminations, :primary_key => :system_user_termination_id, :force => true do |t|
+      t.timestamps
+    end
+
+    create_table :system_groups, :primary_key => :group_id, :force => true do |t|
+      t.integer :gid
       t.timestamps
     end
 
@@ -130,8 +142,9 @@ class CreateOsObjects < ActiveRecord::Migration
     drop_table :unix_socket_terminations
     drop_table :nics
     drop_table :tcp_socket_terminations
-    drop_table :users
-    drop_table :groups
+    drop_table :system_users
+    drop_table :system_user_terminations
+    drop_table :system_groups
     drop_table :software_repositories
     drop_table :packages
     drop_table :gems
