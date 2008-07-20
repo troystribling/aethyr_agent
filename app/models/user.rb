@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
   has_ancestor :named => :aln_resource   
 
   ######################################################################################################
+  #### virtual attributes
+  attr_accessor :default_gid
+
+  ######################################################################################################
   #### validation
   validates_presence_of  :name,    :if => :name_required?
 
