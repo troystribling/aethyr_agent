@@ -14,10 +14,12 @@ module Aethyr
         ########################################################################################################
         def synchronize
           System.synchronize(Aethyr::Linux::System)
-          sys = System.find(:first)
+          sys = System.find_by_model(:first)
           Memory.synchronize(Aethyr::Linux::Memory, sys)
           Cpu.synchronize(Aethyr::Linux::Cpu, sys)
           Nic.synchronize(Aethyr::Linux::Nic, sys)
+          SystemUsers.synchronize(Aethyr::Linux::SystemUsers, sys)
+          SystemGroups.synchronize(Aethyr::Linux::SystemGroups, sys)
         end
   
       ######################################################################################################
