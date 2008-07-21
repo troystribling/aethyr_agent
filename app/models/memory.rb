@@ -17,6 +17,8 @@ class Memory < ActiveRecord::Base
 
   ######################################################################################################
   #### validation
+  validates_presence_of  :machine
+  validates_presence_of  :units
 
   ####################################################################################################
   def add_associations(supporter)

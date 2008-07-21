@@ -3,6 +3,11 @@
 class SystemUser < ActiveRecord::Base
 
   ######################################################################################################
+  #### mixins
+  include Aethyr::Mixins::Synchronizer::Model
+  extend Aethyr::Aln::ConnectedModelHelper  
+
+  ######################################################################################################
   #### inheritance relations
   has_ancestor :named => :aln_resource   
 
@@ -12,10 +17,16 @@ class SystemUser < ActiveRecord::Base
 
   ######################################################################################################
   #### validation
-  validates_presence_of  :name,    :if => :name_required?
+  validates_presence_of  :uid
+  validates_presence_of  :default_gid
+  validates_presence_of  :home_directory
+  validates_presence_of  :login_shell
 
   ####################################################################################################
   def add_associations(supporter)
+
+    #### supporter relation
+    supporter << self
     
   end
 

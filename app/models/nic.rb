@@ -13,10 +13,9 @@ class Nic < ActiveRecord::Base
 
   ######################################################################################################
   #### validation
-  validates_presence_of  :name,           :if => :name_required?
-  validates_presence_of  :mac_address,    :if => :mac_address_required?
-  validates_presence_of  :ip_address,     :if => :ip_address_required?
-  validates_presence_of  :physical_id,    :if => :physical_id_required?
+  validates_presence_of  :mac_address
+  validates_presence_of  :ip_address
+  validates_presence_of  :physical_id
 
   ####################################################################################################
   def add_associations(supporter)
@@ -34,24 +33,5 @@ class Nic < ActiveRecord::Base
 ######################################################################################################
 protected
 
-  ####################################################################################################
-  def name_required?
-    self.name.blank?
-  end
-
-  ####################################################################################################
-  def mac_address_required?
-    self.name.blank?
-  end
-
-  ####################################################################################################
-  def ip_address_required?
-    self.ip_address.blank?
-  end
-
-  ####################################################################################################
-  def physical_id_required?
-    self.physical_id.blank?
-  end
 
 end

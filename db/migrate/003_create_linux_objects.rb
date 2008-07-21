@@ -1,4 +1,4 @@
-class CreateOsObjects < ActiveRecord::Migration
+class CreateLinuxObjects < ActiveRecord::Migration
 
   def self.up
 
@@ -106,7 +106,7 @@ class CreateOsObjects < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :system_groups, :primary_key => :group_id, :force => true do |t|
+    create_table :system_groups, :primary_key => :system_group_id, :force => true do |t|
       t.integer :gid
       t.timestamps
     end

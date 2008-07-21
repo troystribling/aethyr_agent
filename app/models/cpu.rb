@@ -17,6 +17,11 @@ class Cpu < ActiveRecord::Base
 
   ######################################################################################################
   #### validation
+  validates_presence_of  :count
+  validates_presence_of  :frequency
+  validates_presence_of  :frequency_units
+  validates_presence_of  :model
+  validates_presence_of  :vendor
 
   ####################################################################################################
   def add_associations(supporter)

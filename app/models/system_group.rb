@@ -3,6 +3,11 @@
 class SystemGroup < ActiveRecord::Base
 
   ######################################################################################################
+  #### mixins
+  include Aethyr::Mixins::Synchronizer::Model
+  extend Aethyr::Aln::ConnectedModelHelper  
+
+  ######################################################################################################
   #### inheritance relations
   has_ancestor :named => :aln_resource   
 
@@ -12,10 +17,14 @@ class SystemGroup < ActiveRecord::Base
 
   ######################################################################################################
   #### validation
-  validates_presence_of  :name,    :if => :name_required?
+  validates_presence_of  :gid
+  validates_presence_of  :system_users
 
   ####################################################################################################
   def add_associations(supporter)
+
+    #### supporter relation
+    supporter << self
     
   end
 
