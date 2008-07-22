@@ -59,12 +59,30 @@ class CreateLinuxObjects < ActiveRecord::Migration
     #######################################################################################################
     #### applications
     create_table :application_processes, :primary_key => :application_process_id, :force => true do |t|
-      t.integer :pid
+      t.integer  :pid
+      t.integer  :nthreads
+      t.boolean  :kernel
+      t.integer  :priority
+      t.integer  :nice
+      t.integer  :flags
+      t.float  :percent_cpu
+      t.float  :percent_memory
+      t.integer  :rss
+      t.integer  :sz
+      t.integer  :vsz
+      t.string   :wchan
+      t.string   :status
+      t.time     :time
+      t.datetime :start_time
       t.timestamps
     end
 
     create_table :application_threads, :primary_key => :application_thread_id, :force => true do |t|
       t.integer :pid
+      t.integer :tid
+      t.boolean :kernel
+      t.datetime :start_time
+      t.time :time
       t.timestamps
     end
 

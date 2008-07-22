@@ -7,8 +7,13 @@ class ApplicationProcess < ActiveRecord::Base
   has_ancestor :named => :aln_resource   
 
   ######################################################################################################
+  #### virtual attributes
+  attr_accessor :user, :ppid
+
+  ######################################################################################################
   #### validation
-  validates_presence_of  :name,    :if => :name_required?
+  validates_presence_of  :name
+  validates_presence_of  :pid
 
   ####################################################################################################
   def add_associations(supporter)

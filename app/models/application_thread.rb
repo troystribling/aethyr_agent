@@ -7,8 +7,15 @@ class ApplicationThread < ActiveRecord::Base
   has_ancestor :named => :aln_resource   
 
   ######################################################################################################
+  #### virtual attributes
+  attr_accessor :user, :pid, :tty
+
+  ######################################################################################################
   #### validation
-  validates_presence_of  :name,    :if => :name_required?
+  validates_presence_of  :name
+  validates_presence_of  :pid
+  validates_presence_of  :user
+  validates_presence_of  :tty
 
   ####################################################################################################
   def add_associations(supporter)
