@@ -24,13 +24,16 @@ module Aethyr
     
           ##########################################################################################################
           def find_all
-            rows = `ps -eo pid,lwp,f,rtprio,nice,sz,vsz,rss,sess,wchan,stat,tty,time,user,pcpu,pmem,start,nlwp,psr,command`
-            attr_names = rows.shift.splt(/\s+/).collect{|a| a.to_sym}
-            rows.split("\n").collect do |p|
+            rows = `ps -eo pid,lwp,f,rtprio,ni,sz,vsz,rss,sess,wchan,stat,tty,time,user,pcpu,pmem,start,nlwp,psr,command`.split("\n")
+            rows[0].gsub!(/^\s+/, '')
+            attr_names = rows.shift.split(/\s+/).collect{|a| a.gsub!(/%/, 'p'); a.downcase.to_sym}
+            rows.collect do |p|
               attrs = p.split(/\s+/)
+p attrs              
               row = {}
               attrs.each_index{|a| row.update(attr_names[a] => attrs[a])}
-              row
+p row              
+              row if row[:pid].eql?(row[:lwp])
             end
             
           end
