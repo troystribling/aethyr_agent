@@ -76,9 +76,9 @@ module Aethyr
             else 
               model.reload
               model.attributes = params
-              model.synched = true
               model.save
             end
+            model.synched = true
           end
     
           ######################################################################################################
