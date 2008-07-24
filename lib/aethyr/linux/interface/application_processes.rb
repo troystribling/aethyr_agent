@@ -29,13 +29,10 @@ module Aethyr
             attr_names = rows.shift.split(/\s+/).collect{|a| a.gsub!(/%/, 'p'); a.downcase.to_sym}
             rows.collect do |p|
               attrs = p.split(/\s+/)
-p attrs              
               row = {}
               attrs.each_index{|a| row.update(attr_names[a] => attrs[a])}
-p row              
-              row if row[:pid].eql?(row[:lwp])
-            end
-            
+              row
+            end.select{|row| row[:pid].eql?(row[:lwp])}            
           end
     
         ######################################################################################################
