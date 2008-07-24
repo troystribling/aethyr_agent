@@ -17,7 +17,6 @@ class ApplicationProcess < ActiveRecord::Base
 
   ######################################################################################################
   #### validation
-  validates_presence_of  :name
   validates_presence_of  :pid
 
   ####################################################################################################
@@ -58,7 +57,7 @@ class ApplicationProcess < ActiveRecord::Base
         model.reload
         model.attributes = params
         model.synched = true
-      end
+    end
       model.save
     end
   
