@@ -40,36 +40,34 @@ class ApplicationProcess < ActiveRecord::Base
 
     ######################################################################################################
     def synchronize_models(supporter, local_models, remote_models)
+      new_models = []
       remote_models.each do |params| 
-        synchronize_model(local_models[self.sync_key(params)], params)
+        synchronize_model(local_models[self.sync_key(params)], params, new_models)
       end
-      remote_models.each do |params| 
-        synchronize_model_associations(supporter, local_models[self.sync_key(params)])
+      new_models.each do |model| 
+        synchronize_model_associations(supporter, model)
       end
     end
   
     ######################################################################################################
-    def synchronize_model(model, params) 
-      if model.nil?
-p params      
+    def synchronize_model(model, params, new_models) 
+      if model.nil?        
         model = self.new(params)
-        model.save
-        model.synched = false
+        new_models << model
       else 
         model.reload
         model.attributes = params
         model.synched = true
-        model.save
       end
+      model.save
     end
   
     ######################################################################################################
     def synchronize_model_associations(supporter, model) 
-      unless model.synched
-        model.reload
-        model.add_associations(supporter)
-        supporter.reload unless supporter.nil?
-      end
+      model.reload
+      model.add_associations(supporter)
+      model.synched = true
+      supporter.reload unless supporter.nil?
     end
 
   end  
