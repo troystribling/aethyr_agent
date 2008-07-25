@@ -8,7 +8,7 @@ module Aethyr
     module Interface
     
       ##########################################################################################################
-      class ApplicationProcesses
+      class ApplicationThreads
   
         ######################################################################################################
         #### class methods
@@ -24,7 +24,18 @@ module Aethyr
     
           ##########################################################################################################
           def find_all
-            p = `ps -eo pid,f,rtprio,nice,sz,vsz,rss,sess,wchan,stat,tty,time,user,pcpu,pmem,start,lwp,nlwp,psr,command`
+            rows = `ps -eo pid,lwp,f,rtprio,ni,sz,vsz,rss,sess,wchan,stat,tty,time,user,pcpu,pmem,nlwp,psr,start,command`.split("\n")
+            rows[0].gsub!(/^\s+/, '')
+            attr_names = rows.shift.split(/\s+/).collect{|a| a.gsub!(/%/, 'p'); a.downcase.to_sym}
+            rows.collect do |r|
+              row_start = r.slice!(0..107).chop
+              started = r.slice!(0..8).chop
+              started.gsub!(/^\s+/,'') if started =~ /^\s/
+              attrs = row_start.split(/\s+/)
+              row = {}
+              attrs.each_index{|a| row.update(attr_names[a] => attrs[a])}
+              row.merge(:started => started, :command => r)
+            end            
           end
     
         ######################################################################################################

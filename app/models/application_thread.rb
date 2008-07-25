@@ -7,32 +7,35 @@ class ApplicationThread < ActiveRecord::Base
   has_ancestor :named => :aln_resource   
 
   ######################################################################################################
+  #### mixins
+  include Aethyr::Mixins::Synchronizer::Model
+  extend Aethyr::Aln::ConnectedModelHelper  
+
+  ######################################################################################################
   #### virtual attributes
-  attr_accessor :user, :pid, :tty
+  attr_accessor :user, :ppid, :tt, :user
 
   ######################################################################################################
   #### validation
-  validates_presence_of  :name
-  validates_presence_of  :pid
-  validates_presence_of  :user
-  validates_presence_of  :tty
 
   ####################################################################################################
-  def add_associations(supporter)
-    
+  def add_associations(supporter = nil)
+    self.save
   end
 
   ######################################################################################################
   #### class methods
   class << self
+    
+    ####################################################################################################
+    def sync_key(params)
+      params[:name] = params[:lwp]
+      params[:name]
+    end
+    
   end  
 
 ######################################################################################################
 protected
-
-  ####################################################################################################
-  def name_required?
-    self.name.blank?
-  end
 
 end

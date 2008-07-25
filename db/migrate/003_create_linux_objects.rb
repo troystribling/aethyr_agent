@@ -68,10 +68,8 @@ class CreateLinuxObjects < ActiveRecord::Migration
       t.integer  :rss
       t.string   :wchan
       t.string   :stat
-      t.string   :tt      
       t.time     :time
       t.string   :command
-      t.string   :user
       t.float    :pcpu
       t.float    :pmem
       t.datetime :started
@@ -83,11 +81,24 @@ class CreateLinuxObjects < ActiveRecord::Migration
     end
 
     create_table :application_threads, :primary_key => :application_thread_id, :force => true do |t|
-      t.integer :pid
-      t.integer :tid
-      t.boolean :kernel
-      t.datetime :start_time
-      t.time :time
+      t.integer  :f
+      t.integer  :pid
+      t.boolean  :ni
+      t.integer  :sz
+      t.integer  :vsz
+      t.integer  :sess
+      t.integer  :rss
+      t.string   :wchan
+      t.string   :stat
+      t.time     :time
+      t.string   :command
+      t.float    :pcpu
+      t.float    :pmem
+      t.datetime :started
+      t.integer  :lwp
+      t.integer  :nlwp
+      t.integer  :psr
+      t.integer  :rtprio
       t.timestamps
     end
 
