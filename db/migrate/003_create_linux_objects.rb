@@ -82,7 +82,6 @@ class CreateLinuxObjects < ActiveRecord::Migration
 
     create_table :application_threads, :primary_key => :application_thread_id, :force => true do |t|
       t.integer  :f
-      t.integer  :pid
       t.boolean  :ni
       t.integer  :sz
       t.integer  :vsz

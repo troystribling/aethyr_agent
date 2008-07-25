@@ -13,7 +13,7 @@ class ApplicationThread < ActiveRecord::Base
 
   ######################################################################################################
   #### virtual attributes
-  attr_accessor :user, :ppid, :tt, :user
+  attr_accessor :user, :ppid, :tt, :user, :pid
 
   ######################################################################################################
   #### validation
