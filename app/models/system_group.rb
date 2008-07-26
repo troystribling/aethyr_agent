@@ -21,9 +21,10 @@ class SystemGroup < ActiveRecord::Base
   validates_presence_of  :system_users
 
   ####################################################################################################
-  def add_associations(supporter)
+  def add_associations
 
     #### supporter relation
+    supporter = System.find_by_model(:first)
     supporter << self
     
   end

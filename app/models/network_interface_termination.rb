@@ -10,7 +10,7 @@ class NetworkInterfaceTermination < ActiveRecord::Base
   #### validation
 
   ####################################################################################################
-  def add_associations(supporter)
+  def add_associations
     
   end
 

@@ -21,7 +21,7 @@ module Aethyr
           SystemUser.synchronize(Aethyr::Linux::Interface::SystemUsers, sys)
           SystemGroup.synchronize(Aethyr::Linux::Interface::SystemGroups, sys)
           ApplicationProcess.synchronize(Aethyr::Linux::Interface::ApplicationProcesses, sys)
-          ApplicationThread.synchronize(Aethyr::Linux::Interface::ApplicationThreads)
+          ApplicationThread.synchronize(Aethyr::Linux::Interface::ApplicationThreads, sys)
         end
   
       ######################################################################################################

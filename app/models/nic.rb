@@ -18,9 +18,10 @@ class Nic < ActiveRecord::Base
   validates_presence_of  :physical_id
 
   ####################################################################################################
-  def add_associations(supporter)
+  def add_associations
 
     #### supporter relation
+    supporter = System.find_by_model(:first)
     supporter << self
     
   end

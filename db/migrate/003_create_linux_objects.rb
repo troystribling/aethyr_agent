@@ -17,10 +17,6 @@ class CreateLinuxObjects < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :memory_terminations, :primary_key => :memory_termination_id, :force => true do |t|
-      t.timestamps
-    end
-
     #######################################################################################################
     ####  cpu
     create_table :cpu, :primary_key => :cpu_id, :force => true do |t|
@@ -32,13 +28,8 @@ class CreateLinuxObjects < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :cpu_terminations, :primary_key => :cpu_termination_id, :force => true do |t|
-      t.timestamps
-    end
-
-
     #######################################################################################################
-    #### storage
+    #### file system
     create_table :disk_partitions, :primary_key => :disk_partition_id, :force => true do |t|
       t.integer :size
       t.integer :file_system_type
@@ -48,11 +39,6 @@ class CreateLinuxObjects < ActiveRecord::Migration
     create_table :file_systems, :primary_key => :file_system_id, :force => true do |t|
       t.integer :size
       t.integer :mount
-      t.timestamps
-    end
-
-    create_table :file_terminations, :primary_key => :file_termination_id, :force => true do |t|
-      t.integer :size
       t.timestamps
     end
 
@@ -102,8 +88,57 @@ class CreateLinuxObjects < ActiveRecord::Migration
     end
 
     create_table :unix_socket_terminations, :primary_key => :unix_socket_termination_id, :force => true do |t|
+      t.integer  :node
+      t.integer  :refcnt
+      t.string   :command
+      t.string   :type
+      t.string   :state
+      t.string   :fd
       t.timestamps
     end
+
+    create_table :pipe_terminations, :primary_key => :pipe_termination_id, :force => true do |t|
+      t.integer  :size
+      t.integer  :node
+      t.integer  :nlink
+      t.string   :command
+      t.string   :type
+      t.string   :fd
+      t.timestamps
+    end
+
+    create_table :file_terminations, :primary_key => :file_termination_id, :force => true do |t|
+      t.integer  :size
+      t.integer  :node
+      t.integer  :nlink
+      t.string   :command
+      t.string   :type
+      t.string   :fd
+      t.timestamps
+    end
+
+    create_table :tcp_socket_terminations, :primary_key => :tcp_termination_id, :force => true do |t|
+      t.integer  :node
+      t.integer  :refcnt
+      t.string   :command
+      t.string   :type
+      t.string   :state
+      t.string   :fd
+      t.string   :local_address
+      t.integer  :local_port
+      t.string   :remote_address
+      t.integer  :remote_port
+      t.timestamps
+    end
+
+    create_table :memory_terminations, :primary_key => :memory_termination_id, :force => true do |t|
+      t.timestamps
+    end
+
+    create_table :cpu_terminations, :primary_key => :cpu_termination_id, :force => true do |t|
+      t.timestamps
+    end
+
 
     #######################################################################################################
     #### network
@@ -115,10 +150,6 @@ class CreateLinuxObjects < ActiveRecord::Migration
     end
 
     create_table :network_interfaces, :primary_key => :network_interface_id, :force => true do |t|
-      t.timestamps
-    end
-
-    create_table :tcp_socket_terminations, :primary_key => :tcp_termination_id, :force => true do |t|
       t.timestamps
     end
 
@@ -162,25 +193,40 @@ class CreateLinuxObjects < ActiveRecord::Migration
 
   #######################################################################################################
   def self.down
+
+    #### hardware
     drop_table :system
     drop_table :cpus
-    drop_table :cpu_terminations
     drop_table :memory
-    drop_table :memory_terminations
+
+    #### file system
     drop_table :disk_partitions
     drop_table :file_systems
-    drop_table :file_terminations
+
+    #### applications
     drop_table :application_processes
     drop_table :application_threads
     drop_table :unix_socket_terminations
-    drop_table :nics
+    drop_table :pipe_terminations
+    drop_table :file_terminations
+    drop_table :memory_terminations
+    drop_table :cpu_terminations
     drop_table :tcp_socket_terminations
+
+    #### network
+    drop_table :nics
+    drop_table :network_interfaces
+
+    #### users
     drop_table :system_users
     drop_table :system_user_terminations
     drop_table :system_groups
+
+    #### software
     drop_table :software_repositories
     drop_table :packages
     drop_table :gems
+
   end
   
 end

@@ -7,14 +7,17 @@ class TcpSocketTermination < ActiveRecord::Base
   has_ancestor :named => :aln_termination   
 
   ######################################################################################################
+  #### virtual attributes
+  attr_accessor :pid, :user, :device
+
+  ######################################################################################################
   #### validation
-  validates_presence_of  :name,    :if => :name_required?
 
   ######################################################################################################
   #### restrict attribute access
 
   ####################################################################################################
-  def add_associations(supporter)
+  def add_associations
     
   end
 
@@ -25,10 +28,5 @@ class TcpSocketTermination < ActiveRecord::Base
 
 ######################################################################################################
 protected
-
-  ####################################################################################################
-  def name_required?
-    self.name.blank?
-  end
 
 end

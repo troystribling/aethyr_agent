@@ -20,7 +20,7 @@ class System < ActiveRecord::Base
   validates_presence_of  :os
 
   ####################################################################################################
-  def add_associations(supporter)  
+  def add_associations
     self.save
   end
 

@@ -10,6 +10,5 @@ class AlarmLog < ActiveRecord::Base
   #### valdators
   validates_presence_of :model
   validates_presence_of :description
-  validates_presence_of :name
 
 end

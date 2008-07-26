@@ -20,7 +20,7 @@ class ApplicationProcess < ActiveRecord::Base
   validates_presence_of  :pid
 
   ####################################################################################################
-  def add_associations(supporter)
+  def add_associations
 
     #### supporter relation
     supporter << self

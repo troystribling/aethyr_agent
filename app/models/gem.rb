@@ -8,10 +8,9 @@ class Gem < ActiveRecord::Base
 
   ######################################################################################################
   #### validation
-  validates_presence_of  :name,    :if => :name_required?
 
   ####################################################################################################
-  def add_associations(supporter)
+  def add_associations
     
   end
 

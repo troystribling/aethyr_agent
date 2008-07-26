@@ -36,7 +36,7 @@ module Aethyr
           end
                      
           ######################################################################################################
-          def synchronize(interface, supporter = nil)
+          def synchronize(interface, supporter)
             local_models = self.find_local_models(supporter)
             begin
               remote_models = interface.find
@@ -71,7 +71,7 @@ module Aethyr
             model = local_models[model_sync_key]
             if model.nil?
               model = self.new(params)
-              model.add_associations(supporter)
+              model.add_associations
               supporter.reload unless supporter.nil?
             else 
               model.reload

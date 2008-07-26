@@ -23,9 +23,10 @@ class SystemUser < ActiveRecord::Base
   validates_presence_of  :login_shell
 
   ####################################################################################################
-  def add_associations(supporter)
+  def add_associations
 
     #### supporter relation
+    supporter = System.find_by_model(:first)
     supporter << self
     
   end

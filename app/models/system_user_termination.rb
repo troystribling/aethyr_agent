@@ -13,7 +13,7 @@ class SystemUserTermination < ActiveRecord::Base
   #### restrict attribute access
 
   ####################################################################################################
-  def add_associations(supporter)
+  def add_associations
     
   end
  

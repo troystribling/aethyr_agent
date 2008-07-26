@@ -19,7 +19,7 @@ class ApplicationThread < ActiveRecord::Base
   #### validation
 
   ####################################################################################################
-  def add_associations(supporter = nil)
+  def add_associations
     self.save
   end
 
