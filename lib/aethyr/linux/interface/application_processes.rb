@@ -25,7 +25,7 @@ module Aethyr
           ##########################################################################################################
           def find_all
             rows = `ps -eo pid,lwp,f,rtprio,ni,sz,vsz,rss,sess,wchan,stat,tty,time,user,pcpu,pmem,nlwp,psr,start,command`.split("\n")
-            rows[0].gsub!(/^\s+/, '')
+            rows[0].lstrip!
             attr_names = rows.shift.split(/\s+/).collect{|a| a.gsub!(/%/, 'p'); a.downcase.to_sym}
             rows.collect do |r|
               row_start = r.slice!(0..107).chop

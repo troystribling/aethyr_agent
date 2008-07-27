@@ -8,7 +8,7 @@ module Aethyr
     module Interface
     
       ##########################################################################################################
-      class ApplicationThreads
+      class UnixSockets
   
         ######################################################################################################
         #### class methods
@@ -24,18 +24,12 @@ module Aethyr
     
           ##########################################################################################################
           def find_all
-            rows = `ps -eo pid,lwp,f,rtprio,ni,sz,vsz,rss,sess,wchan,stat,tty,time,user,pcpu,pmem,nlwp,psr,start,command`.split("\n")
-            rows[0].lstrip!
-            attr_names = rows.shift.split(/\s+/).collect{|a| a.gsub!(/%/, 'p'); a.downcase.to_sym}
+            rows = `ls -l /dev`.split("\n")
             rows.collect do |r|
-              row_start = r.slice!(0..107).chop
-              started = r.slice!(0..8).chop
-              started.gsub!(/^\s+/,'') if started =~ /^\s/
-              attrs = row_start.split(/\s+/)
-              row = {}
-              attrs.each_index{|a| row.update(attr_names[a] => attrs[a])}
-              row.merge(:started => started, :command => r)
-            end            
+              attrs = r.split(/\s+/)
+              {:name => attrs[8], :last_updated => "#{attrs[6]} #{attrs[7]}", :major_number => attrs[4], :minor_number => attrs[5], 
+               :links => attrs[1], :device_type => /^(\w).*/.match(attrs[0]).to_a.last, :owner => attrs[2], :group => attrs[3]}
+            end.select{|r| r[:device_type].eql?('s')}          
           end
     
         ######################################################################################################

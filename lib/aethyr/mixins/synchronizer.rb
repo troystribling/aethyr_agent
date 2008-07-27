@@ -36,7 +36,7 @@ module Aethyr
           end
                      
           ######################################################################################################
-          def synchronize(interface, supporter)
+          def synchronize(interface, supporter = nil)
             local_models = self.find_local_models(supporter)
             begin
               remote_models = interface.find

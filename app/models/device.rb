@@ -7,10 +7,17 @@ class Device < ActiveRecord::Base
   has_ancestor :named => :aln_resource   
 
   ######################################################################################################
+  #### mixins
+  include Aethyr::Mixins::Synchronizer::Model
+  extend Aethyr::Aln::ConnectedModelHelper  
+
+  ######################################################################################################
   #### validation
 
   ####################################################################################################
   def add_associations
+    
+    self.save
     
   end
 

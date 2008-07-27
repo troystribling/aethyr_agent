@@ -30,12 +30,14 @@ class CreateLinuxObjects < ActiveRecord::Migration
 
     #######################################################################################################
     #### device
-    create_table :device, :primary_key => :device_id, :force => true do |t|
-      t.string  :owner
-      t.string  :group
-      t.string  :type
-      t.integer :major_number
-      t.integer :minor_number
+    create_table :devices, :primary_key => :device_id, :force => true do |t|
+      t.string   :owner
+      t.string   :group
+      t.integer  :links
+      t.string   :device_type
+      t.integer  :major_number
+      t.integer  :minor_number
+      t.datetime :last_updated
       t.timestamps
     end
 
