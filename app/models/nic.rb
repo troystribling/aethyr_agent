@@ -13,8 +13,7 @@ class Nic < ActiveRecord::Base
 
   ######################################################################################################
   #### validation
-  validates_presence_of  :mac_address
-  validates_presence_of  :ip_address
+  validates_presence_of  :hw_address
   validates_presence_of  :physical_id
 
   ####################################################################################################

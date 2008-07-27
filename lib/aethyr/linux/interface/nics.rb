@@ -26,8 +26,7 @@ module Aethyr
           def find_all
             hw = XmlSimple.xml_in(`lshw -xml`, {'KeyAttr' => {'node' => 'id', 'capability' => 'id', 'setting' => 'id'}, 'forcearray' => false})
             network = hw['node']['node']['pci']['node']['pci:1']['node']['network']
-           [{:name => network['logicalname'], :mac_address => network['serial'], :ip_address => network['configuration']['setting']['ip']['value'], 
-             :physical_id => network['physid']}]
+           [{:name => network['logicalname'], :hw_address => network['serial'], :physical_id => network['physid']}]
           end
     
         ######################################################################################################

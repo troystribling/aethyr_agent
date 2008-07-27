@@ -29,6 +29,17 @@ class CreateLinuxObjects < ActiveRecord::Migration
     end
 
     #######################################################################################################
+    #### device
+    create_table :device, :primary_key => :device_id, :force => true do |t|
+      t.string  :owner
+      t.string  :group
+      t.string  :type
+      t.integer :major_number
+      t.integer :minor_number
+      t.timestamps
+    end
+
+    #######################################################################################################
     #### file system
     create_table :disk_partitions, :primary_key => :disk_partition_id, :force => true do |t|
       t.integer :size
@@ -143,13 +154,21 @@ class CreateLinuxObjects < ActiveRecord::Migration
     #######################################################################################################
     #### network
     create_table :nics, :primary_key => :nic_id, :force => true do |t|
-      t.string :mac_address
-      t.string :ip_address
+      t.string  :hw_address
       t.integer :physical_id
       t.timestamps
     end
 
     create_table :network_interfaces, :primary_key => :network_interface_id, :force => true do |t|
+      t.string  :ip_address
+      t.string  :broadcast_address
+      t.string  :mask
+      t.string  :ipv6_address
+      t.string  :link_encapsulation
+      t.string  :scope
+      t.string  :status
+      t.integer :mtu
+      t.integer :metric
       t.timestamps
     end
 
