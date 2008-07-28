@@ -101,11 +101,13 @@ class CreateLinuxObjects < ActiveRecord::Migration
     end
 
     create_table :unix_socket_terminations, :primary_key => :unix_socket_termination_id, :force => true do |t|
-      t.integer  :node
+      t.integer  :i_node
       t.integer  :refcnt
       t.string   :command
-      t.string   :type
-      t.string   :state
+      t.string   :socket_type
+      t.string   :socket_state
+      t.string   :socket_flags
+      t.string   :device
       t.string   :fd
       t.timestamps
     end

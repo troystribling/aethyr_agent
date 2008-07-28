@@ -24,12 +24,17 @@ module Aethyr
     
           ##########################################################################################################
           def find_all
-            rows = `ls -l /dev`.split("\n")
-            rows.collect do |r|
+            rows = `netstat -pnax`.split("\n")
+            socks = {};
+            rows.each do |r|
+              r.tr!('[]', '')
               attrs = r.split(/\s+/)
-              {:name => attrs[8], :last_updated => "#{attrs[6]} #{attrs[7]}", :major_number => attrs[4], :minor_number => attrs[5], 
-               :links => attrs[1], :device_type => /^(\w).*/.match(attrs[0]).to_a.last, :owner => attrs[2], :group => attrs[3]}
-            end.select{|r| r[:device_type].eql?('s')}          
+              next if attrs[0].eql?('unix')
+              if attrs.length.eql?(5)
+              elsif attrs.length.eql?(6)
+              elsif attrs.length.eql?(7)
+              end
+            end
           end
     
         ######################################################################################################

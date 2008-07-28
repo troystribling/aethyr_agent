@@ -7,8 +7,13 @@ class UnixSocketTermination < ActiveRecord::Base
   has_ancestor :named => :aln_termination   
 
   ######################################################################################################
+  #### mixins
+  include Aethyr::Mixins::Synchronizer::Model
+  extend Aethyr::Aln::ConnectedModelHelper  
+
+  ######################################################################################################
   #### virtual attributes
-  attr_accessor :pid, :user, :device
+  attr_accessor :pid, :user
 
   ######################################################################################################
   #### validation
