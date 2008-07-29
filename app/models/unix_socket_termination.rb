@@ -17,6 +17,7 @@ class UnixSocketTermination < ActiveRecord::Base
 
   ######################################################################################################
   #### validation
+  validates_inclusion_of    :unix_socket_type,      :in => %w(STREAM DGRAM)
 
   ######################################################################################################
   #### restrict attribute access
@@ -29,6 +30,17 @@ class UnixSocketTermination < ActiveRecord::Base
   ######################################################################################################
   #### class methods
   class << self
+
+    ####################################################################################################
+    def unix_socket_type
+      %w(STREAM DGRAM RAW RDM SEQPACKET CONNECTING UNKNOWN)
+    end
+
+    ####################################################################################################
+    def unix_socket_state
+      %w(LISTENING CONNECTED FREE  CONNECTING DISCONNECTING UNKNOWN)
+    end
+
   end  
 
 ######################################################################################################
