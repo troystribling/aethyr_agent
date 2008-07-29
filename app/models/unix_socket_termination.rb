@@ -17,7 +17,7 @@ class UnixSocketTermination < ActiveRecord::Base
 
   ######################################################################################################
   #### validation
-  validates_inclusion_of    :unix_socket_type,      :in => %w(STREAM DGRAM)
+  validates_inclusion_of    :unix_socket_type,      :in => %w(STREAM DGRAM RAW RDM SEQPACKET CONNECTING UNKNOWN)
 
   ######################################################################################################
   #### restrict attribute access
@@ -25,11 +25,24 @@ class UnixSocketTermination < ActiveRecord::Base
   ####################################################################################################
   def add_associations
     
+    sys = System.find_by_model(:first)
+    sys << self
+    
+  end
+
+  ######################################################################################################
+  def sync_key
+    self.i_node
   end
 
   ######################################################################################################
   #### class methods
   class << self
+
+    ####################################################################################################
+    def sync_key(params)
+      params[:i_node]
+    end
 
     ####################################################################################################
     def unix_socket_type

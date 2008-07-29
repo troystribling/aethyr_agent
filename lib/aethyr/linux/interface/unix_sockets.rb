@@ -33,58 +33,51 @@ module Aethyr
               r.tr!('[]', '')
               attrs = r.split(/\s+/)
               next unless attrs[0].eql?('unix')
-              if attrs.length.eql?(5)
-                sock = build_hash_length_5(r)
-              elsif attrs.length.eql?(6)
-                sock = build_hash_length_6(r)
-              elsif attrs.length.eql?(7)
-                sock = build_hash_length_7(r)
-              elsif attrs.length.eql?(8)
-                sock = build_hash_length_8(r)
-              end
+              sock = self.send("build_hash_length_#{attrs.length}".to_sym, attrs)
               socks[sock[:i_node]] = sock
             end
+            socks.values
           end
 
           ##########################################################################################################
-          def build_hash_length_8(r)
-            {:ref_cnt => r[1], :unix_socket_flags => r[2], :unix_socket_type => r[3], :unix_socket_state => r[4], :i_node => r[5], 
-             :pid => get_pid(r[6]), :name => r[7]}
+          def build_hash_length_8(attrs)
+            {:ref_cnt => attrs[1], :unix_socket_flags => attrs[2], :unix_socket_type => attrs[3], :unix_socket_state => attrs[4], :i_node => attrs[5], 
+             :pid => get_netstat_pid(attrs[6]), :name => attrs[7]}
           end
 
           ##########################################################################################################
-          def build_hash_length_7(r)
-            if UnixSocketTermination.unix_socket_state.include?(r[3])
-              {:ref_cnt => r[1], :unix_socket_type => r[2], :unix_socket_state => r[3], :i_node => r[4], 
-               :pid => get_pid(r[5]), :name => r[6]}
-            elsif UnixSocketTermination.unix_socket_state.include?(r[4])
-              {:ref_cnt => r[1], :unix_socket_flags => r[2], :unix_socket_type => r[3], :unix_socket_state => r[4], :i_node => r[5], 
-               :pid => get_pid(r[6])}
+          def build_hash_length_7(attrs)
+            if UnixSocketTermination.unix_socket_state.include?(attrs[3])
+              {:ref_cnt => attrs[1], :unix_socket_type => attrs[2], :unix_socket_state => attrs[3], :i_node => attrs[4], 
+               :pid => get_netstat_pid(attrs[5]), :name => attrs[6]}
+            elsif UnixSocketTermination.unix_socket_state.include?(attrs[4])
+              {:ref_cnt => attrs[1], :unix_socket_flags => attrs[2], :unix_socket_type => attrs[3], :unix_socket_state => attrs[4], :i_node => attrs[5], 
+               :pid => get_netstat_pid(attrs[6])}
             else
-              {:ref_cnt => r[1], :unix_socket_flags => r[2], :unix_socket_type => r[3], :i_node => r[4], 
-               :pid => get_pid(r[5]), :name => r[6]}
+              {:ref_cnt => attrs[1], :unix_socket_flags => attrs[2], :unix_socket_type => attrs[3], :i_node => attrs[4], 
+               :pid => get_netstat_pid(attrs[5]), :name => attrs[6]}
             end
           end
 
           ##########################################################################################################
-          def build_hash_length_6(r)
-            if UnixSocketTermination.unix_socket_state.include?(r[3])
-              {:ref_cnt => r[1], :unix_socket_type => r[2], :unix_socket_state => r[3], :i_node => r[4], :pid => get_pid(r[5])}
-            elsif UnixSocketTermination.unix_socket_type.include?(r[3])
-              {:ref_cnt => r[1], :unix_socket_flags => r[2], :unix_socket_type => r[3], :i_node => r[4], :pid => get_pid(r[5])}
+          def build_hash_length_6(attrs)
+            if UnixSocketTermination.unix_socket_state.include?(attrs[3])
+              {:ref_cnt => attrs[1], :unix_socket_type => attrs[2], :unix_socket_state => attrs[3], :i_node => attrs[4], :pid => get_netstat_pid(attrs[5])}
+            elsif UnixSocketTermination.unix_socket_type.include?(attrs[3])
+              {:ref_cnt => attrs[1], :unix_socket_flags => attrs[2], :unix_socket_type => attrs[3], :i_node => attrs[4], :pid => get_netstat_pid(attrs[5])}
             else
-              {:ref_cnt => r[1], :unix_socket_type => r[2], :i_node => r[3], :pid => get_pid(r[4]), :name => r[5]}
+              {:ref_cnt => attrs[1], :unix_socket_type => attrs[2], :i_node => attrs[3], :pid => get_netstat_pid(attrs[4]), :name => attrs[5]}
             end
           end
 
           ##########################################################################################################
-          def build_hash_length_5(r)
-            {:ref_cnt => r[1], :unix_socket_type => r[2], :i_node => r[3], :pid => get_pid(r[4])}
+          def build_hash_length_5(attrs)
+            {:ref_cnt => attrs[1], :unix_socket_type => attrs[2], :i_node => attrs[3], :pid => get_netstat_pid(attrs[4])}
           end
 
           ##########################################################################################################
-          def get_pid(a)
-            a.split('/').first
+          def get_netstat_pid(a)
+            a.eql?('-') ? nil : a.split('/').first
           end
         
         ######################################################################################################
