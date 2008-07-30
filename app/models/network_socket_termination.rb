@@ -12,8 +12,8 @@ class NetworkSocketTermination < ActiveRecord::Base
 
   ######################################################################################################
   #### validation
-  validates_inclusion_of    :protocol,         :allow_nil,  :in => %w(tcp tcp6 udp)
-  validates_inclusion_of    :tcp_socket_state, :allow_nil,  :in => %w(ESTABLISHED SENT RECV WAIT1 WAIT2 WAIT CLOSED CLOSE_WAIT LAST_ACK LISTEN CLOSING UNKNOWN)
+  validates_inclusion_of    :protocol,         :allow_nil,      :in => %w(tcp tcp6 udp)
+  validates_inclusion_of    :network_socket_state, :allow_nil,  :in => %w(ESTABLISHED SENT RECV WAIT1 WAIT2 WAIT CLOSED CLOSE_WAIT LAST_ACK LISTEN CLOSING UNKNOWN)
 
   ######################################################################################################
   #### restrict attribute access
@@ -27,13 +27,13 @@ class NetworkSocketTermination < ActiveRecord::Base
   end
 
   ######################################################################################################
+  def sync_key
+    self.local_port
+  end
+    
+  ######################################################################################################
   #### class methods
   class << self
-    
-    ######################################################################################################
-    def sync_key
-      self.i_node
-    end
     
     ####################################################################################################
     def sync_key(params)
