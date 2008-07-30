@@ -136,8 +136,9 @@ class CreateLinuxObjects < ActiveRecord::Migration
       t.integer  :node
       t.integer  :refcnt
       t.string   :command
-      t.string   :type
-      t.string   :state
+      t.string   :tcp_socket_type
+      t.string   :tcp_socket_state
+      t.string   :protocol
       t.string   :fd
       t.string   :local_address
       t.integer  :local_port

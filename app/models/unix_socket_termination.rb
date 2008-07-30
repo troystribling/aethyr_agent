@@ -13,11 +13,12 @@ class UnixSocketTermination < ActiveRecord::Base
 
   ######################################################################################################
   #### virtual attributes
-  attr_accessor :pid, :user
+  attr_accessor :pid
 
   ######################################################################################################
   #### validation
   validates_inclusion_of    :unix_socket_type,      :in => %w(STREAM DGRAM RAW RDM SEQPACKET CONNECTING UNKNOWN)
+  validates_inclusion_of    :unix_socket_state,     :in => %w(LISTENING CONNECTED FREE  CONNECTING DISCONNECTING UNKNOWN)
 
   ######################################################################################################
   #### restrict attribute access

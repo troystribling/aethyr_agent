@@ -27,6 +27,7 @@ module Aethyr
     
           ##########################################################################################################
           def find_all
+
             rows = `netstat -pnax`.split("\n")
             socks = {};
             rows.each do |r|
@@ -36,26 +37,34 @@ module Aethyr
               sock = self.send("build_hash_length_#{attrs.length}".to_sym, attrs)
               socks[sock[:i_node]] = sock
             end
+
+            rows = `lsof -U`.split("\n")
+            rows.shift
+            rows.each do |r|
+              attrs = r.split(/\s+/)
+              socks[attrs[6]].update({:fd => attrs[3], :device => attrs[5], :name => attrs[7]}) unless socks[attrs[6]].nil?
+            end
+
             socks.values
           end
 
           ##########################################################################################################
           def build_hash_length_8(attrs)
             {:ref_cnt => attrs[1], :unix_socket_flags => attrs[2], :unix_socket_type => attrs[3], :unix_socket_state => attrs[4], :i_node => attrs[5], 
-             :pid => get_netstat_pid(attrs[6]), :name => attrs[7]}
+             :pid => get_netstat_pid(attrs[6])}
           end
 
           ##########################################################################################################
           def build_hash_length_7(attrs)
             if UnixSocketTermination.unix_socket_state.include?(attrs[3])
               {:ref_cnt => attrs[1], :unix_socket_type => attrs[2], :unix_socket_state => attrs[3], :i_node => attrs[4], 
-               :pid => get_netstat_pid(attrs[5]), :name => attrs[6]}
+               :pid => get_netstat_pid(attrs[5])}
             elsif UnixSocketTermination.unix_socket_state.include?(attrs[4])
               {:ref_cnt => attrs[1], :unix_socket_flags => attrs[2], :unix_socket_type => attrs[3], :unix_socket_state => attrs[4], :i_node => attrs[5], 
                :pid => get_netstat_pid(attrs[6])}
             else
               {:ref_cnt => attrs[1], :unix_socket_flags => attrs[2], :unix_socket_type => attrs[3], :i_node => attrs[4], 
-               :pid => get_netstat_pid(attrs[5]), :name => attrs[6]}
+               :pid => get_netstat_pid(attrs[5])}
             end
           end
 
@@ -66,7 +75,7 @@ module Aethyr
             elsif UnixSocketTermination.unix_socket_type.include?(attrs[3])
               {:ref_cnt => attrs[1], :unix_socket_flags => attrs[2], :unix_socket_type => attrs[3], :i_node => attrs[4], :pid => get_netstat_pid(attrs[5])}
             else
-              {:ref_cnt => attrs[1], :unix_socket_type => attrs[2], :i_node => attrs[3], :pid => get_netstat_pid(attrs[4]), :name => attrs[5]}
+              {:ref_cnt => attrs[1], :unix_socket_type => attrs[2], :i_node => attrs[3], :pid => get_netstat_pid(attrs[4])}
             end
           end
 
