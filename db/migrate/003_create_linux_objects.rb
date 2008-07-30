@@ -103,7 +103,6 @@ class CreateLinuxObjects < ActiveRecord::Migration
     create_table :unix_socket_terminations, :primary_key => :unix_socket_termination_id, :force => true do |t|
       t.integer  :i_node
       t.integer  :ref_cnt
-      t.string   :command
       t.string   :unix_socket_type
       t.string   :unix_socket_state
       t.string   :unix_socket_flags
@@ -117,7 +116,7 @@ class CreateLinuxObjects < ActiveRecord::Migration
       t.integer  :node
       t.integer  :nlink
       t.string   :command
-      t.string   :type
+      t.string   :pipe_type
       t.string   :fd
       t.timestamps
     end
@@ -132,15 +131,15 @@ class CreateLinuxObjects < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :tcp_socket_terminations, :primary_key => :tcp_termination_id, :force => true do |t|
+    create_table :network_socket_terminations, :primary_key => :tcp_termination_id, :force => true do |t|
       t.integer  :node
       t.integer  :refcnt
       t.string   :command
-      t.string   :tcp_socket_type
-      t.string   :tcp_socket_state
+      t.string   :network_socket_type
+      t.string   :network_socket_state
+      t.string   :device
       t.string   :protocol
       t.string   :fd
-      t.string   :local_address
       t.integer  :local_port
       t.string   :remote_address
       t.integer  :remote_port
@@ -235,7 +234,7 @@ class CreateLinuxObjects < ActiveRecord::Migration
     drop_table :file_terminations
     drop_table :memory_terminations
     drop_table :cpu_terminations
-    drop_table :tcp_socket_terminations
+    drop_table :network_socket_terminations
 
     #### network
     drop_table :nics

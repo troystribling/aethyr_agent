@@ -1,6 +1,6 @@
 ########################################################################################################
 ########################################################################################################
-class TcpSocketTermination < ActiveRecord::Base
+class NetworkSocketTermination < ActiveRecord::Base
 
   ######################################################################################################
   #### inheritance relations
@@ -8,12 +8,12 @@ class TcpSocketTermination < ActiveRecord::Base
 
   ######################################################################################################
   #### virtual attributes
-  attr_accessor :pid
+  attr_accessor :pid, :local_address
 
   ######################################################################################################
   #### validation
-#  validates_inclusion_of    :tcp_socket_type,      :in => %w(STREAM DGRAM RAW RDM SEQPACKET CONNECTING UNKNOWN)
-#  validates_inclusion_of    :tcp_socket_state,     :in => %w(LISTENING CONNECTED FREE  CONNECTING DISCONNECTING UNKNOWN)
+  validates_inclusion_of    :protocol,         :allow_nil,  :in => %w(tcp tcp6 udp)
+  validates_inclusion_of    :tcp_socket_state, :allow_nil,  :in => %w(ESTABLISHED SENT RECV WAIT1 WAIT2 WAIT CLOSED CLOSE_WAIT LAST_ACK LISTEN CLOSING UNKNOWN)
 
   ######################################################################################################
   #### restrict attribute access
@@ -37,23 +37,21 @@ class TcpSocketTermination < ActiveRecord::Base
     
     ####################################################################################################
     def sync_key(params)
-      params[:i_node]
+      params[:local_port]
     end
 
     ####################################################################################################
-    def unix_socket_type
-      %w(STREAM DGRAM RAW RDM SEQPACKET CONNECTING UNKNOWN)
+    def protocol
+      %w(tcp tcp6 udp)
     end
 
     ####################################################################################################
     def unix_socket_state
-      %w(LISTENING CONNECTED FREE  CONNECTING DISCONNECTING UNKNOWN)
+      %w(ESTABLISHED SENT RECV WAIT1 WAIT2 WAIT CLOSED CLOSE_WAIT LAST_ACK LISTEN CLOSING UNKNOWN)
     end
 
   end  
     
-  end  
-
 ######################################################################################################
 protected
 
