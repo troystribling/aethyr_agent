@@ -132,16 +132,16 @@ class CreateLinuxObjects < ActiveRecord::Migration
     end
 
     create_table :network_socket_terminations, :primary_key => :network_socket_termination_id, :force => true do |t|
-      t.integer  :refcnt
-      t.string   :command
-      t.string   :network_socket_type
-      t.string   :network_socket_state
-      t.string   :device
-      t.string   :protocol
-      t.string   :fd
-      t.integer  :local_port
-      t.string   :remote_address
-      t.integer  :remote_port
+      t.integer :refcnt
+      t.string  :command
+      t.string  :network_socket_type
+      t.string  :network_socket_state
+      t.string  :device
+      t.string  :protocol
+      t.string  :fd
+      t.string  :local_port
+      t.string  :remote_ip
+      t.string  :remote_port
       t.timestamps
     end
 

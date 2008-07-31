@@ -11,6 +11,10 @@ module Aethyr
       class NetworkSockets
   
         ######################################################################################################
+        #### class attributes
+        @@services = nil
+        
+        ######################################################################################################
         #### class methods
         class << self
   
@@ -33,21 +37,18 @@ module Aethyr
             rows.each do |r|
               attrs = r.split(/\s+/)
               next unless attrs[0] =~ /^(tcp|udp)/
-p r
-p attrs              
               local = get_netstat_ip_and_port(attrs[3])
               remote = get_netstat_ip_and_port(attrs[4])
-p local
-p remote
-              socks[local[1]] = {:protocol => attrs[0], :local_address => local[0], :local_port => local[1], :remote_address => remote[0], 
-                                 :remote_port => remote[1], :network_socket_state => attrs[5]}
+              socks[local[0]] = {:protocol => attrs[0], :local_ip => local[1], :local_port => local[2], :remote_ip => remote[1], 
+                                 :remote_port => remote[2], :network_socket_state => attrs[5]}
             end
 
             rows = `lsof -i -n`.split("\n")
             rows.shift
             rows.each do |r|
               attrs = r.split(/\s+/)
-              socks[get_lsof_local_port(attrs[7])].update(:pid => attrs[1], :fd => attrs[3], :device => attrs[5], :name => attrs[7])
+              local_addr = get_lsof_local_addr(attrs[7])
+              socks[local_addr].update(:pid => attrs[1], :fd => attrs[3], :device => attrs[5], :name => attrs[7])
             end
 
             socks.values
@@ -56,12 +57,15 @@ p remote
 
           ##########################################################################################################
           def get_netstat_ip_and_port(ip_port)
-            ip_port.split(':')
+            ip_port = /(.*):(\d+|\*)$/.match(ip_port).to_a
+            ip_port[1] = '*' if ip_port[1].eql?('::')
+            ip_port[0].gsub!('::','*') if ip_port[0] =~ /^:/
+            ip_port
           end
 
           ##########################################################################################################
-          def get_lsof_local_port(name)
-            /.*:(\d+)->.*/.match(name).to_a.last
+          def get_lsof_local_addr(name)
+            local_addr = /(.*)->.*/.match(name).to_a.last
           end
 
           ##########################################################################################################
@@ -70,9 +74,11 @@ p remote
               @@services = {}
               `cat /etc/services`.split("\n").each do |r|
                 attrs = r.split(/\s+/)
-                next if attrs[0] =~ /^#/
-                
+                next if attrs[0] =~ /^#/ or attrs.length.eql?(0)
+                @@services[attrs[0]] = attrs[1].split('/').first
               end
+            end
+            @@services[service]
           end
         
         ######################################################################################################
