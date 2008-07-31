@@ -48,8 +48,6 @@ module Aethyr
             rows.each do |r|
               attrs = r.split(/\s+/)
               local_addr = get_lsof_local_addr(attrs[7])
-p attrs              
-p local_addr              
               socks[local_addr].update(:pid => attrs[1], :fd => attrs[3], :device => attrs[5], :name => attrs[7]) unless socks[local_addr].nil?
             end
 
@@ -67,7 +65,6 @@ p local_addr
 
           ##########################################################################################################
           def get_lsof_local_addr(name)
-p name            
             unless local_addr = /(.*)->.*/.match(name).to_a.last
               local_addr = name
             end
