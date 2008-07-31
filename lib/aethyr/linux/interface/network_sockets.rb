@@ -48,7 +48,9 @@ module Aethyr
             rows.each do |r|
               attrs = r.split(/\s+/)
               local_addr = get_lsof_local_addr(attrs[7])
-              socks[local_addr].update(:pid => attrs[1], :fd => attrs[3], :device => attrs[5], :name => attrs[7])
+p attrs              
+p local_addr              
+              socks[local_addr].update(:pid => attrs[1], :fd => attrs[3], :device => attrs[5], :name => attrs[7]) unless socks[local_addr].nil?
             end
 
             socks.values
@@ -65,7 +67,13 @@ module Aethyr
 
           ##########################################################################################################
           def get_lsof_local_addr(name)
-            local_addr = /(.*)->.*/.match(name).to_a.last
+p name            
+            unless local_addr = /(.*)->.*/.match(name).to_a.last
+              local_addr = name
+            end
+            local_addr = local_addr.split(':')
+            local_addr[1] = get_service_port(local_addr[1])
+            local_addr.join(':')
           end
 
           ##########################################################################################################
@@ -78,7 +86,7 @@ module Aethyr
                 @@services[attrs[0]] = attrs[1].split('/').first
               end
             end
-            @@services[service]
+            @@services[service].nil? ? service : @@services[service]
           end
         
         ######################################################################################################
