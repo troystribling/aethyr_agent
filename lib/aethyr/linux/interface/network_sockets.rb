@@ -33,13 +33,21 @@ module Aethyr
             rows.each do |r|
               attrs = r.split(/\s+/)
               next unless attrs[0] =~ /^(tcp|udp)/
-              
+p r
+p attrs              
+              local = get_netstat_ip_and_port(attrs[3])
+              remote = get_netstat_ip_and_port(attrs[4])
+p local
+p remote
+              socks[local[1]] = {:protocol => attrs[0], :local_address => local[0], :local_port => local[1], :remote_address => remote[0], 
+                                 :remote_port => remote[1], :network_socket_state => attrs[5]}
             end
 
             rows = `lsof -i -n`.split("\n")
             rows.shift
             rows.each do |r|
               attrs = r.split(/\s+/)
+              socks[get_lsof_local_port(attrs[7])].update(:pid => attrs[1], :fd => attrs[3], :device => attrs[5], :name => attrs[7])
             end
 
             socks.values
@@ -47,8 +55,24 @@ module Aethyr
           end
 
           ##########################################################################################################
-          def get_ip_and_port(ip_port)
+          def get_netstat_ip_and_port(ip_port)
             ip_port.split(':')
+          end
+
+          ##########################################################################################################
+          def get_lsof_local_port(name)
+            /.*:(\d+)->.*/.match(name).to_a.last
+          end
+
+          ##########################################################################################################
+          def get_service_port(service)
+            if @@services.nil?
+              @@services = {}
+              `cat /etc/services`.split("\n").each do |r|
+                attrs = r.split(/\s+/)
+                next if attrs[0] =~ /^#/
+                
+              end
           end
         
         ######################################################################################################

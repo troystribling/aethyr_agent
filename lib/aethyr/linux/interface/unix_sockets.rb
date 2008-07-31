@@ -42,7 +42,7 @@ module Aethyr
             rows.shift
             rows.each do |r|
               attrs = r.split(/\s+/)
-              socks[attrs[6]].update({:fd => attrs[3], :device => attrs[5], :name => attrs[7]}) unless socks[attrs[6]].nil?
+              socks[attrs[6]].update(:fd => attrs[3], :device => attrs[5], :name => attrs[7]) unless socks[attrs[6]].nil?
             end
 
             socks.values

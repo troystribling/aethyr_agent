@@ -131,8 +131,7 @@ class CreateLinuxObjects < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :network_socket_terminations, :primary_key => :tcp_termination_id, :force => true do |t|
-      t.integer  :node
+    create_table :network_socket_terminations, :primary_key => :network_socket_termination_id, :force => true do |t|
       t.integer  :refcnt
       t.string   :command
       t.string   :network_socket_type
