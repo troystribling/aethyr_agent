@@ -17,8 +17,8 @@ class NetworkSocketTermination < ActiveRecord::Base
 
   ######################################################################################################
   #### validation
-  validates_inclusion_of    :protocol,             :allow_nil => true,  :in => %w(tcp tcp6 udp)
-  validates_inclusion_of    :network_socket_state, :allow_nil => true,  :in => %w(ESTABLISHED SENT RECV WAIT1 WAIT2 WAIT CLOSED CLOSE_WAIT LAST_ACK LISTEN CLOSING UNKNOWN)
+  validates_inclusion_of    :protocol,    :allow_nil => true,  :in => %w(tcp tcp6 udp)
+  validates_inclusion_of    :state,       :allow_nil => true,  :in => %w(ESTABLISHED SENT RECV WAIT1 WAIT2 WAIT CLOSED CLOSE_WAIT LAST_ACK LISTEN CLOSING UNKNOWN)
 
   ######################################################################################################
   #### restrict attribute access
@@ -51,7 +51,7 @@ class NetworkSocketTermination < ActiveRecord::Base
     end
 
     ####################################################################################################
-    def unix_socket_state
+    def state
       %w(ESTABLISHED SENT RECV WAIT1 WAIT2 WAIT CLOSED CLOSE_WAIT LAST_ACK LISTEN CLOSING UNKNOWN)
     end
 

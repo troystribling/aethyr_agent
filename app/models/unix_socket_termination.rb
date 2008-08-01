@@ -17,8 +17,8 @@ class UnixSocketTermination < ActiveRecord::Base
 
   ######################################################################################################
   #### validation
-  validates_inclusion_of    :unix_socket_type,  :allow_nil, :in => %w(STREAM DGRAM RAW RDM SEQPACKET CONNECTING UNKNOWN)
-  validates_inclusion_of    :unix_socket_state, :allow_nil, :in => %w(LISTENING CONNECTED FREE  CONNECTING DISCONNECTING UNKNOWN)
+  validates_inclusion_of    :socket_type,  :allow_nil => true, :in => %w(STREAM DGRAM RAW RDM SEQPACKET CONNECTING UNKNOWN)
+  validates_inclusion_of    :state,        :allow_nil => true, :in => %w(LISTENING CONNECTED FREE  CONNECTING DISCONNECTING UNKNOWN)
 
   ######################################################################################################
   #### restrict attribute access
@@ -46,12 +46,12 @@ class UnixSocketTermination < ActiveRecord::Base
     end
 
     ####################################################################################################
-    def unix_socket_type
+    def socket_type
       %w(STREAM DGRAM RAW RDM SEQPACKET CONNECTING UNKNOWN)
     end
 
     ####################################################################################################
-    def unix_socket_state
+    def state
       %w(LISTENING CONNECTED FREE  CONNECTING DISCONNECTING UNKNOWN)
     end
 

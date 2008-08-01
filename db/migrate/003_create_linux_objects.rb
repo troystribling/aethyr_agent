@@ -103,9 +103,9 @@ class CreateLinuxObjects < ActiveRecord::Migration
     create_table :unix_socket_terminations, :primary_key => :unix_socket_termination_id, :force => true do |t|
       t.integer  :i_node
       t.integer  :ref_cnt
-      t.string   :unix_socket_type
-      t.string   :unix_socket_state
-      t.string   :unix_socket_flags
+      t.string   :socket_type
+      t.string   :state
+      t.string   :flags
       t.string   :device
       t.string   :fd
       t.timestamps
@@ -132,7 +132,7 @@ class CreateLinuxObjects < ActiveRecord::Migration
     end
 
     create_table :network_socket_terminations, :primary_key => :network_socket_termination_id, :force => true do |t|
-      t.string  :network_socket_state
+      t.string  :state
       t.string  :device
       t.string  :protocol
       t.string  :fd
@@ -159,15 +159,19 @@ class CreateLinuxObjects < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :network_interfaces, :primary_key => :network_interface_id, :force => true do |t|
+    create_table :network_interface_terminations, :primary_key => :network_interface_termination_id, :force => true do |t|
       t.string  :ip_address
       t.string  :broadcast_address
+      t.string  :base_address
       t.string  :mask
       t.string  :ipv6_address
       t.string  :link_encapsulation
       t.string  :scope
+      t.string  :network_interface_status
       t.string  :status
       t.integer :mtu
+      t.integer :txqueuelen
+      t.integer :interrrupt
       t.integer :metric
       t.timestamps
     end
@@ -234,7 +238,7 @@ class CreateLinuxObjects < ActiveRecord::Migration
 
     #### network
     drop_table :nics
-    drop_table :network_interfaces
+    drop_table :network_interface_terminations
 
     #### users
     drop_table :system_users
