@@ -24,7 +24,8 @@ module Aethyr
 #          ApplicationThread.synchronize(Aethyr::Linux::Interface::ApplicationThreads, sys)
 #          Device.synchronize(Aethyr::Linux::Interface::Devices, sys)
 #          UnixSocketTermination.synchronize(Aethyr::Linux::Interface::UnixSockets, sys)
-          NetworkSocketTermination.synchronize(Aethyr::Linux::Interface::NetworkSockets, sys)
+#          NetworkSocketTermination.synchronize(Aethyr::Linux::Interface::NetworkSockets, sys)
+          NetworkInterfaceTermination.synchronize(Aethyr::Linux::Interface::NetworkInterfaces, sys)
         end
   
       ######################################################################################################

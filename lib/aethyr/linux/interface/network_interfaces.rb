@@ -33,18 +33,33 @@ module Aethyr
           def find_all
 
             rows = `ifconfig -a`.split("\n")
-            socks = {};
-            rows.each do |r|
-              attrs = r.split(/\s+/)
-              next unless attrs[0] =~ /^(tcp|udp)/
-              local = get_netstat_ip_and_port(attrs[3])
-              remote = get_netstat_ip_and_port(attrs[4])
-              socks[local[0]] = {:protocol => attrs[0], :local_ip => local[1], :local_port => local[2], :remote_ip => remote[1], 
-                                 :remote_port => remote[2], :network_socket_state => attrs[5]}
+            rows = rows.collect{|r| r.split(/\s+/)}
+            ifaces = []
+            row = 0
+            until row.eql?(rows.length)
+              iface_type = /^(\D+)/.match(rows[row][0]).to_a.last
+              iface_type.nil? ? row += 1 : row = self.send("build_#{iface_type}".to_sym, row, rows, ifaces)
             end
-
+            ifaces
           end
-        
+
+          ##########################################################################################################
+          def build_eth(row, rows, ifaces) 
+p rows[row]
+row += 1
+          end
+
+          ##########################################################################################################
+          def build_lo(row, rows, ifaces) 
+p rows[row]
+row += 1
+          end
+
+          ##########################################################################################################
+          def get_attr_value(attr)
+            attr.split(":").last
+          end
+
         ######################################################################################################
         end  
         
