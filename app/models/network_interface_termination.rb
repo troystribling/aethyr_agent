@@ -21,6 +21,9 @@ class NetworkInterfaceTermination < ActiveRecord::Base
   ####################################################################################################
   def add_associations
     
+    sys = System.find_by_model(:first)
+    sys << self
+        
   end
 
   ######################################################################################################
