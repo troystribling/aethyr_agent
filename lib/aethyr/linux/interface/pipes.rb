@@ -27,12 +27,21 @@ module Aethyr
     
           ##########################################################################################################
           def find_all
-            rows = `ls -l /dev`.split("\n")
+
+            rows = `lsof +L | grep -i fifo`.split("\n")
             rows.collect do |r|
               attrs = r.split(/\s+/)
-              {:name => attrs[8], :last_updated => "#{attrs[6]} #{attrs[7]}", :major_number => attrs[4], :minor_number => attrs[5], 
-               :links => attrs[1], :device_type => /^(\w).*/.match(attrs[0]).to_a.last, :owner => attrs[2], :group => attrs[3]}
-            end.select{|r| r[:device_type].eql?('p')}          
+              {
+               :pid       => attrs[1],
+               :fd        => attrs[3],
+               :pipe_type => attrs[4],
+               :device    => attrs[5],
+               :nlink     => attrs[6],
+               :i_node    => attrs[7],
+               :name      => attrs[8],
+              }
+            end
+
           end
     
         ######################################################################################################

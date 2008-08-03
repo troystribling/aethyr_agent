@@ -33,6 +33,7 @@ class CreateLinuxObjects < ActiveRecord::Migration
     create_table :devices, :primary_key => :device_id, :force => true do |t|
       t.string   :owner
       t.string   :group
+      t.integer  :i_node
       t.integer  :links
       t.string   :device_type
       t.integer  :major_number
@@ -112,10 +113,8 @@ class CreateLinuxObjects < ActiveRecord::Migration
     end
 
     create_table :pipe_terminations, :primary_key => :pipe_termination_id, :force => true do |t|
-      t.integer  :size
-      t.integer  :node
+      t.integer  :i_node
       t.integer  :nlink
-      t.string   :command
       t.string   :pipe_type
       t.string   :fd
       t.timestamps

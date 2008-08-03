@@ -27,12 +27,20 @@ module Aethyr
     
           ##########################################################################################################
           def find_all
-            rows = `ls -l /dev`.split("\n")
+            rows = `ls -li /dev`.split("\n")
             rows.collect do |r|
               attrs = r.split(/\s+/)
-              {:name => attrs[8], :last_updated => "#{attrs[6]} #{attrs[7]}", :major_number => attrs[4], :minor_number => attrs[5], 
-               :links => attrs[1], :device_type => /^(\w).*/.match(attrs[0]).to_a.last, :owner => attrs[2], :group => attrs[3]}
-            end.select{|r| r[:device_type].eql?('c') or (r[:device_type].eql?('b') and r[:name] !~ /^sd/)}          
+              {
+               :name => attrs[10], 
+               :last_updated => "#{attrs[8]} #{attrs[9]}", 
+               :major_number => attrs[6], 
+               :minor_number => attrs[7], 
+               :links => attrs[8], 
+               :device_type => /^(\w).*/.match(attrs[2]).to_a.last, 
+               :owner => attrs[4], 
+               :group => attrs[5], 
+               :i_node => attrs[1]}
+            end.select{|r| r[:device_type].eql?('p') or r[:device_type].eql?('c') or (r[:device_type].eql?('b') and r[:name] !~ /^sd/)}          
           end
     
         ######################################################################################################
