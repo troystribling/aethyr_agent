@@ -27,12 +27,38 @@ module Aethyr
     
           ##########################################################################################################
           def find_all
-            rows = `ls -l /dev`.split("\n")
-            rows.collect do |r|
+
+            parts = {}
+            
+            rows = `ls -il /dev/sd* | egrep "sd[a-z][1-9]+"`.split("\n")
+            rows.each do |r|
+              r.gsub!(/^\s+/, '')
               attrs = r.split(/\s+/)
-              {:name => attrs[8], :last_updated => "#{attrs[6]} #{attrs[7]}", :major_number => attrs[4], :minor_number => attrs[5], 
-               :links => attrs[1], :device_type => /^(\w).*/.match(attrs[0]).to_a.last, :owner => attrs[2], :group => attrs[3]}
-            end.select{|r| r[:device_type].eql?('c') or (r[:device_type].eql?('b') and r[:name] !~ /^sd/)}          
+              parts[attrs[9]] = {
+               :name         => attrs[9], 
+               :last_updated => "#{attrs[7]} #{attrs[8]}", 
+               :major_number => attrs[5], 
+               :minor_number => attrs[6], 
+               :links        => attrs[2], 
+               :device_type  => /^(\w).*/.match(attrs[1]).to_a.last, 
+               :owner        => attrs[3], 
+               :group        => attrs[4],
+               :i_node       => attrs[0],
+              }
+            end          
+            
+            rows = `cat /proc/partions`.split("\n")
+            rows.each do |r|
+              r.gsub!(/^\s+/, '')
+              next unless /^\d+/.match(r)
+              attrs = r.split(/\s+/)
+              parts[attrs[3]] = {
+               :size => attrs[2],
+              } unless parts[attrs[3]].nil?
+            end
+            
+            parts.values
+            
           end
     
         ######################################################################################################
