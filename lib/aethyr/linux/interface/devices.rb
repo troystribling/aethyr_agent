@@ -28,21 +28,47 @@ module Aethyr
           ##########################################################################################################
           def find_all
             rows = `ls -li /dev`.split("\n")
-            rows.collect do |r|
-              attrs = r.split(/\s+/)
-              {
-               :name => attrs[10], 
-               :last_updated => "#{attrs[8]} #{attrs[9]}", 
-               :major_number => attrs[6], 
-               :minor_number => attrs[7], 
-               :links => attrs[8], 
-               :device_type => /^(\w).*/.match(attrs[2]).to_a.last, 
-               :owner => attrs[4], 
-               :group => attrs[5], 
-               :i_node => attrs[1]}
-            end.select{|r| r[:device_type].eql?('p') or r[:device_type].eql?('c') or (r[:device_type].eql?('b') and r[:name] !~ /^sd/)}          
+            devs = []
+            rows.each do |r|
+              r.gsub!(/^\s+/, '')
+              attrs =r.split(/\s+/)
+              if self.respond_to?("build_hash_length_#{attrs.length}".to_sym) 
+                dev = self.send("build_hash_length_#{attrs.length}".to_sym, attrs) 
+                devs << dev if dev[:device_type].eql?('p') or dev[:device_type].eql?('c') or (dev[:device_type].eql?('b') and dev[:name] !~ /^sd/)
+              end
+            end
+            devs
           end
-    
+
+          ##########################################################################################################
+          def build_hash_length_10(attrs)
+            {
+             :name => attrs[9], 
+             :last_updated => "#{attrs[7]} #{attrs[8]}", 
+             :major_number => attrs[5], 
+             :minor_number => attrs[6], 
+             :links => attrs[2], 
+             :device_type => /^(\w).*/.match(attrs[1]).to_a.last, 
+             :owner => attrs[3], 
+             :group => attrs[4], 
+             :i_node => attrs[0]
+            }
+          end
+
+          ##########################################################################################################
+          def build_hash_length_9(attrs)
+            {
+             :name => attrs[8], 
+             :last_updated => "#{attrs[6]} #{attrs[7]}", 
+             :major_number => attrs[5], 
+             :links => attrs[2], 
+             :device_type => /^(\w).*/.match(attrs[1]).to_a.last, 
+             :owner => attrs[3], 
+             :group => attrs[4], 
+             :i_node => attrs[0]
+            }
+          end
+
         ######################################################################################################
         end  
         
