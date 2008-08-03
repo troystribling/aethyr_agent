@@ -46,13 +46,20 @@ class CreateLinuxObjects < ActiveRecord::Migration
     #### file system
     create_table :disk_partitions, :primary_key => :disk_partition_id, :force => true do |t|
       t.integer :size
-      t.integer :file_system_type
-      t.timestamps
+      t.string   :owner
+      t.string   :group
+      t.integer  :i_node
+      t.integer  :links
+      t.string   :device_type
+      t.integer  :major_number
+      t.integer  :minor_number
+      t.datetime :last_updated
     end
 
     create_table :file_systems, :primary_key => :file_system_id, :force => true do |t|
       t.integer :size
       t.integer :mount
+      t.integer :file_system_type
       t.timestamps
     end
 
