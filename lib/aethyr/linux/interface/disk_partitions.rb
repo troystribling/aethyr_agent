@@ -37,7 +37,7 @@ module Aethyr
               parts[attrs[9]] = {
                :name         => attrs[9], 
                :last_updated => "#{attrs[7]} #{attrs[8]}", 
-               :major_number => attrs[5], 
+               :major_number => /(^\d+)/.match(attrs[5]).to_a.last, 
                :minor_number => attrs[6], 
                :links        => attrs[2], 
                :device_type  => /^(\w).*/.match(attrs[1]).to_a.last, 
@@ -45,18 +45,17 @@ module Aethyr
                :group        => attrs[4],
                :i_node       => attrs[0],
               }
-            end          
+            end    
             
-            rows = `cat /proc/partions`.split("\n")
+            rows = `cat /proc/partitions`.split("\n")
             rows.each do |r|
               r.gsub!(/^\s+/, '')
               next unless /^\d+/.match(r)
               attrs = r.split(/\s+/)
-              parts[attrs[3]] = {
-               :size => attrs[2],
-              } unless parts[attrs[3]].nil?
+              dev_name = "/dev/#{attrs[3]}"
+              parts[dev_name].update(:size => attrs[2], :size_units => 'KB') unless parts[dev_name].nil?
             end
-            
+
             parts.values
             
           end

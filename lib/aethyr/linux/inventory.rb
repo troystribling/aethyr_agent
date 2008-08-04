@@ -26,7 +26,9 @@ module Aethyr
 #          UnixSocketTermination.synchronize(Aethyr::Linux::Interface::UnixSockets, sys)
 #          NetworkSocketTermination.synchronize(Aethyr::Linux::Interface::NetworkSockets, sys)
 #          NetworkInterfaceTermination.synchronize(Aethyr::Linux::Interface::NetworkInterfaces, sys)
-          PipeTermination.synchronize(Aethyr::Linux::Interface::Pipes, sys)
+#          PipeTermination.synchronize(Aethyr::Linux::Interface::Pipes, sys)
+#          DiskPartition.synchronize(Aethyr::Linux::Interface::DiskPartitions, sys)
+          FileSystem.synchronize(Aethyr::Linux::Interface::FileSystems, sys)
         end
   
       ######################################################################################################
