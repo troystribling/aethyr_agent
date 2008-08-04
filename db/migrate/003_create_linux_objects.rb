@@ -60,8 +60,8 @@ class CreateLinuxObjects < ActiveRecord::Migration
     create_table :file_systems, :primary_key => :file_system_id, :force => true do |t|
       t.integer :size
       t.string  :size_units
-      t.integer :mount
-      t.integer :file_system_type
+      t.string :mount
+      t.string :file_system_type
       t.timestamps
     end
 

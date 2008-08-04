@@ -30,30 +30,21 @@ module Aethyr
 
             parts = {}
             
-            rows = `dk -k"`.split("\n")
+            rows = `df -k`.split("\n")
             rows.each do |r|
-              r.gsub!(/^\s+/, '')
               attrs = r.split(/\s+/)
-              parts[attrs[9]] = {
-               :name         => attrs[9], 
-               :last_updated => "#{attrs[7]} #{attrs[8]}", 
-               :major_number => /(^\d+)/.match(attrs[5]).to_a.last, 
-               :minor_number => attrs[6], 
-               :links        => attrs[2], 
-               :device_type  => /^(\w).*/.match(attrs[1]).to_a.last, 
-               :owner        => attrs[3], 
-               :group        => attrs[4],
-               :i_node       => attrs[0],
+              parts[attrs[0]] = {
+               :name       => attrs[0], 
+               :size       => attrs[1],
+               :size_units => 'KB',               
+               :mount      => attrs[5],
               }
             end    
             
-            rows = `cat /proc/partitions`.split("\n")
+            rows = `cat /etc/mtab`.split("\n")
             rows.each do |r|
-              r.gsub!(/^\s+/, '')
-              next unless /^\d+/.match(r)
               attrs = r.split(/\s+/)
-              dev_name = "/dev/#{attrs[3]}"
-              parts[dev_name].update(:size => attrs[2], :size_units => 'KB') unless parts[dev_name].nil?
+              parts[attrs[0]].update(:file_system_type => attrs[2]) unless parts[attrs[0]].nil?
             end
 
             parts.values
