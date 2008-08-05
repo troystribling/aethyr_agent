@@ -28,12 +28,13 @@ module Aethyr
           ##########################################################################################################
           def find_all
 
-            parts = {}
+            fs = {}
             
             rows = `df -k`.split("\n")
+            rows.shift
             rows.each do |r|
               attrs = r.split(/\s+/)
-              parts[attrs[0]] = {
+              fs[attrs[0]] = {
                :name       => attrs[0], 
                :size       => attrs[1],
                :size_units => 'KB',               
@@ -44,10 +45,15 @@ module Aethyr
             rows = `cat /etc/mtab`.split("\n")
             rows.each do |r|
               attrs = r.split(/\s+/)
-              parts[attrs[0]].update(:file_system_type => attrs[2]) unless parts[attrs[0]].nil?
+              fs[attrs[0]].update(
+                                     :file_system_type => attrs[2],
+                                     :mount_options    => attrs[3],
+                                     :backup_frequency => attrs[4],
+                                     :fsck_order       => attrs[5]
+                                     ) unless fs[attrs[0]].nil?
             end
 
-            parts.values
+            fs.values
             
           end
     

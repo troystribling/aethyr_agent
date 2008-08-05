@@ -60,8 +60,11 @@ class CreateLinuxObjects < ActiveRecord::Migration
     create_table :file_systems, :primary_key => :file_system_id, :force => true do |t|
       t.integer :size
       t.string  :size_units
-      t.string :mount
-      t.string :file_system_type
+      t.string  :mount
+      t.string  :file_system_type
+      t.string  :mount_options
+      t.integer :backup_frequency
+      t.integer :fsck_order
       t.timestamps
     end
 
@@ -131,10 +134,10 @@ class CreateLinuxObjects < ActiveRecord::Migration
 
     create_table :file_terminations, :primary_key => :file_termination_id, :force => true do |t|
       t.integer  :size
-      t.integer  :node
+      t.integer  :i_node
       t.integer  :nlink
       t.string   :command
-      t.string   :type
+      t.string   :file_type
       t.string   :fd
       t.timestamps
     end
@@ -217,6 +220,7 @@ class CreateLinuxObjects < ActiveRecord::Migration
     end
 
     create_table :gems, :primary_key => :gem_id, :force => true do |t|
+      t.string :vesrions
       t.timestamps
     end
 
