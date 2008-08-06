@@ -31,31 +31,26 @@ module Aethyr
             pkgs = {}
             
             #### attributes other than description
-            rows = `aptitude -w 300 -F "%C# %p# %M %t# %v# %V# %d#" search '~i'`.split("\n")
+            rows = `aptitude -w 300 -F "%p# %C# %M %t# %v# %V#" search '~i'`.split("\n")
             rows.each do |r|
               attrs = r.split(/\s+/)              
-              desc = attrs[6..attrs.length-1].join(' ')
-              attrs[1].eql?(A) auto
-              {
-                :package_state => attrs[0],
-                :automatic     => ,
-                
-              }
+              pkg = self.send("build_hash_length_#{attrs.length}".to_sym, attrs)
+              pkgs[pkg[:name]] = pkg
             end
             
             #### description
             rows = `aptitude -w 300 -F "%p# %d#" search '~i'`.split("\n")
             rows.each do |r|
               attrs = r.split(/\s+/)              
-              desc = attrs[6..attrs.length-1].join(' ')
-              attrs[1].eql?(A) auto
-              {
-                :package_state => attrs[0],
-                :automatic     => ,
-                
-              }
+              pkgs[attrs[0]].update(:description => desc = attrs[1..attrs.length-1].join(' '))
             end
 
+          end
+    
+          ##########################################################################################################
+          def build_hash_length_8(attrs)
+            {:ref_cnt => attrs[1], :flags => attrs[2], :socket_type => attrs[3], :state => attrs[4], :i_node => attrs[5], 
+             :pid => get_netstat_pid(attrs[6])}
           end
     
         ######################################################################################################
