@@ -8,7 +8,7 @@ module Aethyr
     module Interface
     
       ##########################################################################################################
-      class Files
+      class SoftwarePackages
   
         ######################################################################################################
         #### class methods
@@ -28,18 +28,31 @@ module Aethyr
           ##########################################################################################################
           def find_all
 
-            rows = `lsof -S 5 +L +D /`.split("\n")
-            rows.collect do |r|
-              attrs = r.split(/\s+/)
+            pkgs = {}
+            
+            #### attributes other than description
+            rows = `aptitude -w 300 -F "%C# %p# %M %t# %v# %V# %d#" search '~i'`.split("\n")
+            rows.each do |r|
+              attrs = r.split(/\s+/)              
+              desc = attrs[6..attrs.length-1].join(' ')
+              attrs[1].eql?(A) auto
               {
-               :pid       => attrs[1],
-               :fd        => attrs[3],
-               :file_type => attrs[4],
-               :device    => attrs[5],
-               :size      => attrs[6],
-               :nlink     => attrs[7],
-               :i_node    => attrs[8],
-               :name      => attrs[9],
+                :package_state => attrs[0],
+                :automatic     => ,
+                
+              }
+            end
+            
+            #### description
+            rows = `aptitude -w 300 -F "%p# %d#" search '~i'`.split("\n")
+            rows.each do |r|
+              attrs = r.split(/\s+/)              
+              desc = attrs[6..attrs.length-1].join(' ')
+              attrs[1].eql?(A) auto
+              {
+                :package_state => attrs[0],
+                :automatic     => ,
+                
               }
             end
 
