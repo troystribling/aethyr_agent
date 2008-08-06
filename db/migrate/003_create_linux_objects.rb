@@ -136,7 +136,6 @@ class CreateLinuxObjects < ActiveRecord::Migration
       t.integer  :size
       t.integer  :i_node
       t.integer  :nlink
-      t.string   :command
       t.string   :file_type
       t.string   :fd
       t.timestamps
@@ -212,15 +211,35 @@ class CreateLinuxObjects < ActiveRecord::Migration
     #######################################################################################################
     #### software
     create_table :software_repositories, :primary_key => :software_repository_id, :force => true do |t|
+      t.string :repository_types
+      t.string :address
+      t.string :components
       t.timestamps
     end
 
     create_table :packages, :primary_key => :package_id, :force => true do |t|
+      t.string  :package_state
+      t.boolean :automatic
+      t.string  :description
+      t.string  :installed_version
+      t.string  :available_version
       t.timestamps
     end
 
     create_table :gems, :primary_key => :gem_id, :force => true do |t|
-      t.string :vesrions
+      t.string :versions
+      t.string  :description
+      t.timestamps
+    end
+
+    create_table :gems_environment, :primary_key => :gems_environment_id, :force => true do |t|
+      t.string :gems_version
+      t.string :ruby_version
+      t.string :installation_directory
+      t.string :ruby_executable
+      t.string :platforms
+      t.string :gem_paths
+      t.string :remote_sources
       t.timestamps
     end
 
@@ -261,6 +280,7 @@ class CreateLinuxObjects < ActiveRecord::Migration
     drop_table :software_repositories
     drop_table :packages
     drop_table :gems
+    drop_table :gems_environment
 
   end
   

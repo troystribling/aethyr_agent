@@ -31,7 +31,7 @@ module Aethyr
             rows = `lsof -S 5 +L +D /`.split("\n")
             rows.collect do |r|
               attrs = r.split(/\s+/)
-              {
+              vals = {
                :pid       => attrs[1],
                :fd        => attrs[3],
                :file_type => attrs[4],
