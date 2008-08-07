@@ -211,6 +211,7 @@ class CreateLinuxObjects < ActiveRecord::Migration
     #######################################################################################################
     #### software
     create_table :software_package_repositories, :primary_key => :software_package_repository_id, :force => true do |t|
+      t.string :repository_type
       t.string :address
       t.string :components
       t.timestamps

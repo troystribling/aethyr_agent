@@ -28,22 +28,33 @@ module Aethyr
           ##########################################################################################################
           def find_all
 
-            rows = `cat /etc/apt/source.list`.split("\n")
+            rows = `cat /etc/apt/sources.list`.split("\n")
+            repos = {}
             rows.each do |r|
-              next if /^#/.match(r)
-              attrs = r.split(/\s+/)
-              {
-               :pid       => attrs[1],
-               :fd        => attrs[3],
-               :file_type => attrs[4],
-               :device    => attrs[5],
-               :size      => attrs[6],
-               :nlink     => attrs[7],
-               :i_node    => attrs[8],
-               :name      => attrs[9],
-              }
+              attrs = r.split(/\s+/)  
+              if /cdrom/.match(r)
+                build_hash_for_cdrom(repos, r) 
+                next
+              end
+              next if /^#/.match(r) or attrs.length.eql?(0)              
+              key = attrs[2] + attrs[3..attrs.length-1].join + attrs[0]
+              repos[key] = {
+                            :repository_type  => attrs[0],
+                            :address          => attrs[1],
+                            :name             => attrs[2],
+                            :components       => attrs[3..attrs.length-1]
+                           }
+p repos[key]              
             end
 
+            repos.values
+            
+          end
+    
+          ##########################################################################################################
+          def build_hash_for_cdrom(repos, r)
+            {
+            }
           end
     
         ######################################################################################################

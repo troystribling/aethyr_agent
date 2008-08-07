@@ -30,7 +30,8 @@ module Aethyr
 #          DiskPartition.synchronize(Aethyr::Linux::Interface::DiskPartitions, sys)
 #          FileSystem.synchronize(Aethyr::Linux::Interface::FileSystems, sys)
 #          FileTermination.synchronize(Aethyr::Linux::Interface::Files, sys)
-          SoftwarePackage.synchronize(Aethyr::Linux::Interface::SoftwarePackages, sys)
+#          SoftwarePackage.synchronize(Aethyr::Linux::Interface::SoftwarePackages, sys)
+          SoftwarePackageRepository.synchronize(Aethyr::Linux::Interface::SoftwarePackageRepositories, sys)
         end
   
       ######################################################################################################
