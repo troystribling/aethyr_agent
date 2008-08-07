@@ -13,7 +13,7 @@ class SoftwarePackage < ActiveRecord::Base
 
   ######################################################################################################
   #### virtual attributes
-  attr_accessor :respoitories
+  attr_accessor :repositories
 
   ######################################################################################################
   #### validation

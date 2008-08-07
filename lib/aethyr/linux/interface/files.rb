@@ -29,6 +29,7 @@ module Aethyr
           def find_all
 
             rows = `lsof -S 5 +L +D /`.split("\n")
+            rows.shift            
             rows.collect do |r|
               attrs = r.split(/\s+/)
               {

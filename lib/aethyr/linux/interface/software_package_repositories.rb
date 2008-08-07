@@ -8,7 +8,7 @@ module Aethyr
     module Interface
     
       ##########################################################################################################
-      class Files
+      class SoftwarePackageRepositories
   
         ######################################################################################################
         #### class methods
@@ -28,8 +28,9 @@ module Aethyr
           ##########################################################################################################
           def find_all
 
-            rows = `lsof -S 5 +L +D /`.split("\n")
-            rows.collect do |r|
+            rows = `cat /etc/apt/source.list`.split("\n")
+            rows.each do |r|
+              next if /^#/.match(r)
               attrs = r.split(/\s+/)
               {
                :pid       => attrs[1],

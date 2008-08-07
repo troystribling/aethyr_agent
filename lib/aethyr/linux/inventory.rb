@@ -29,8 +29,8 @@ module Aethyr
 #          PipeTermination.synchronize(Aethyr::Linux::Interface::Pipes, sys)
 #          DiskPartition.synchronize(Aethyr::Linux::Interface::DiskPartitions, sys)
 #          FileSystem.synchronize(Aethyr::Linux::Interface::FileSystems, sys)
-          FileTermination.synchronize(Aethyr::Linux::Interface::Files, sys)
-#          SoftwarePackage.synchronize(Aethyr::Linux::Interface::SoftwarePackages, sys)
+#          FileTermination.synchronize(Aethyr::Linux::Interface::Files, sys)
+          SoftwarePackage.synchronize(Aethyr::Linux::Interface::SoftwarePackages, sys)
         end
   
       ######################################################################################################
