@@ -32,18 +32,18 @@ module Aethyr
             repos = {}
             rows.each do |r|
               attrs = r.split(/\s+/)  
-              if /cdrom/.match(r)
-                build_hash_for_cdrom(repos, r) 
-                next
-              end
               next if /^#/.match(r) or attrs.length.eql?(0)              
-              key = attrs[2] + attrs[3..attrs.length-1].join + attrs[0]
-              repos[key] = {
-                            :repository_type  => attrs[0],
-                            :address          => attrs[1],
-                            :name             => attrs[2],
-                            :components       => attrs[3..attrs.length-1]
-                           }
+              unless /cdrom/.match(r)
+                key = attrs[2] + attrs[3..attrs.length-1].join + attrs[0]
+                repos[key] = {
+                              :repository_type  => attrs[0],
+                              :address          => attrs[1],
+                              :name             => attrs[2],
+                              :components       => attrs[3..attrs.length-1]
+                             }
+              else
+                build_hash_for_cdrom(repos, r) 
+              end
 p repos[key]              
             end
 
