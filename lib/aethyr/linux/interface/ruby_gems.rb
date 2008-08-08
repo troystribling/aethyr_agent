@@ -38,10 +38,12 @@ module Aethyr
 p r
               if name_ver = /(^\S+)\s\((.*)\)/.match(r)
                 gem = {
-                        :name     => name_ver.to_a[1],
-                        :versions => name_ver.to_a[2].split(','),
+                       :name     => name_ver.to_a[1],
+                       :versions => name_ver.to_a[2].split(','),
                       }
               end
+              gems << gem if /(^\S+)\s\((.*)\)/
+              
             end
             
             gems
