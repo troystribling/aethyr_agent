@@ -29,32 +29,31 @@ module Aethyr
           def find_all
 
             rows = `cat /etc/apt/sources.list`.split("\n")
-            repos = {}
+            repos = []
             rows.each do |r|
               attrs = r.split(/\s+/)  
               next if /^#/.match(r) or attrs.length.eql?(0)              
               unless /cdrom/.match(r)
-                key = attrs[2] + attrs[3..attrs.length-1].join + attrs[0]
-                repos[key] = {
-                              :repository_type  => attrs[0],
-                              :address          => attrs[1],
-                              :name             => attrs[2],
-                              :components       => attrs[3..attrs.length-1]
-                             }
+                repos << {
+                          :repository_type  => attrs[0],
+                          :address          => attrs[1],
+                          :name             => attrs[2],
+                          :components       => attrs[3..attrs.length-1]
+                          }
               else
-                build_hash_for_cdrom(repos, r) 
+                addr_end = attrs.index(attrs.detect{|a| /\/$/.match(a)})
+                unless addr_end.nil?
+                  repos << {
+                            :repository_type  => attrs[0],
+                            :address          => attrs[1..addr_end].join(' '),
+                            :name             => attrs[addr_end+1],
+                            :components       => attrs[addr_end+2..attrs.length-1]
+                           }
+                end
               end
-p repos[key]              
             end
+            repos
 
-            repos.values
-            
-          end
-    
-          ##########################################################################################################
-          def build_hash_for_cdrom(repos, r)
-            {
-            }
           end
     
         ######################################################################################################

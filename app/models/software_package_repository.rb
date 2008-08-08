@@ -17,6 +17,7 @@ class SoftwarePackageRepository < ActiveRecord::Base
 
   ######################################################################################################
   #### validation
+  serialize :components
 
   ####################################################################################################
   def add_associations
@@ -28,8 +29,19 @@ class SoftwarePackageRepository < ActiveRecord::Base
   end
 
   ######################################################################################################
+  def sync_key
+    "#{self.repository_type}-#{self.name}-#{self.components.join}#{self.address}"
+  end
+
+  ######################################################################################################
   #### class methods
   class << self
+
+    ####################################################################################################
+    def sync_key(params)
+      "#{params[:repository_type]}-#{params[:name]}-#{params[:components].join}-#{params[:address]}"
+    end
+
   end  
 
 ######################################################################################################
