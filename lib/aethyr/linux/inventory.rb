@@ -31,7 +31,8 @@ module Aethyr
 #          FileSystem.synchronize(Aethyr::Linux::Interface::FileSystems, sys)
 #          FileTermination.synchronize(Aethyr::Linux::Interface::Files, sys)
 #          SoftwarePackage.synchronize(Aethyr::Linux::Interface::SoftwarePackages, sys)
-          SoftwarePackageRepository.synchronize(Aethyr::Linux::Interface::SoftwarePackageRepositories, sys)
+#          SoftwarePackageRepository.synchronize(Aethyr::Linux::Interface::SoftwarePackageRepositories, sys)
+          Gem.synchronize(Aethyr::Linux::Interface::Gems, sys)
         end
   
       ######################################################################################################
