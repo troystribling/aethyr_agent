@@ -8,7 +8,7 @@ module Aethyr
     module Interface
     
       ##########################################################################################################
-      class Gems
+      class RubyGems
   
         ######################################################################################################
         #### class methods
@@ -29,15 +29,22 @@ module Aethyr
           def find_all
 
             gems = []
+            gem = {}
             
             #### attributes other than description
             rows = `gem list -d -l`.split("\n")
             rows.slice!(0..2)
             rows.each do |r|
-p r              
+p r
+              if name_ver = /(^\S+)\s\((.*)\)/.match(r)
+                gem = {
+                        :name     => name_ver.to_a[1],
+                        :versions => name_ver.to_a[2].split(','),
+                      }
+              end
             end
             
-            pkgs.values
+            gems
 
           end
     

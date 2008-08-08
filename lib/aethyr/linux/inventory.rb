@@ -32,7 +32,7 @@ module Aethyr
 #          FileTermination.synchronize(Aethyr::Linux::Interface::Files, sys)
 #          SoftwarePackage.synchronize(Aethyr::Linux::Interface::SoftwarePackages, sys)
 #          SoftwarePackageRepository.synchronize(Aethyr::Linux::Interface::SoftwarePackageRepositories, sys)
-          Gem.synchronize(Aethyr::Linux::Interface::Gems, sys)
+          RubyGem.synchronize(Aethyr::Linux::Interface::RubyGems, sys)
         end
   
       ######################################################################################################

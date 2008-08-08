@@ -226,13 +226,13 @@ class CreateLinuxObjects < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :gems, :primary_key => :gem_id, :force => true do |t|
+    create_table :ruby_gems, :primary_key => :ruby_gem_id, :force => true do |t|
       t.string :versions
       t.string  :description
       t.timestamps
     end
 
-    create_table :gems_environment, :primary_key => :gems_environment_id, :force => true do |t|
+    create_table :ruby_gems_environment, :primary_key => :ruby_gems_environment_id, :force => true do |t|
       t.string :gems_version
       t.string :ruby_version
       t.string :installation_directory
