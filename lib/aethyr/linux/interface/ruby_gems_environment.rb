@@ -1,3 +1,5 @@
+require 'yaml'
+
 ############################################################################################################
 module Aethyr
 
@@ -8,7 +10,7 @@ module Aethyr
     module Interface
     
       ##########################################################################################################
-      class RubyGems
+      class RubyGemsEnvironment
   
         ######################################################################################################
         #### class methods
@@ -28,30 +30,24 @@ module Aethyr
           ##########################################################################################################
           def find_all
 
-            gems = []
-            gem = {}
-            
-            rows = `gem list -d -l`.split("\n")
-            rows.slice!(0..2)
+            genv = YAML::load(`gem environment`)['RubyGems Environment']
 
-            rows.each do |r|
-
-              if name_ver = /(^\S+)\s\((.*)\)/.match(r)
-                gem = {
-                       :name        => name_ver.to_a[1],
-                       :versions    => name_ver.to_a[2].split(','),
-                       :description => '',
-                      }
-              else
-                r.blank? ? gems << gem  : gem[:description] << r.gsub!(/^\s+/, '') + ' '
-
-              end                            
-            end            
-
-            gems << gem
-
+p genv
+val =             {
+              :gems_version           => genv['RUBYGEMS VERSION'],
+              :ruby_version           => genv['RUBY VERSION'],
+              :installation_directory => genv['INSTALLATION DIRECTORY'],
+              :ruby_executable        => genv['RUBY EXECUTABLE'],
+              :platforms              => genv['RUBYGEMS PLATFORMS'],
+              :gem_paths              => genv['GEM PATHS'],
+              :gem_configuration      => genv['GEM CONFIGURATION'],
+              :remote_sources         => genv['REMOTE SOURCES'],
+            }
+      
+p val
+val
           end
-    
+
         ######################################################################################################
         end  
         

@@ -238,6 +238,7 @@ class CreateLinuxObjects < ActiveRecord::Migration
       t.string :installation_directory
       t.string :ruby_executable
       t.string :platforms
+      t.string :gem_configuration
       t.string :gem_paths
       t.string :remote_sources
       t.timestamps
