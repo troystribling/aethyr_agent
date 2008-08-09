@@ -64,7 +64,7 @@ class ApplicationProcess < ActiveRecord::Base
     ######################################################################################################
     def synchronize_model_associations(supporter, model) 
       model.reload
-      model.add_associations(supporter)
+      model.add_associations
       model.synched = true
       supporter.reload unless supporter.nil?
     end
