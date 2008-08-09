@@ -19,7 +19,6 @@ class AccessLogsController < ApplicationController
   ######################################################################################################
   def edit
     respond_to do |format|
-      format.html {redirect_to(access_logs_path)}
       format.js do
         render :update do |page|
           page['display-click-path-wrapper'].show

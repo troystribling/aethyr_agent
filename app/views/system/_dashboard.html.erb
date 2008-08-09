@@ -1,4 +1,16 @@
 <h1>agent dashboard</h1>
 <div class="dashboard-container">
+  <div class = "top-toolbar ">
+    <hr class="dashboard-divide">    
+    <div class="dashboard-buttons"> 
+      <% form_tag do -%>
+        <%= submit_to_remote_with_synchronize_notifier "synchronize", :url => {:action => 'synchronize'} %>
+      <% end -%>
+    </div>
+    <hr class="dashboard-divide">    
+    <%= validation_errors %>
+    <hr class="dashboard-divide">    
+    <hr class="dashboard-divide">    
+  </div>
 </div>
   
