@@ -1,0 +1,19 @@
+<div class="display-control-wrapper">
+
+  <h1>cpu</h1>
+  <hr class="display-top"> 
+  <hr class="display-top"> 
+
+  <div class="display-list-wrapper">
+    <table class="display-list">
+      <%= display_list_attribute 'count', @cpu.count, :class=>'even'%>
+      <%= display_list_attribute 'frequency', "#{@cpu.frequency} #{@cpu.frequency_units}", :class=>'odd'%>
+      <%= display_list_attribute 'vendor', @cpu.vendor, :class=>'even'%>
+      <%= display_list_attribute 'model', @cpu.model, :class=>'odd'%>
+    </table>
+  </div>
+  
+  <hr class="display-divide"> 
+  <hr class="display-bottom"> 
+
+</div>
