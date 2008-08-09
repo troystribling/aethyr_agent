@@ -32,20 +32,22 @@ module Aethyr
 
             genv = YAML::load(`gem environment`)['RubyGems Environment']
 
-p genv
-val =             {
-              :gems_version           => genv['RUBYGEMS VERSION'],
-              :ruby_version           => genv['RUBY VERSION'],
-              :installation_directory => genv['INSTALLATION DIRECTORY'],
-              :ruby_executable        => genv['RUBY EXECUTABLE'],
-              :platforms              => genv['RUBYGEMS PLATFORMS'],
-              :gem_paths              => genv['GEM PATHS'],
-              :gem_configuration      => genv['GEM CONFIGURATION'],
-              :remote_sources         => genv['REMOTE SOURCES'],
-            }
-      
-p val
-val
+            config = {}
+            genv[6]['GEM CONFIGURATION'].each do |c|
+              key_val = /(.*)\s=>\s(.*)/.match(c.to_s).to_a
+              config[key_val[1]] = key_val[2]
+            end
+            [{
+              :name                   => 'gems',
+              :gems_version           => genv[0]['RUBYGEMS VERSION'],
+              :ruby_version           => genv[1]['RUBY VERSION'],
+              :installation_directory => genv[2]['INSTALLATION DIRECTORY'],
+              :ruby_executable        => genv[3]['RUBY EXECUTABLE'],
+              :platforms              => genv[4]['RUBYGEMS PLATFORMS'],
+              :gem_paths              => genv[5]['GEM PATHS'],
+              :gem_configuration      => config,
+              :remote_sources         => genv[7]['REMOTE SOURCES'],
+            }]
           end
 
         ######################################################################################################
