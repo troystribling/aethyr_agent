@@ -22,9 +22,9 @@ class ApplicationProcess < ActiveRecord::Base
   ####################################################################################################
   def add_associations
 
-    #### supporter relation
-    supporter << self
-    
+    sys = System.find_by_model(:first)
+    sys << self
+
   end
 
   ######################################################################################################
