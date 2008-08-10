@@ -17,8 +17,8 @@ class Memory < ActiveRecord::Base
 
   ######################################################################################################
   #### validation
-  validates_presence_of  :machine
-  validates_presence_of  :units
+  validates_presence_of  :total
+  validates_presence_of  :total_units
 
   ####################################################################################################
   def add_associations

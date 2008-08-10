@@ -4,34 +4,26 @@ class UsersController < ApplicationController
 
   ######################################################################################################
   #### mixins
+  include Aethyr::Mixins::MultimodelControllerHelper
 
   ######################################################################################################
   #### default layout
   layout 'agent'
 
   ######################################################################################################
+  #### declare sortable tables
+  responds_to_sortable_table :model => :user, :search => true, :paginate => 17
+
+  ######################################################################################################
   #### filters
+  before_filter :find_access_log, :only => [:edit]
+  before_filter :add_page_to_click_path, :only => [:edit]
+  before_filter :set_root_page_of_click_path, :only => [:users_summary]
 
   ######################################################################################################
-  def index
+  def index    
   end
-
-  ######################################################################################################
-  def users_summary
-    initialize_users_list(:column => 'name', :sort => 'sort-up', :force => false)
-    respond_to do |format|
-      format.html {redirect_to(users_path)}
-      format.js do
-        render :update do |page|
-          page['agent-display'].replace_html :partial => 'users_summary'
-          page['agent-navigation'].replace_html :partial => 'users/navigation'
-          page['display-click-path-wrapper'].hide
-          page << "SearchInputMgr.loadSearchInput('/users/users_search');"
-        end
-      end
-    end
-  end
-
+  
 ########################################################################################################
 protected
     
