@@ -1,7 +1,7 @@
 <% content_for(:navigation) do %>
   <ul>
     <li><%= navigate_to "system", [system_index_path, '/'] %></li>
-    <li><%= navigate_to "administration", users_path %></li>
+    <li><%= navigate_to "administration", system_users_path %></li>
     <li><%= navigate_to "messages", messages_path %></li>
     <li><%= link_to "help", HELP_URL %></li>
   </ul>

@@ -21,12 +21,12 @@ module Aethyr
           
         base.class_eval <<-do_eval 
 
-          def edit
+          def show
             respond_to do |format|
               format.html {redirect_to(services_path)}
               format.js do
                 render :update do |page|
-                  page['agent-display'].replace_html :partial => 'edit'
+                  page['agent-display'].replace_html :partial => 'show'
                 end
               end
             end

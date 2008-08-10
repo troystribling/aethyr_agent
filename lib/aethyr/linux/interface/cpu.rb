@@ -28,7 +28,7 @@ module Aethyr
           ##########################################################################################################
           def find_all
             get_val = lambda{|r| /^.+:\s(.+)/.match(r).to_a.last}
-            get_units = lambda{|r| /^cpu(\w+):/.match(r).to_a.last}
+            get_units = lambda{|r| /^cpu\s(\w+)/.match(r).to_a.last}
             rows = `cat /proc/cpuinfo`.split("\n")
             [{:name => 'CPU', :count => rows.length/19, :frequency => get_val[rows[6]], :frequency_units => get_units[rows[6]],  
               :model =>  get_val[rows[4]], :vendor => get_val[rows[1]]}]

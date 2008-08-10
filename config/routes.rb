@@ -2,14 +2,12 @@ ActionController::Routing::Routes.draw do |map|
   # The priority is based upon order of creation: first created -> highest priority.
 
   #### REST routes
-  map.resources  :system,    :controller => 'system'
-  map.resources  :cpu,       :controller => 'cpu'
-  map.resources  :memory,    :controller => 'memory'
-  map.resources  :network,   :controller => 'network'
-  map.resources  :storage,   :controller => 'storage'
-  map.resources  :processes, :controller => 'processes'
-  map.resources  :software,  :controller => 'software'
-  map.resources  :users
+  map.resources  :system,     :controller => 'system'
+  map.resources  :cpu,        :controller => 'cpu'
+  map.resources  :memory,     :controller => 'memory'
+  map.resources  :nic,        :controller => 'nic'
+  map.resources  :processes
+  map.resources  :system_users
   map.resources  :access_logs
   map.resources  :messages
 

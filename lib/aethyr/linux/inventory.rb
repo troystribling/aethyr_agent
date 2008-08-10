@@ -17,7 +17,7 @@ module Aethyr
           sys = System.find_by_model(:first)
           Memory.synchronize(Aethyr::Linux::Interface::Memory, sys)
           Cpu.synchronize(Aethyr::Linux::Interface::Cpu, sys)
-          Nic.synchronize(Aethyr::Linux::Interface::Nics, sys)
+          Nic.synchronize(Aethyr::Linux::Interface::Nic, sys)
           SystemUser.synchronize(Aethyr::Linux::Interface::SystemUsers, sys)
           SystemGroup.synchronize(Aethyr::Linux::Interface::SystemGroups, sys)
           ApplicationProcess.synchronize(Aethyr::Linux::Interface::ApplicationProcesses, sys)
