@@ -28,7 +28,7 @@ module Aethyr
           ##########################################################################################################
           def find_all
             attrs = /MemTotal:\s*(\d+)\s(\w+)/.match(`cat /proc/meminfo`)
-            [{:name => 'Memory', :machine => attrs[1], :units => attrs[2]}]
+            [{:name => 'Memory', :total => attrs[1], :total_units => attrs[2]}]
           end
     
         ######################################################################################################

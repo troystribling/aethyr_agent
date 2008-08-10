@@ -12,8 +12,8 @@ class CreateLinuxObjects < ActiveRecord::Migration
     #######################################################################################################
     ####  memory
     create_table :memory, :primary_key => :memory_id, :force => true do |t|
-      t.string :machine
-      t.string :units
+      t.string :total
+      t.string :total_units
       t.timestamps
     end
 
