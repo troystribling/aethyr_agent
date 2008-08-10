@@ -49,10 +49,8 @@ var PromptText = Class.create({
     var text_field = event.element();
     if (key == Event.KEY_RETURN) {
       var text_field = event.element();
-      var auth_token = $$('input[name=authenticity_token]').first();
       var params = {};
       params['search'] = encodeURIComponent(text_field.value);
-      params['authenticity_token'] = encodeURIComponent(auth_token.value);
       $('loading-indication').show();       
       new Ajax.Request(this.url, {onComplete:function(request){$('loading-indication').hide()}, 
         parameters: params});            
