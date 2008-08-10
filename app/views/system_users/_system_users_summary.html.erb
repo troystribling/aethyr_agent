@@ -1,0 +1,13 @@
+<h1>users summary</h1>
+<hr class="page-divide"> 
+
+<%= render :partial => "common/search", :object => {:model => 'access_log', :search_value => @search} %>
+
+<hr class="page-top">    
+
+<div id = "access_logs-list">
+  <%= render :partial => "access_logs" unless @access_logs.empty? %>
+</div>
+
+<hr class="page-bottom">    
+  
