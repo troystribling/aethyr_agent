@@ -1,6 +1,6 @@
 ########################################################################################################
 ########################################################################################################
-class UsersController < ApplicationController
+class SystemUsersController < ApplicationController
 
   ######################################################################################################
   #### mixins
@@ -12,13 +12,13 @@ class UsersController < ApplicationController
 
   ######################################################################################################
   #### declare sortable tables
-  responds_to_sortable_table :model => :user, :search => true, :paginate => 17
+  responds_to_sortable_table :model => :system_user, :search => true, :paginate => 17
 
   ######################################################################################################
   #### filters
   before_filter :find_access_log, :only => [:edit]
   before_filter :add_page_to_click_path, :only => [:edit]
-  before_filter :set_root_page_of_click_path, :only => [:users_summary]
+  before_filter :set_root_page_of_click_path, :only => [:system_users_summary]
 
   ######################################################################################################
   def index    
