@@ -34,7 +34,7 @@ module Aethyr
           end
         
           def #{controller}_summary
-            initialize_system_users_list(:column => 'created_at', :sort => 'sort-up', :force => false)
+            initialize_#{controller}_list(:column => 'created_at', :sort => 'sort-up', :force => false)
             respond_to do |format|
               format.js do
                 render :update do |page|
