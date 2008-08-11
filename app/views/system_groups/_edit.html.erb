@@ -1,0 +1,19 @@
+<div class="display-control-wrapper">
+
+  <h1>group: <em><%= @system_group.name%></em></h1>
+  <hr class="display-top"> 
+  <hr class="display-top"> 
+
+  <div class="display-list-wrapper">
+    <table class="display-list">
+      <%= display_list_attribute 'name', @system_group.name, :class=>'even'%>
+      <%= display_list_attribute 'gid', @system_group.gid, :class=>'odd'%>
+      <%= display_list_attribute 'created at', @system_group.created_at, :class=>'even'%>
+      <%= display_list_attribute 'updated at', @system_group.updated_at, :class=>'odd'%>
+    </table>
+  </div>
+  
+  <hr class="display-divide"> 
+  <hr class="display-bottom"> 
+
+</div>

@@ -1,0 +1,6 @@
+<tr class=<%= cycle("even", "odd") %>>
+  <td><%= link_to_remote_with_load_notifier(system_group.name, :url => {:action => 'edit', :system_group_id => system_group.system_group_id}) %></td>
+  <td><%= system_group.gid %></td>
+  <td><%= system_group.created_at %></td>
+  <td><%= system_group.updated_at %></td>
+</tr>
