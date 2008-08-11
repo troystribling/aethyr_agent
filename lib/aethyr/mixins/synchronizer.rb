@@ -69,8 +69,6 @@ module Aethyr
           def synchronize_model(supporter, local_models, params) 
             model_sync_key = self.sync_key(params)
             model = local_models[model_sync_key]
-p params  
-p model
             if model.nil?
               model = self.new(params)
               model.add_associations
@@ -81,7 +79,6 @@ p model
               model.synched = true
               model.save
             end
-p model            
           end
     
           ######################################################################################################
