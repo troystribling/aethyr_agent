@@ -18,7 +18,6 @@ class SystemGroup < ActiveRecord::Base
   ######################################################################################################
   #### validation
   validates_presence_of  :gid
-  validates_presence_of  :system_users
 
   ####################################################################################################
   def add_associations

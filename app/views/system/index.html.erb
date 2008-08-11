@@ -5,7 +5,7 @@
     <%= menu_content(:title => link_to_remote_with_load_notifier('dashboard', :url => {:controller=> 'system', :action => 'show_dashboard'})) %>
     <%= menu_content(:title => link_to_remote_with_load_notifier('cpu', :url => {:controller=> 'cpu', :action => 'show'})) %>
     <%= menu_content(:title => link_to_remote_with_load_notifier('memory', :url => {:controller=> 'memory', :action => 'show'})) %>
-    <%= menu_content(:title => link_to_remote_with_load_notifier('network', :url => {:controller=> 'network', :action => 'show'})) %>
+    <%= menu_content(:title => link_to_remote_with_load_notifier('network', :url => {:controller=> 'nic', :action => 'show'})) %>
     <%= menu_content(:title => link_to_remote_with_load_notifier('storage', :url => {:controller=> 'storage', :action => 'show'})) %>
     <%= menu_content(:title => link_to_remote_with_load_notifier('processes', :url => {:controller=> 'processes', :action => 'show'})) %>
     <%= menu_content(:title => link_to_remote_with_load_notifier('software', :url => {:controller=> 'software', :action => 'show'})) %>

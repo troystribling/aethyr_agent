@@ -27,8 +27,7 @@ module Aethyr
     
           ##########################################################################################################
           def find_all
-            groups = `cat /etc/group`
-            groups.split("\n").collect do |g|
+            `cat /etc/group`.split("\n").collect do |g|
               ga = g.split(':')
               ga[3].nil? ? su = [] : su = ga[3].split(',')
               {:name => ga[0], :gid => ga[2], :system_users => su}
