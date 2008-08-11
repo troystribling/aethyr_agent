@@ -2,12 +2,19 @@
 
 <% content_for(:agent_navigation) do %>
   <% menu do %>
-    <%= menu_content(:title => link_to_remote_with_load_notifier('users', :url => {:controller=> 'users', :action => 'users_summary'})) %>
+    <%= menu_content(:title => link_to_remote_with_load_notifier('users', :url => {:controller=> 'system_users', :action => 'system_users_summary'})) %>
     <%= menu_content(:title => link_to_remote_with_load_notifier('groups', :url => {:controller=> 'groups', :action => 'groups_summary'})) %>
     <%= menu_content(:title => link_to_remote_with_load_notifier('access log', :url => {:controller=> 'access_logs', :action => 'access_logs_summary'})) %>
   <% end %>
 <% end %>
 
 <div id = "agent-display">
-  <%= render :partial => 'users_summary' %>
+  <%= render :partial => 'system_users_summary' %>
 </div>    
+
+<script type="text/javascript">
+	//<![CDATA[
+    SearchInputMgr.loadSearchInput('/system_users/system_users_search');	
+  //]]>
+</script>
+

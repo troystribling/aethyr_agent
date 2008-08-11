@@ -12,7 +12,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources  :messages
 
   #### sortable table pagination
-  map.access_logs_change_page    '/access_logs/access_logs_change_page/:page',  :controller => 'access_logs', :action => 'access_logs_change_page'
+  map.access_logs_change_page    '/access_logs/access_logs_change_page/:page',   :controller => 'access_logs', :action => 'access_logs_change_page'
+  map.system_users_change_page   '/system_users/system_users_change_page/:page', :controller => 'system_users', :action => 'system_users_change_page'
 
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'

@@ -1,13 +1,14 @@
 <table class="table-data">
   <tr>
-    <%= access_logs_sort_link :column => :created_at %>
-    <%= access_logs_sort_link :column => :controller %>
-    <%= access_logs_sort_link :column => :action %>
-    <%= access_logs_sort_link :column => :dns_name %>
+    <%= system_users_sort_link :column => :name %>
+    <%= system_users_sort_link :column => :uid %>
+    <%= system_users_sort_link :column => :default_group %>
+    <%= system_users_sort_link :column => :created_at %>
+    <%= system_users_sort_link :column => :updated_at %>
   </tr>
-  <%= render(:partial => "access_log" , :collection => @access_logs) %>
+  <%= render(:partial => "system_user" , :collection => @system_users) %>
 </table>
 
 <div class="bottom-toolbar">
-  <%= will_paginate @access_logs, :params=> {:controller => 'access_logs', :action => 'access_logs_change_page'} %>
+  <%= will_paginate @system_users, :params=> {:controller => 'system_users', :action => 'system_users_change_page'} %>
 </div> 

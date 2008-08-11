@@ -34,11 +34,11 @@ module Aethyr
           end
         
           def #{controller}_summary
-            initialize_access_logs_list(:column => 'created_at', :sort => 'sort-up', :force => false)
+            initialize_system_users_list(:column => 'created_at', :sort => 'sort-up', :force => false)
             respond_to do |format|
               format.js do
                 render :update do |page|
-                  page['agent-display'].replace_html :partial => 'access_logs_summary'
+                  page['agent-display'].replace_html :partial => '#{controller}_summary'
                   page['display-click-path-wrapper'].hide
                   page << "SearchInputMgr.loadSearchInput('/#{controller}/#{controller}_search');"              
                 end
@@ -51,10 +51,10 @@ module Aethyr
             @#{model} = #{model.camelize}.find_by_model(model_id, :readonly => false)
             if @#{model}.nil?
               respond_to do |format|
-                format.html {redirect_to(services_path)}
+                format.html {redirect_to(system_index_path)}
                 format.js do
                   render :update do |page|
-                    page.redirect_to services_path 
+                    page.redirect_to system_index_path 
                   end
                 end
               end

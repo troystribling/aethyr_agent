@@ -1,0 +1,24 @@
+<div class="display-control-wrapper">
+
+  <h1>user: <em><%= @system_user.name%></em></h1>
+  <hr class="display-top"> 
+  <hr class="display-top"> 
+
+  <div class="display-list-wrapper">
+    <table class="display-list">
+      <%= display_list_attribute 'name', @system_user.name, :class=>'even'%>
+      <%= display_list_attribute 'uid', @system_user.uid, :class=>'odd'%>
+      <%= display_list_attribute 'default group', 'default group', :class=>'even'%>
+      <%= display_list_attribute 'home directory', @system_user.home_directory, :class=>'odd'%>
+      <%= display_list_attribute 'login shell', @system_user.login_shell, :class=>'even'%>
+      <%= display_list_attribute 'full name', @system_user.full_name, :class=>'odd'%>
+      <%= display_list_attribute 'office', @system_user.office, :class=>'even'%>
+      <%= display_list_attribute 'extension', @system_user.extension, :class=>'odd'%>
+      <%= display_list_attribute 'home phone', @system_user.home_phone, :class=>'even'%>
+    </table>
+  </div>
+  
+  <hr class="display-divide"> 
+  <hr class="display-bottom"> 
+
+</div>
