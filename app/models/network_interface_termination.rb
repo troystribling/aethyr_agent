@@ -21,7 +21,7 @@ class NetworkInterfaceTermination < ActiveRecord::Base
   ####################################################################################################
   def add_associations(supporter)
     
-    nic = supporter.find_supported_by_model(model, :first, :conditions => "nic.hw_address = '#{self.hw_adddress}'")
+    nic = supporter.find_supported_by_model(Nic, :first, :conditions => "nics.hw_address = '#{self.hw_address}'")
     nic << self
         
   end
