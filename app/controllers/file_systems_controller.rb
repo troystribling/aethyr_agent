@@ -1,6 +1,10 @@
 ########################################################################################################
 ########################################################################################################
-class AccessLogsController < ApplicationController
+class FileSystemsController < ApplicationController
+
+  ######################################################################################################
+  #### mixins
+  include Aethyr::Mixins::MultimodelControllerHelper
 
   ######################################################################################################
   #### default layout
@@ -16,49 +20,36 @@ class AccessLogsController < ApplicationController
   before_filter :add_page_to_click_path, :only => [:edit]
   before_filter :set_root_page_of_click_path, :only => [:access_logs_summary]
 
-  ######################################################################################################
-  def edit
-    respond_to do |format|
-      format.js do
-        render :update do |page|
-          page['display-click-path-wrapper'].show
-          page['display-click-path'].replace_html :partial => 'common/click_path'
-          page['agent-display'].replace_html :partial => 'edit'
-        end
-      end
-    end
-  end
-
-  ######################################################################################################
-  def access_logs_summary
-    initialize_access_logs_list(:column => 'created_at', :sort => 'sort-up', :force => false)
-    respond_to do |format|
-      format.js do
-        render :update do |page|
-          page['agent-display'].replace_html :partial => 'access_logs_summary'
-          page['display-click-path-wrapper'].hide
-          page << "SearchInputMgr.loadSearchInput('/access_logs/access_logs_search');"
-        end
-      end
-    end
-  end
-
 protected
 
   ######################################################################################################
-  def find_access_log
-    access_log_id = params[:access_log_id] || params[:id]
-    @access_log = AccessLog.find_by_model(access_log_id, :readonly => false)
-    if @access_log.nil?
+  def find_aws_storage_bucket
+    @aws_storage_bucket = AwsStorageBucket.find_by_model(params[:aws_storage_bucket_id], :readonly => false)
+    if @aws_storage_bucket.nil?
       respond_to do |format|
-        format.html {redirect_to(access_logs_path)}
+        format.html {redirect_to(services_path)}
         format.js do
           render :update do |page|
-            page.redirect_to access_logs_path 
+            page.redirect_to services_path 
           end
         end
       end
+    else
+      @aws_storage_bucket
     end 
   end
+
+  ######################################################################################################
+  def find_supporting_aws_storage_bucket
+    @aws_storage_bucket = @aws_storage_object.find_supporter_by_model(AwsStorageBucket)                
+    @remote_aws_storage_bucket = Aethyr::Aws::Interface::StorageBucket.new(@aws_storage_bucket.credential).find(:first, 
+      :name => @aws_storage_bucket.name) if @aws_storage_bucket.sync_status.eql?('active')
+  end
+  
+  ######################################################################################################
+  def find_aws_storage_objects
+    @aws_storage_objects = self.class.paginate_in_support_hierarchy_by_model(@aws_storage_bucket, session)
+  end
+  
 
 end
