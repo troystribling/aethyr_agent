@@ -10,6 +10,8 @@
       <%= display_list_attribute 'frequency', "#{@cpu.frequency} #{@cpu.frequency_units}", :class=>'odd'%>
       <%= display_list_attribute 'vendor', @cpu.vendor, :class=>'even'%>
       <%= display_list_attribute 'model', @cpu.model, :class=>'odd'%>
+      <%= display_list_attribute 'created at', @cpu.created_at, :class=>'even'%>
+      <%= display_list_attribute 'updated at', @cpu.updated_at, :class=>'odd'%>
     </table>
   </div>
   

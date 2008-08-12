@@ -7,6 +7,8 @@
   <div class="display-list-wrapper">
     <table class="display-list">
       <%= display_list_attribute 'total memory available', "#{@memory.total} #{@memory.total_units}", :class=>'even'%>
+      <%= display_list_attribute 'created at', @memory.created_at, :class=>'odd'%>
+      <%= display_list_attribute 'updated at', @memory.updated_at, :class=>'even'%>
     </table>
   </div>
   
