@@ -40,4 +40,18 @@ protected
     AccessLog.to_log(request)
   end
   
+  def to_system_index(model)
+    if model.nil?
+      respond_to do |format|
+        format.html {redirect_to(system_index_path)}
+        format.js do
+          render :update do |page|
+            page.redirect_to system_index_path 
+          end
+        end
+      end
+    end
+  end
+
+    
 end

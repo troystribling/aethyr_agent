@@ -1,16 +1,31 @@
-<h1>agent dashboard</h1>
-<div class="dashboard-container">
+<h1>system dashboard</h1>
+<div class="display-control-wrapper">
+
+  <hr class="display-top"> 
   <div class = "top-toolbar ">
-    <hr class="dashboard-divide">    
-    <div class="dashboard-buttons"> 
+    <div class="display-buttons"> 
       <% form_tag do -%>
         <%= submit_to_remote_with_synchronize_notifier "synchronize", :url => {:action => 'synchronize'} %>
       <% end -%>
     </div>
-    <hr class="dashboard-divide">    
+    <hr class="display-divide">    
     <%= validation_errors %>
-    <hr class="dashboard-divide">    
-    <hr class="dashboard-divide">    
+    <hr class="display-divide">    
   </div>
+
+  <div class="display-list-wrapper">
+    <table class="display-list">
+      <%= display_list_attribute 'operating system', @system.os, :class=>'even'%>
+      <%= display_list_attribute 'total memory available', "#{@memory.total} #{@memory.total_units}", :class=>'odd'%>
+      <%= display_list_attribute 'cpu count', @cpu.count, :class=>'even'%>
+      <%= display_list_attribute 'cpu frequency', "#{@cpu.frequency} #{@cpu.frequency_units}", :class=>'odd'%>
+      <%= display_list_attribute 'cpu vendor', @cpu.vendor, :class=>'even'%>
+      <%= display_list_attribute 'cpu model', @cpu.model, :class=>'odd'%>
+    </table>
+  </div>
+  
+  <hr class="display-divide"> 
+  <hr class="display-bottom"> 
+
 </div>
   

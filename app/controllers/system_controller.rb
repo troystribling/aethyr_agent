@@ -11,6 +11,10 @@ class SystemController < ApplicationController
 
   ######################################################################################################
   #### filters
+  before_filter :find_system, :only => [:index, :show_dashboard]
+  before_filter :find_memory, :only => [:index, :show_dashboard]
+  before_filter :find_cpu, :only => [:index, :show_dashboard]
+
 
   ######################################################################################################
   def index
@@ -33,10 +37,10 @@ class SystemController < ApplicationController
   def synchronize
     Aethyr::Linux::Inventory.synchronize
     respond_to do |format|
-      format.html {redirect_to(system_path)}
+      format.html {redirect_to(system_index_path)}
       format.js do
         render :update do |page|
-          page.redirect_to system_path
+          page.redirect_to system_index_path
         end
       end
     end
@@ -45,4 +49,19 @@ class SystemController < ApplicationController
 ########################################################################################################
 protected
     
+  def find_system
+    @system = System.find_by_model(:first, :readonly => false)
+    self.to_system_index(@system)
+  end
+
+  def find_memory
+    @memory = Memory.find_by_model(:first, :readonly => false)
+    self.to_system_index(@memory)
+  end
+
+  def find_cpu
+    @cpu = Cpu.find_by_model(:first, :readonly => false)
+    self.to_system_index(@cpu)
+  end
+
 end
