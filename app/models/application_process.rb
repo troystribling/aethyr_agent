@@ -20,10 +20,9 @@ class ApplicationProcess < ActiveRecord::Base
   validates_presence_of  :pid
 
   ####################################################################################################
-  def add_associations
+  def add_associations(supporter)
 
-    sys = System.find_by_model(:first)
-    sys << self
+    supporter << self
 
   end
 

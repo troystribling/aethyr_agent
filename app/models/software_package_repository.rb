@@ -23,12 +23,10 @@ class SoftwarePackageRepository < ActiveRecord::Base
   #### validation
 
   ####################################################################################################
-  def add_associations
+  def add_associations(supporter)
 
-    #### supporter relation
-    supporter = System.find_by_model(:first)
     supporter << self
-    
+
   end
 
   ######################################################################################################

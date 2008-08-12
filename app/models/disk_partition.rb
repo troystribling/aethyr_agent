@@ -15,11 +15,10 @@ class DiskPartition < ActiveRecord::Base
   #### validation
 
   ####################################################################################################
-  def add_associations
+  def add_associations(supporter)
 
-    sys = System.find_by_model(:first)
-    sys << self
-    
+    supporter << self
+
   end
 
   ######################################################################################################

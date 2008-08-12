@@ -39,13 +39,9 @@ module Aethyr
           def synchronize(interface, supporter = nil)
             self.synchronize_associations(supporter) if self.respond_to?(:synchronize_associations)     
             local_models = self.find_local_models(supporter)
-            begin
-              remote_models = interface.find
-              self.synchronize_models(supporter, local_models, remote_models)
-              delete_models(local_models)
-            rescue
-              raise
-            end
+            remote_models = interface.find
+            self.synchronize_models(supporter, local_models, remote_models)
+            delete_models(local_models)
           end
       
           ######################################################################################################
@@ -72,7 +68,7 @@ module Aethyr
             model = local_models[model_sync_key]
             if model.nil?
               model = self.new(params)
-              model.add_associations
+              model.add_associations(supporter)
               supporter.reload unless supporter.nil?
             else 
               model.reload

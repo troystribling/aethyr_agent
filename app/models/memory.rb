@@ -21,10 +21,9 @@ class Memory < ActiveRecord::Base
   validates_presence_of  :total_units
 
   ####################################################################################################
-  def add_associations
+  def add_associations(supporter)
     
     #### supporter relation
-    supporter = System.find_by_model(:first)
     supporter << self
 
     #### termination and connection support relations

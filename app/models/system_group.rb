@@ -20,12 +20,10 @@ class SystemGroup < ActiveRecord::Base
   validates_presence_of  :gid
 
   ####################################################################################################
-  def add_associations
+  def add_associations(supporter)
 
-    #### supporter relation
-    supporter = System.find_by_model(:first)
     supporter << self
-    
+
   end
 
   ######################################################################################################

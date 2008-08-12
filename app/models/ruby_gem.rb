@@ -19,12 +19,10 @@ class RubyGem < ActiveRecord::Base
   serialize :versions
 
   ####################################################################################################
-  def add_associations
-    
-    #### supporter relation
-    supporter = System.find_by_model(:first)
+  def add_associations(supporter)
+
     supporter << self
-    
+
   end
 
   ######################################################################################################

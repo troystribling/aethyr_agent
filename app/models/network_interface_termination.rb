@@ -19,16 +19,22 @@ class NetworkInterfaceTermination < ActiveRecord::Base
   #### validation
 
   ####################################################################################################
-  def add_associations
+  def add_associations(supporter)
     
-    sys = System.find_by_model(:first)
-    sys << self
+    nic = supporter.find_supported_by_model(model, :first, :conditions => "nic.hw_address = '#{self.hw_adddress}'")
+    nic << self
         
   end
 
   ######################################################################################################
   #### class methods
   class << self
+    
+    ####################################################################################################
+    def synchronize_associations(supporter)
+      Nic.synchronize(Aethyr::Linux::Interface::Nic, supporter)
+    end
+    
   end  
 
 ######################################################################################################

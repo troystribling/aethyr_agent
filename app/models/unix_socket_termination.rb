@@ -24,11 +24,10 @@ class UnixSocketTermination < ActiveRecord::Base
   #### restrict attribute access
 
   ####################################################################################################
-  def add_associations
-    
-    sys = System.find_by_model(:first)
-    sys << self
-    
+  def add_associations(supporter)
+
+    supporter << self
+
   end
 
   ######################################################################################################
