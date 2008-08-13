@@ -40,7 +40,7 @@ protected
     AccessLog.to_log(request)
   end
   
-  def to_system_index(model)
+  def to_system_index_on_error(model)
     if model.nil?
       respond_to do |format|
         format.html {redirect_to(system_index_path)}

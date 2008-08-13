@@ -20,10 +20,12 @@ class NetworkInterfaceTermination < ActiveRecord::Base
 
   ####################################################################################################
   def add_associations(supporter)
-    
-    nic = supporter.find_supported_by_model(Nic, :first, :conditions => "nics.hw_address = '#{self.hw_address}'")
-    nic << self
-        
+    if self.hw_address.eql?('Loopback')
+      supporter << self
+    else
+      nic = supporter.find_supported_by_model(Nic, :first, :conditions => "nics.hw_address = '#{self.hw_address.downcase}'")
+      nic << self
+    end        
   end
 
   ######################################################################################################
