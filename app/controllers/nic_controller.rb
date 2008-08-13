@@ -5,22 +5,22 @@ class NicController < ApplicationController
   ######################################################################################################
   #### mixins
   include Aethyr::Mixins::MonomodelControllerHelper
+  include Aethyr::Mixins::SupporterControllerHelper
 
   ######################################################################################################
   #### default layout
   layout 'agent'
 
   ######################################################################################################
+  #### supported models
+  has_supported :model => :network_interface_termination, :sort_column => 'name'
+
+  ######################################################################################################
   #### filters
   before_filter :find_nic, :only => [:show]
+  before_filter :find_network_interface_terminations, :only=>[:show]
 
 ########################################################################################################
 protected
-    
-  ######################################################################################################
-  def find_network_interface_terminations
-    self.initialize_sortable_table_session(:session_key => :network_interface_terminations_sortable_table, :column => 'name', :sort => 'sort-up', :force => false)
-    @network_interface_terminations = NetworkInterfaceTerminationsController.paginate_in_support_hierarchy_by_model(@nic, session)
-  end
-    
+        
 end

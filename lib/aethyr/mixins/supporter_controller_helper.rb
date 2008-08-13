@@ -50,7 +50,7 @@ module Aethyr
           ######################################################################################################
           def has_supported(args = {})
           
-            args.assert_valid_keys(:model, :column)
+            args.assert_valid_keys(:model, :sort_column)
             supported_models = args[:model].to_s.pluralize         
             column = args[:column] || 'name'
             model = /(\S+)Controller/.match(self.name).to_a.last
