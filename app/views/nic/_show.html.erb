@@ -13,6 +13,12 @@
     </table>
   </div>
   
+  <% unless @aws_storage_objects.blank? %> 
+    <hr class="display-divide">     
+    <%= render :partial => "aws_storage_objects/aws_storage_objects_summary" %>
+    <hr class="display-bottom"> 
+  <% end %>
+	
   <hr class="display-divide"> 
   <hr class="display-bottom"> 
 
