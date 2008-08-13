@@ -13,9 +13,11 @@
     </table>
   </div>
   
-  <% unless @aws_storage_objects.blank? %> 
+  <hr class="display-divide"> 
+
+  <% unless @network_interface_terminations.blank? %> 
     <hr class="display-divide">     
-    <%= render :partial => "aws_storage_objects/aws_storage_objects_summary" %>
+    <%= render :partial => "network_interface_terminations/network_interface_terminations_summary" %>
     <hr class="display-bottom"> 
   <% end %>
 	
