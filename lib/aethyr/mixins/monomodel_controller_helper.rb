@@ -33,7 +33,9 @@ module Aethyr
           end
             
           def find_#{model}
+puts "find_#{model}"
             @#{model} = #{model.camelize}.find_by_model(:first, :readonly => false)
+p @#{model}            
             if @#{model}.nil?
               respond_to do |format|
                 format.html {redirect_to(system_index_path)}

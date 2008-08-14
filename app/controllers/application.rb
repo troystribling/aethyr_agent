@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
 
   ######################################################################################################
   #### mixins
-  extend Aethyr::Mixins::SortableTable::Controller
+  extend Aethyr::Mixins::SortableTable::Controller::ClassMethods
+  include Aethyr::Mixins::SortableTable::Controller::InstanceMethods
   include Aethyr::Mixins::Error  
   include Aethyr::Mixins::Navigator::Controller
 
@@ -53,5 +54,17 @@ protected
     end
   end
 
+  def to_500_error(model)
+    if model.nil?
+      respond_to do |format|
+        format.html {redirect_to("/500.html")}
+        format.js do
+          render :update do |page|
+            page.redirect_to("/500.html")
+          end
+        end
+      end
+    end
+  end
     
 end

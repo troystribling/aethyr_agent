@@ -1,13 +1,8 @@
-<h1>groups summary</h1>
-<hr class="page-divide"> 
+<h1>network interfaces</h1>
+<hr class="display-divide"> 
+<hr class="display-divide"> 
 
-<%= render :partial => "common/search", :object => {:model => 'access_log', :search_value => @search} %>
-
-<hr class="page-top">    
-
-<div id = "system_groups-list">
-  <%= render :partial => "system_groups" unless @system_groups.empty? %>
+<div id = "network_interface_terminations-list">
+  <%= render :partial => "network_interface_terminations/network_interface_termination" unless @network_interface_terminationss.empty? %>
 </div>
-
-<hr class="page-bottom">    
   

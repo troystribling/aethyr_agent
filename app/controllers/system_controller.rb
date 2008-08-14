@@ -51,17 +51,17 @@ protected
     
   def find_system
     @system = System.find_by_model(:first, :readonly => false)
-    self.to_system_index_on_error(@system)
+    self.to_500_error(@system)
   end
 
   def find_memory
     @memory = Memory.find_by_model(:first, :readonly => false)
-    self.to_system_index_on_error(@memory)
+    self.to_500_error(@memory)
   end
 
   def find_cpu
     @cpu = Cpu.find_by_model(:first, :readonly => false)
-    self.to_system_index_on_error(@cpu)
+    self.to_500_error(@cpu)
   end
 
 end

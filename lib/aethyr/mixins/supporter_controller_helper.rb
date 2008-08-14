@@ -16,7 +16,7 @@ module Aethyr
         ######################################################################################################
         def self.included(base) 
           base.send(:include, Aethyr::Mixins::SupporterControllerHelper::InstanceMethods) 
-          extend(Aethyr::Mixins::SupporterControllerHelper::ClassMethods)
+          base.extend(Aethyr::Mixins::SupporterControllerHelper::ClassMethods)
         end
 
         ########################################################################################################
@@ -24,23 +24,9 @@ module Aethyr
         ########################################################################################################
         module InstanceMethods
 
-          ########################################################################################################
-          def initialize_sortable_table_session(args)
-            args.assert_valid_keys(:session_key, :column, :sort, :force)
-            args[:force].nil? ? force = true : force = args[:force]
-            table_is_new = false
-            unless session[args[:session_key]]
-              session[args[:session_key]] = {}
-              table_is_new = true
-            end 
-            if table_is_new or force
-              session[args[:session_key]][:column] = args[:column]
-              session[args[:session_key]][:sort] = args[:sort]
-              session[args[:session_key]][:page] = 1
-            end
-          end
-
-        end
+        ########################################################################################################
+        end  #### instance methods
+        ########################################################################################################
            
         ########################################################################################################
         #### class methods
@@ -58,6 +44,7 @@ module Aethyr
             class_eval <<-do_eval
 
               def find_#{supported_models}
+p @#{model}              
                 self.initialize_sortable_table_session(:session_key => :#{supported_models}_sortable_table, :column => '#{column}', :sort => 'sort-up', :force => false)
                 @#{supported_models} = #{supported_models.camelize}Controller.paginate_in_support_hierarchy_by_model(@#{model}, session)
               end
@@ -66,7 +53,9 @@ module Aethyr
                    
           end
 
-        end
+        ########################################################################################################
+        end  #### class methods
+        ########################################################################################################
                              
       ########################################################################################################
       end #### ControllerHelper

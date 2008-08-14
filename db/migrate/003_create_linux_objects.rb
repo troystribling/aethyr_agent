@@ -177,7 +177,6 @@ class CreateLinuxObjects < ActiveRecord::Migration
       t.string  :ipv6_address
       t.string  :link_encapsulation
       t.string  :scope
-      t.string  :network_interface_status
       t.string  :status
       t.integer :mtu
       t.integer :txqueuelen
