@@ -39,12 +39,11 @@ module Aethyr
             args.assert_valid_keys(:model, :sort_column)
             supported_models = args[:model].to_s.pluralize         
             column = args[:column] || 'name'
-            model = /(\S+)Controller/.match(self.name).to_a.last
+            model = /(\S+)Controller/.match(self.name).to_a.last.singularize.underscore
       
             class_eval <<-do_eval
 
               def find_#{supported_models}
-p @#{model}              
                 self.initialize_sortable_table_session(:session_key => :#{supported_models}_sortable_table, :column => '#{column}', :sort => 'sort-up', :force => false)
                 @#{supported_models} = #{supported_models.camelize}Controller.paginate_in_support_hierarchy_by_model(@#{model}, session)
               end
