@@ -17,15 +17,9 @@ class NetworkInterfaceTerminationsController < ApplicationController
 
   ######################################################################################################
   #### filters
-  before_filter :network_interface_termination, :only => [:edit]
+  before_filter :find_network_interface_termination, :only => [:edit]
   before_filter :add_page_to_click_path, :only => [:edit]
-  before_filter :set_root_page_of_click_path, :only => [:network_interface_terminations_summary]
 
-  ######################################################################################################
-  def index    
-    initialize_system_users_list(:column => 'name', :sort => 'sort-up', :force => true)
-  end
-  
 ########################################################################################################
 protected
     

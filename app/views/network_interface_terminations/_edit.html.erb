@@ -1,15 +1,26 @@
 <div class="display-control-wrapper">
 
-  <h1>group: <em><%= @system_group.name%></em></h1>
+  <h1>network _interface termination: <em><%= @network_interface_termination.name%></em></h1>
   <hr class="display-top"> 
   <hr class="display-divide"> 
 
   <div class="display-list-wrapper">
     <table class="display-list">
-      <%= display_list_attribute 'name', @system_group.name, :class=>'even'%>
-      <%= display_list_attribute 'gid', @system_group.gid, :class=>'odd'%>
-      <%= display_list_attribute 'created at', @system_group.created_at, :class=>'even'%>
-      <%= display_list_attribute 'updated at', @system_group.updated_at, :class=>'odd'%>
+      <%= display_list_attribute 'name', @network_interface_termination.name, :class=>'even'%>
+      <%= display_list_attribute 'ip address', @network_interface_termination.ip_address, :class=>'odd'%>
+      <%= display_list_attribute 'broadcast address', @network_interface_termination.broadcast_address, :class=>'even'%>
+      <%= display_list_attribute 'mask', @network_interface_termination.mask, :class=>'odd'%>
+      <%= display_list_attribute 'ipv6 address', @network_interface_termination.ipv6_address, :class=>'even'%>
+      <%= display_list_attribute 'link _encapsulation', @network_interface_termination.link_encapsulation, :class=>'odd'%>
+      <%= display_list_attribute 'scope', @network_interface_termination.scope, :class=>'even'%>
+      <%= display_list_attribute 'status', @network_interface_termination.status, :class=>'odd'%>
+      <%= display_list_attribute 'mtu', @network_interface_termination.mtu, :class=>'even'%>
+      <%= display_list_attribute 'metric', @network_interface_termination.metric, :class=>'odd'%>
+      <%= display_list_attribute 'txqueuelen', @network_interface_termination.txqueuelen, :class=>'even'%>
+      <%= display_list_attribute 'interrrupt', @network_interface_termination.interrrupt, :class=>'odd'%>
+      <%= display_list_attribute 'base address', @network_interface_termination.base_address, :class=>'even'%>
+      <%= display_list_attribute 'created at', @network_interface_termination.created_at, :class=>'odd'%>
+      <%= display_list_attribute 'updated at', @network_interface_termination.updated_at, :class=>'even'%>
     </table>
   </div>
   

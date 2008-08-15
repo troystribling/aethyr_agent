@@ -19,6 +19,7 @@ class NicController < ApplicationController
   #### filters
   before_filter :find_nic, :only => [:show]
   before_filter :find_network_interface_terminations, :only=>[:show]
+  before_filter :set_root_page_of_click_path, :only => [:show]
 
 ########################################################################################################
 protected

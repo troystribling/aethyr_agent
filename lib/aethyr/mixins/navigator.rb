@@ -61,7 +61,7 @@ module Aethyr
           list_items = ''        
           (0..session[:click_path].size-2).each do |click|
             url = session[:click_path][click]
-            url[:action].eql?('edit') ? name = url[:controller].humanize.singularize.downcase : name = url[:action].humanize.downcase
+            %w(edit show).include?(url[:action]) ? name = url[:controller].humanize.singularize.downcase : name = url[:action].humanize.downcase
             name = ' &laquo ' + name
             list_items += content_tag :li do
               link_to_remote_with_load_notifier(name, :url => url.merge(:click_path => click))

@@ -6,6 +6,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources  :cpu,        :controller => 'cpu'
   map.resources  :memory,     :controller => 'memory'
   map.resources  :nic,        :controller => 'nic'
+
+  map.resources  :network_interface_terminations
   map.resources  :processes
   map.resources  :system_users
   map.resources  :access_logs

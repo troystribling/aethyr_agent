@@ -26,6 +26,7 @@ module Aethyr
               format.html {redirect_to(services_path)}
               format.js do
                 render :update do |page|
+                  page['display-click-path-wrapper'].hide
                   page['agent-display'].replace_html :partial => 'show'
                 end
               end
