@@ -4,25 +4,23 @@
   <hr class="display-top"> 
   <hr class="display-divide"> 
 
-  <div class="display-list-wrapper">
-    <table class="display-list">
-      <%= display_list_attribute 'name', @network_interface_termination.name, :class=>'even'%>
-      <%= display_list_attribute 'ip address', @network_interface_termination.ip_address, :class=>'odd'%>
-      <%= display_list_attribute 'broadcast address', @network_interface_termination.broadcast_address, :class=>'even'%>
-      <%= display_list_attribute 'mask', @network_interface_termination.mask, :class=>'odd'%>
-      <%= display_list_attribute 'ipv6 address', @network_interface_termination.ipv6_address, :class=>'even'%>
-      <%= display_list_attribute 'link _encapsulation', @network_interface_termination.link_encapsulation, :class=>'odd'%>
-      <%= display_list_attribute 'scope', @network_interface_termination.scope, :class=>'even'%>
-      <%= display_list_attribute 'status', @network_interface_termination.status, :class=>'odd'%>
-      <%= display_list_attribute 'mtu', @network_interface_termination.mtu, :class=>'even'%>
-      <%= display_list_attribute 'metric', @network_interface_termination.metric, :class=>'odd'%>
-      <%= display_list_attribute 'txqueuelen', @network_interface_termination.txqueuelen, :class=>'even'%>
-      <%= display_list_attribute 'interrrupt', @network_interface_termination.interrrupt, :class=>'odd'%>
-      <%= display_list_attribute 'base address', @network_interface_termination.base_address, :class=>'even'%>
-      <%= display_list_attribute 'created at', @network_interface_termination.created_at, :class=>'odd'%>
-      <%= display_list_attribute 'updated at', @network_interface_termination.updated_at, :class=>'even'%>
-    </table>
-  </div>
+  <% display_list(@network_interface_termination) do |nt| %>
+      <%= display_list_attribute nt, :name %>
+      <%= display_list_attribute nt, :ip_address %>
+      <%= display_list_attribute nt, :broadcast_address %>
+      <%= display_list_attribute nt, :mask %>
+      <%= display_list_attribute nt, :ipv6_address %>
+      <%= display_list_attribute nt, :link_encapsulation %>
+      <%= display_list_attribute nt, :scope %>
+      <%= display_list_attribute nt, :status %>
+      <%= display_list_attribute nt, :mtu %>
+      <%= display_list_attribute nt, :metric %>
+      <%= display_list_attribute nt, :txqueuelen %>
+      <%= display_list_attribute nt, :interrrupt %>
+      <%= display_list_attribute nt, :base_address %>
+      <%= display_list_attribute nt, :created_at %>
+      <%= display_list_attribute nt, :updated_at %>
+  <% end %>  
   
   <hr class="display-divide"> 
   <hr class="display-bottom"> 

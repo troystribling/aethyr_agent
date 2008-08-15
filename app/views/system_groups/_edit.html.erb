@@ -4,14 +4,12 @@
   <hr class="display-top"> 
   <hr class="display-divide"> 
 
-  <div class="display-list-wrapper">
-    <table class="display-list">
-      <%= display_list_attribute 'name', @system_group.name, :class=>'even'%>
-      <%= display_list_attribute 'gid', @system_group.gid, :class=>'odd'%>
-      <%= display_list_attribute 'created at', @system_group.created_at, :class=>'even'%>
-      <%= display_list_attribute 'updated at', @system_group.updated_at, :class=>'odd'%>
-    </table>
-  </div>
+  <% display_list(@system_group) do |g| %>
+    <%= display_list_attribute g, :name %>
+    <%= display_list_attribute g, :gid %>
+    <%= display_list_attribute g, :created_at %>
+    <%= display_list_attribute g, :updated_at %>
+  <% end %>  
   
   <hr class="display-divide"> 
   <hr class="display-bottom"> 

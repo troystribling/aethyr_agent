@@ -4,14 +4,12 @@
   <hr class="display-top"> 
   <hr class="display-divide"> 
 
-  <div class="display-list-wrapper">
-    <table class="display-list">
-      <%= display_list_attribute 'hardware address', @nic.hw_address, :class=>'even'%>
-      <%= display_list_attribute 'physical id', @nic.physical_id, :class=>'odd'%>
-      <%= display_list_attribute 'created at', @nic.created_at, :class=>'even'%>
-      <%= display_list_attribute 'updated at', @nic.updated_at, :class=>'odd'%>
-    </table>
-  </div>
+  <% display_list(@nic) do |n| %>
+    <%= display_list_attribute n, :hw_address %>
+    <%= display_list_attribute n, :physical_id %>
+    <%= display_list_attribute n, :created_at %>
+    <%= display_list_attribute n, :updated_at %>
+  <% end %>  
   
   <hr class="display-divide"> 
 

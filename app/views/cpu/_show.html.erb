@@ -4,16 +4,14 @@
   <hr class="display-top"> 
   <hr class="display-divide"> 
 
-  <div class="display-list-wrapper">
-    <table class="display-list">
-      <%= display_list_attribute 'count', @cpu.count, :class=>'even'%>
-      <%= display_list_attribute 'frequency', "#{@cpu.frequency} #{@cpu.frequency_units}", :class=>'odd'%>
-      <%= display_list_attribute 'vendor', @cpu.vendor, :class=>'even'%>
-      <%= display_list_attribute 'model', @cpu.model, :class=>'odd'%>
-      <%= display_list_attribute 'created at', @cpu.created_at, :class=>'even'%>
-      <%= display_list_attribute 'updated at', @cpu.updated_at, :class=>'odd'%>
-    </table>
-  </div>
+  <% display_list(@cpu) do |c| %>
+    <%= display_list_attribute c, :count %>
+    <%= display_list_attribute 'frequency', "#{c.frequency} #{c.frequency_units}" %>
+    <%= display_list_attribute c, :vendor %>
+    <%= display_list_attribute c, :model %>
+    <%= display_list_attribute c, :created_at %>
+    <%= display_list_attribute c, :updated_at %>
+  <% end %>  
   
   <hr class="display-divide"> 
   <hr class="display-bottom"> 

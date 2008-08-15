@@ -4,19 +4,17 @@
   <hr class="display-top"> 
   <hr class="display-divide"> 
 
-  <div class="display-list-wrapper">
-    <table class="display-list">
-      <%= display_list_attribute 'dns', @access_log.dns_name, :class=>'even'%>
-      <%= display_list_attribute 'ip address', @access_log.ip_address, :class=>'odd'%>
-      <%= display_list_attribute 'created at', @access_log.created_at, :class=>'even'%>
-      <%= display_list_attribute 'uri', @access_log.uri, :class=>'odd'%>
-      <%= display_list_attribute 'controller', @access_log.controller, :class=>'even'%>
-      <%= display_list_attribute 'action', @access_log.action, :class=>'odd'%>
-      <%= display_list_attribute 'http user agent', @access_log.http_user_agent, :class=>'even'%>
-      <%= display_list_attribute 'http refeerer', @access_log.http_referer, :class=>'odd'%>
-      <%= display_list_attribute 'parameters', @access_log.parameters.inspect, :class=>'even'%>
-    </table>
-  </div>
+  <% display_list(@access_log) do |a| %>
+    <%= display_list_attribute a, :dns_name %>
+    <%= display_list_attribute a, :ip_address %>
+    <%= display_list_attribute a, :created_at %>
+    <%= display_list_attribute a, :uri %>
+    <%= display_list_attribute a, :controller %>
+    <%= display_list_attribute a, :action %>
+    <%= display_list_attribute a, :http_user_agent %>
+    <%= display_list_attribute a, :http_referer %>
+    <%= display_list_attribute 'parameters', a.parameters.inspect %>
+  <% end %>  
   
   <hr class="display-divide"> 
   <hr class="display-bottom"> 

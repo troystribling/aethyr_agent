@@ -39,34 +39,6 @@ module Aethyr
       end
   
       ######################################################################################################
-      def display_list(model, &block)      
-        concat('<div class="display-list-wrapper">', block.binding)
-        concat('<table class="display-list">', block.binding)
-        yield(model)
-        concat('</table>', block.binding)
-        concat("</div>", block.binding)
-      end
-  
-      ######################################################################################################
-      def display_list_attribute(a1, a2, options = {})
-        attribute_options = {:class => "display-list-attribute"}
-        value_options = {:class => "display-list-value"}
-        unless a1.kind_of?(String)
-          item = content_tag(:td, a2.to_s, attribute_options) + content_tag(:td, a1.send(a2), value_options)  
-        else
-          item = content_tag(:td, a1, attribute_options) + content_tag(:td, a2, value_options)  
-        end      
-        content_tag :tr, item, options 
-      end
-  
-      ######################################################################################################
-      def display_list_value(value, options = {})
-        value_options = {:class => "display-list-value"}
-        item = content_tag(:td, value, value_options)       
-        content_tag :tr, item, options 
-      end
-  
-      ######################################################################################################
       def format_rsa_key(value)
         format_new_line(value, "\n", 'rsa_key')
       end

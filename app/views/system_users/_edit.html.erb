@@ -4,21 +4,19 @@
   <hr class="display-top"> 
   <hr class="display-top"> 
 
-  <div class="display-list-wrapper">
-    <table class="display-list">
-      <%= display_list_attribute 'name', @system_user.name, :class=>'even'%>
-      <%= display_list_attribute 'uid', @system_user.uid, :class=>'odd'%>
-      <%= display_list_attribute 'default group', 'default group', :class=>'even'%>
-      <%= display_list_attribute 'home directory', @system_user.home_directory, :class=>'odd'%>
-      <%= display_list_attribute 'login shell', @system_user.login_shell, :class=>'even'%>
-      <%= display_list_attribute 'full name', @system_user.full_name, :class=>'odd'%>
-      <%= display_list_attribute 'office', @system_user.office, :class=>'even'%>
-      <%= display_list_attribute 'extension', @system_user.extension, :class=>'odd'%>
-      <%= display_list_attribute 'home phone', @system_user.home_phone, :class=>'even'%>
-      <%= display_list_attribute 'created at', @system_user.created_at, :class=>'odd'%>
-      <%= display_list_attribute 'updated at', @system_user.updated_at, :class=>'even'%>
-    </table>
-  </div>
+  <% display_list(@system_user) do |u| %>
+    <%= display_list_attribute u, :name %>
+    <%= display_list_attribute u, :uid %>
+    <%= display_list_attribute 'default group', 'default group' %>
+    <%= display_list_attribute u, :home_directory %>
+    <%= display_list_attribute u, :login_shell %>
+    <%= display_list_attribute u, :full_name %>
+    <%= display_list_attribute u, :office %>
+    <%= display_list_attribute u, :extension %>
+    <%= display_list_attribute u, :home_phone %>
+    <%= display_list_attribute u, :created_at %>
+    <%= display_list_attribute u, :updated_at %>
+  <% end %>  
   
   <hr class="display-divide"> 
   <hr class="display-bottom"> 

@@ -4,14 +4,12 @@
   <hr class="display-top"> 
   <hr class="display-divide"> 
 
-  <div class="display-list-wrapper">
-    <table class="display-list">
-      <%= display_list_attribute 'total memory available', "#{@memory.total} #{@memory.total_units}", :class=>'even'%>
-      <%= display_list_attribute 'created at', @memory.created_at, :class=>'odd'%>
-      <%= display_list_attribute 'updated at', @memory.updated_at, :class=>'even'%>
-    </table>
-  </div>
-  
+  <% display_list(@memory) do |m| %>
+    <%= display_list_attribute 'total installed memory', "#{m.total} #{m.total_units}" %>
+    <%= display_list_attribute m, :created_at %>
+    <%= display_list_attribute m, :updated_at %>
+  <% end %>  
+
   <hr class="display-divide"> 
   <hr class="display-bottom"> 
 
