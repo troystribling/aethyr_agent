@@ -1,7 +1,7 @@
-<tr class=<%= cycle("even", "odd") %>>
-  <td><%= link_to_remote_with_load_notifier(system_user.name, :url => {:action => 'edit', :system_user_id => system_user.system_user_id}) %></td>
-  <td><%= system_user.uid %></td>
-  <td><%= 'default group' %></td>
-  <td><%= system_user.created_at %></td>
-  <td><%= system_user.updated_at %></td>
-</tr>
+<% display_model(system_user) do |s| %>
+  <%= display_model_attribute(link_to_remote_with_load_notifier(s.name, :url => {:action => 'edit', :system_user_id => s.system_user_id})) %>
+  <%= display_model_attribute(s.uid) %>
+  <%= display_model_attribute('default group') %>
+  <%= display_model_attribute(s.created_at) %>
+  <%= display_model_attribute(s.updated_at) %>
+<% end %>

@@ -46,9 +46,14 @@ module Aethyr
 
         ######################################################################################################
         def display_model(model, &block)      
-          concat("<tr class=#{cycle("even", "odd", )}>", block.binding)
+          concat("<tr class=#{cycle("even", "odd", :name => 'display_model')}>", block.binding)
             yield(model)
           concat("</tr>", block.binding)
+        end
+
+        ######################################################################################################
+        def display_model_attribute(attr)
+          content_tag :td, attr
         end
 
         ######################################################################################################
@@ -75,7 +80,7 @@ module Aethyr
             concat('</div>', block.binding)
           end
 
-          reset_cycle('display_list')
+          reset_cycle('display_model')
           
         end
 
