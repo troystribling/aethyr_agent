@@ -1,17 +1,14 @@
-<div class="display-control-wrapper">
+<% display_control(@system_group) do |model| %>
 
-  <h1>group: <em><%= @system_group.name%></em></h1>
-  <hr class="display-top"> 
-  <hr class="display-divide"> 
+  <%= display_header(:model => model) %>
 
-  <% display_list(@system_group) do |m| %>
+  <% display_list(model) do |m| %>
     <%= display_list_attribute m, :name %>
     <%= display_list_attribute m, :gid %>
     <%= display_list_attribute m, :created_at %>
     <%= display_list_attribute m, :updated_at %>
   <% end %>  
   
-  <hr class="display-divide"> 
-  <hr class="display-bottom"> 
+  <%= display_buttons %>
 
-</div>
+<% end %>  

@@ -145,7 +145,7 @@ module Aethyr
           model = models.first.class.name.underscore
           search = args[:search] || true
           controller = args[:controller] || model.pluralize
-          title = args[:title] || model + ' summary'
+          title = args[:title] || controller.humanize.downcase + ' summary'
 
           page_out = content_tag(:h1, title) + tag(:hr, {:class => 'page-divide'})                    
           page_out << render(:partial => "common/search", :object => {:model => "#{model}", :search_value => @search}) if search
