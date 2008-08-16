@@ -13,7 +13,10 @@ class SystemUser < ActiveRecord::Base
 
   ######################################################################################################
   #### virtual attributes
-  attr_accessor :default_gid
+
+  ######################################################################################################
+  #### connection relations
+  connection_ingress
 
   ######################################################################################################
   #### validation
@@ -25,7 +28,17 @@ class SystemUser < ActiveRecord::Base
   ####################################################################################################
   def add_associations(supporter)
 
+    #### supporter relation
     supporter << self
+
+    #### termination and connection support relations
+    xc = AlnConnection.new(:name => self.name, :termination_type => 'SystemUserTermination')
+    term = SystemUserTermination.new(:name => self.name, :directionality => 'ingress')
+    self << [term, xc]
+    term.reload
+
+    #### connection relations
+    xc << term
 
   end
 

@@ -16,15 +16,17 @@ module Aethyr
           System.synchronize(Aethyr::Linux::Interface::System)
           sys = System.find_by_model(:first)
 
+          #### Memory, Cpu
           Memory.synchronize(Aethyr::Linux::Interface::Memory, sys)
           Cpu.synchronize(Aethyr::Linux::Interface::Cpu, sys)
 
           #### Nic, NetworkInterfaceTermination
-          NetworkInterfaceTermination.synchronize(Aethyr::Linux::Interface::NetworkInterfaces, sys)
+#          NetworkInterfaceTermination.synchronize(Aethyr::Linux::Interface::NetworkInterfaces, sys)
           
           #### SystemGroup, SystemUser
 #          SystemUser.synchronize(Aethyr::Linux::Interface::SystemUsers, sys)
           SystemGroup.synchronize(Aethyr::Linux::Interface::SystemGroups, sys)
+          
 #          ApplicationProcess.synchronize(Aethyr::Linux::Interface::ApplicationProcesses, sys)
 #          ApplicationThread.synchronize(Aethyr::Linux::Interface::ApplicationThreads, sys)
 #          Device.synchronize(Aethyr::Linux::Interface::Devices, sys)

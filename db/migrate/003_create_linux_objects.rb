@@ -189,6 +189,7 @@ class CreateLinuxObjects < ActiveRecord::Migration
     #### users
     create_table :system_users, :primary_key => :system_user_id, :force => true do |t|
       t.integer :uid
+      t.integer :default_gid
       t.string :full_name
       t.string :office
       t.string :extension
