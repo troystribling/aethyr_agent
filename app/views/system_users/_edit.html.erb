@@ -1,24 +1,21 @@
-<div class="display-control-wrapper">
+<% display_control(@system_user) do |model| %>
 
-  <h1>user: <em><%= @system_user.name%></em></h1>
-  <hr class="display-top"> 
-  <hr class="display-top"> 
+  <%= display_header(:model => model) %>
 
-  <% display_list(@system_user) do |u| %>
-    <%= display_list_attribute u, :name %>
-    <%= display_list_attribute u, :uid %>
+  <% display_list(model) do |m| %>
+    <%= display_list_attribute m, :name %>
+    <%= display_list_attribute m, :uid %>
     <%= display_list_attribute 'default group', 'default group' %>
-    <%= display_list_attribute u, :home_directory %>
-    <%= display_list_attribute u, :login_shell %>
-    <%= display_list_attribute u, :full_name %>
-    <%= display_list_attribute u, :office %>
-    <%= display_list_attribute u, :extension %>
-    <%= display_list_attribute u, :home_phone %>
-    <%= display_list_attribute u, :created_at %>
-    <%= display_list_attribute u, :updated_at %>
+    <%= display_list_attribute m, :home_directory %>
+    <%= display_list_attribute m, :login_shell %>
+    <%= display_list_attribute m, :full_name %>
+    <%= display_list_attribute m, :office %>
+    <%= display_list_attribute m, :extension %>
+    <%= display_list_attribute m, :home_phone %>
+    <%= display_list_attribute m, :created_at %>
+    <%= display_list_attribute m, :updated_at %>
   <% end %>  
   
-  <hr class="display-divide"> 
-  <hr class="display-bottom"> 
+  <%= display_buttons %>
 
-</div>
+<% end %>  

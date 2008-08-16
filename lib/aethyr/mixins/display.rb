@@ -12,6 +12,54 @@ module Aethyr
       module Helper
           
         ######################################################################################################
+        def display_control(model, &block)      
+          concat('<div class="display-control-wrapper">', block.binding)
+            yield(model)
+          concat("</div>", block.binding)
+        end
+    
+        ######################################################################################################
+        def display_header(args, &block)      
+
+          args.assert_valid_keys(:title, :name, :model)
+
+          model = args[:model]
+          title = args[:title] || model.class.name.underscore.humanize.downcase
+          name = args[:name] || model.name 
+
+          if block_given?
+            concat("<h1>#{title}: <em>#{name}</em></h1>", block.binding)
+            concat('<hr class=display-top">', block.binding)
+            yield(model)
+            concat('<hr class=display-divide">', block.binding)
+          else
+            page_out  = content_tag :h1 do
+              "#{title}: " + content_tag(:em, "#{name}")
+            end 
+            page_out + tag(:hr, {:class => 'display-top'}) + tag(:hr, {:class => 'display-divide'})
+          end
+        
+
+        end
+
+        ######################################################################################################
+        def display_buttons(args = {}, &block)      
+
+          args.assert_valid_keys(:model)
+
+          model = args[:model]
+
+          if block_given?
+            concat('<hr class=display-divide">', block.binding)
+            yield(model)
+            concat('<hr class=display-bottom">', block.binding)
+          else
+            tag(:hr, {:class => 'display-divide'}) + tag(:hr, {:class => 'display-bottom'})
+          end
+
+        end
+
+        ######################################################################################################
         def display_list(model, &block)      
           concat('<div class="display-list-wrapper">', block.binding)
             concat('<table class="display-list">', block.binding)
@@ -61,8 +109,9 @@ module Aethyr
 
           args.assert_valid_keys(:models, :paginate)
 
-          models = args[:models]
+          models = args[:models]          
           model = models.first.class.name.underscore
+
           paginate = args[:paginate] || true
           controller = args[:controller] || model.pluralize
           action = "#{model.pluralize}_change_page"
@@ -75,9 +124,12 @@ module Aethyr
           concat('</table>', block.binding)
 
           if paginate
-            concat('<div class="bottom-toolbar">', block.binding)
-              concat(will_paginate(models, :params=> {:controller => "#{controller}", :action => "#{action}"}), block.binding)
-            concat('</div>', block.binding)
+            pag_browse = will_paginate(models, :params=> {:controller => "#{controller}", :action => "#{action}"})            
+            unless pag_browse.nil?
+              concat('<div class="bottom-toolbar">', block.binding)
+                concat(pag_browse, block.binding)
+              concat('</div>', block.binding)
+            end
           end
 
           reset_cycle('display_model')
