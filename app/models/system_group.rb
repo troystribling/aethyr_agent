@@ -29,6 +29,12 @@ class SystemGroup < ActiveRecord::Base
   ######################################################################################################
   #### class methods
   class << self
+
+    ####################################################################################################
+    def synchronize_associations(supporter)
+      SystemUser.synchronize(Aethyr::Linux::Interface::SystemUsers, supporter)
+    end
+    
   end  
 
 ######################################################################################################
