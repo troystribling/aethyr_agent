@@ -84,8 +84,16 @@ module Aethyr
             #{from_model}_remote_termination.supporter.to_descendant unless #{from_model}_remote_termination.nil?
           end
 
+          def #{from_model.pluralize}
+            #{from_model}_remote_terminations.collect{|t| t.supporter.to_descendant} unless #{from_model}_remote_terminations.empty?
+          end
+
           def #{from_model}_remote_termination
             #{from_model}_connection.find_termination_as_type(:first, :conditions => "aln_terminations.directionality = 'ingress'") unless #{from_model}_connection.nil?
+          end
+
+          def #{from_model}_remote_terminations
+            #{from_model}_connections.collect{|c| c.find_termination_as_type(:first, :conditions => "aln_terminations.directionality = 'ingress'")} unless #{from_model}_connections.empty?
           end
 
         do_eval
@@ -109,8 +117,24 @@ module Aethyr
             self.find_supported_by_model(#{model.classify}Termination, :first)
           end
 
+          def #{model}_terminations
+            self.find_supported_by_model(#{model.classify}Termination, :all)
+          end
+
+          def #{model}_termination_named(name)
+            self.find_supported_by_model(model, :first, :conditions => "aln_resources.name = '#{name.to_s}'")
+          end
+
           def #{model}_connection
             #{model}_termination.aln_connection unless #{model}_termination.nil?
+          end
+
+          def #{model}_connections
+            #{model}_terminations.collect{|t| t.aln_connection} unless #{model}_terminations.empty?
+          end
+
+          def #{model}_connection_named(name)
+            #{model}_termination_named(name).aln_connection unless #{model}_termination.nil?
           end
       
         do_eval
