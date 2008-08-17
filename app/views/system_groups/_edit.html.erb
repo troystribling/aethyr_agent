@@ -11,4 +11,10 @@
   
   <%= display_buttons %>
 
+  <% unless @network_interface_terminations.blank? %> 
+    <hr class="display-divide">     
+    <%= render :partial => "network_interface_terminations/network_interface_terminations_summary" %>
+    <hr class="display-bottom"> 
+  <% end %>
+
 <% end %>  

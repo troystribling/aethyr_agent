@@ -1,0 +1,7 @@
+<% display_models(:models => @system_users, :paginate => false) do %>
+  <%= display_model_header_label 'name' %>
+  <%= display_model_header_label 'uid' %>
+  <%= display_model_header_label 'default_group' %>
+  <%= display_model_header_label 'created_at' %>
+  <%= display_model_header_label 'updated_at' %>
+<% end %>

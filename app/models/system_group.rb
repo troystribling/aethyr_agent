@@ -33,10 +33,8 @@ class SystemGroup < ActiveRecord::Base
     user_models = supporter.find_supported_by_model(SystemUser, :all).select{|m| self.system_users.include?(m.name) or m.default_gid.eql?(self.gid)}
       
     #### user terminations
-    terms = {}
-    user_models.collect{|m| terms[m.name] = SystemUserTermination.new(:name => m.name, :directionality => 'egress')}
-    self << terms.values
-      
+    user_models.each{|m| self << SystemUserTermination.new(:name => m.name, :directionality => 'egress')}
+
     #### user connections
     user_models.each {|m| m.system_user_connection << self.system_user_termination_named(m.name)}
     
