@@ -17,7 +17,7 @@ class SystemGroupsController < ApplicationController
 
   ######################################################################################################
   #### declare model connection
-  has_egress_connections :from_models => :system_users
+  has_egress_connections :from_model => :system_user
 
   ######################################################################################################
   #### filters

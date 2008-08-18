@@ -36,14 +36,31 @@ module Aethyr
           ######################################################################################################
           def has_egress_connections(args = {})
           
-            args.assert_valid_keys(:from_models)
-            connecteded_models = args[:from_models].to_s         
+            args.assert_valid_keys(:from_model)
+            connecteded_models = args[:from_model].to_s.pluralize         
             model = /(\S+)Controller/.match(self.name).to_a.last.singularize.underscore
       
             class_eval <<-do_eval
 
               def find_connected_#{connecteded_models}
-                @#{connecteded_models} = @#{model}.system_users
+                @#{connecteded_models} = @#{model}.#{connecteded_models}
+              end
+                
+            do_eval
+                   
+          end
+
+          ######################################################################################################
+          def has_inress_connections(args = {})
+          
+            args.assert_valid_keys(:from_model)
+            connecteded_models = args[:from_model].to_s.pluralize         
+            model = /(\S+)Controller/.match(self.name).to_a.last.singularize.underscore
+      
+            class_eval <<-do_eval
+
+              def find_connected_#{connecteded_models}
+                @#{connecteded_models} = @#{model}.#{connecteded_models}
               end
                 
             do_eval

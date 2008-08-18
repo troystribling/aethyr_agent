@@ -31,8 +31,7 @@ protected
 
   ######################################################################################################
   def find_connected_system_groups
-p @system_user
-p @system_user.system_groups
+    @system_groups = @system_user.system_groups
   end
     
 end
