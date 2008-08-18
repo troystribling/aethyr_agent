@@ -17,6 +17,7 @@ class SystemUsersController < ApplicationController
   ######################################################################################################
   #### filters
   before_filter :find_system_user, :only => [:edit]
+  before_filter :find_connected_system_groups, :only => [:edit]
   before_filter :add_page_to_click_path, :only => [:edit]
   before_filter :set_root_page_of_click_path, :only => [:system_users_summary]
 
@@ -27,5 +28,11 @@ class SystemUsersController < ApplicationController
   
 ########################################################################################################
 protected
+
+  ######################################################################################################
+  def find_connected_system_groups
+p @system_user
+p @system_user.system_groups
+  end
     
 end

@@ -48,12 +48,12 @@ module Aethyr
           target.class_eval <<-do_eval
 
             def #{to_model.pluralize}              
-              #{to_model}_remote_terminations.collect {|t| t.supporter.to_descendant}
+              #{to_model}_remote_terminations.collect {|t| t.supporter.to_descendant}.select{|t| t.kind_of?(#{to_model.classify})}
             end
 
             def #{to_model}_remote_terminations
               unless #{model}_connection.nil?
-                #{model}_connection.find_termination_as_type(:all, :conditions => "aln_terminations.directionality = 'egress'")
+                #{model}_connection.find_termination_as_type(:all, :conditions => "aln_terminations.directionality = 'egress'")                
               else
                 []
               end
@@ -85,7 +85,7 @@ module Aethyr
           end
 
           def #{from_model.pluralize}
-            #{from_model}_remote_terminations.collect{|t| t.supporter.to_descendant} unless #{from_model}_remote_terminations.empty?
+            #{from_model}_remote_terminations.collect{|t| t.supporter.to_descendant}
           end
 
           def #{from_model}_remote_termination
@@ -93,7 +93,7 @@ module Aethyr
           end
 
           def #{from_model}_remote_terminations
-            #{from_model}_connections.collect{|c| c.find_termination_as_type(:first, :conditions => "aln_terminations.directionality = 'ingress'")} unless #{from_model}_connections.empty?
+            #{from_model}_connections.collect{|c| c.find_termination_as_type(:first, :conditions => "aln_terminations.directionality = 'ingress'")}
           end
 
         do_eval
@@ -121,8 +121,8 @@ module Aethyr
             self.find_supported_by_model(#{model.classify}Termination, :all)
           end
 
-          def #{model}_termination_named(name)
-            self.find_supported_by_model(model, :first, :conditions => "aln_resources.name = '#{name.to_s}'")
+          def #{model}_termination_named(term_name)
+            self.find_supported_by_model(#{model.classify}Termination, :first, :conditions => "aln_resources.name = '" + term_name.to_s + "'")
           end
 
           def #{model}_connection
@@ -130,7 +130,7 @@ module Aethyr
           end
 
           def #{model}_connections
-            #{model}_terminations.collect{|t| t.aln_connection} unless #{model}_terminations.empty?
+            #{model}_terminations.collect{|t| t.aln_connection}
           end
 
           def #{model}_connection_named(name)

@@ -1,5 +1,5 @@
 <% display_model(system_user) do |s| %>
-  <%= display_model_attribute(link_to_remote_with_load_notifier(s.name, :url => {:action => 'edit', :system_user_id => s.system_user_id})) %>
+  <%= display_model_attribute(link_to_remote_with_load_notifier(s.name, :url => {:controller => 'system_users', :action => 'edit', :system_user_id => s.system_user_id})) %>
   <%= display_model_attribute(s.uid) %>
   <%= display_model_attribute('default group') %>
   <%= display_model_attribute(s.created_at) %>

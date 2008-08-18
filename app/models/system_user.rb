@@ -16,7 +16,7 @@ class SystemUser < ActiveRecord::Base
 
   ######################################################################################################
   #### connection relations
-  connection_ingress
+  connection_ingress :to_model => :system_group
 
   ######################################################################################################
   #### validation

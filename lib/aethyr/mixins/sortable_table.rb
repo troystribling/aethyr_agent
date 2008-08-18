@@ -101,7 +101,7 @@ module Aethyr
             model = args[:model].to_s
             search = args[:search] || false
             paginate = args[:paginate] || false
-            partial = args[:partial] || "#{model.pluralize}"
+            partial = args[:partial] || "#{model.pluralize}_sortable_table"
             object = args[:object] || "@#{model.pluralize}"
             update = args[:update] || "#{model.pluralize}-list"
             session_key = ":#{model.pluralize}_sortable_table"

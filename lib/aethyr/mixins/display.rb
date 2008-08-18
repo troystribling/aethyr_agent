@@ -100,6 +100,11 @@ module Aethyr
         end
 
         ######################################################################################################
+        def display_model_header_label(lable)
+          content_tag :th, lable
+        end
+
+        ######################################################################################################
         def display_model_attribute(attr)
           content_tag :td, attr
         end
@@ -112,7 +117,7 @@ module Aethyr
           models = args[:models]          
           model = models.first.class.name.underscore
 
-          paginate = args[:paginate] || true
+          args[:paginate].nil? ? paginate = true : paginate = false
           controller = args[:controller] || model.pluralize
           action = "#{model.pluralize}_change_page"
 
@@ -137,6 +142,25 @@ module Aethyr
         end
 
         ######################################################################################################
+        def display_table_of_models(args)
+          
+          args.assert_valid_keys(:models)
+
+          models = args[:models]
+
+          return if models.empty?
+          
+          models_text = models.first.class.name.underscore.pluralize
+
+          page_out = content_tag(:h2, models_text.humanize.downcase) + tag(:hr, {:class => 'page-divide'})                    
+          page_out << render(:partial => "#{models_text}/#{models_text}_table")
+          page_out << tag(:hr, {:class => 'page-divide'})          
+          
+          page_out 
+          
+        end
+
+        ######################################################################################################
         def display_models_summary(args)
 
           args.assert_valid_keys(:models, :controller, :search, :title)
@@ -151,7 +175,7 @@ module Aethyr
           page_out << render(:partial => "common/search", :object => {:model => "#{model}", :search_value => @search}) if search
           page_out << tag(:hr, {:class => 'page-top'})          
           page_out << content_tag(:div, {:id => "#{controller}-list"}) do 
-            render(:partial => "#{controller}/#{model.pluralize}") unless models.empty? 
+            render(:partial => "#{controller}/#{model.pluralize}_sortable_table") unless models.empty? 
           end
           page_out << tag(:hr, {:class => 'page-bottom'})
           

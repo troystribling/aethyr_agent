@@ -5,6 +5,7 @@ class SystemGroupsController < ApplicationController
   ######################################################################################################
   #### mixins
   include Aethyr::Mixins::MultimodelControllerHelper
+  include Aethyr::Aln::ConnectionControllerHelper
 
   ######################################################################################################
   #### default layout
@@ -15,6 +16,10 @@ class SystemGroupsController < ApplicationController
   responds_to_sortable_table :model => :system_group, :search => true, :paginate => 17
 
   ######################################################################################################
+  #### declare model connection
+  has_egress_connections :from_models => :system_users
+
+  ######################################################################################################
   #### filters
   before_filter :find_system_group, :only => [:edit]
   before_filter :find_connected_system_users, :only => [:edit]
@@ -23,10 +28,5 @@ class SystemGroupsController < ApplicationController
 
 ########################################################################################################
 protected
-
-  ######################################################################################################
-  def find_connected_system_users    
-    @system_users = @system_group.system_users
-  end
   
 end

@@ -4,19 +4,19 @@
 module Aethyr
 
     ########################################################################################################
-    #### Mixins
+    #### Aln
     ########################################################################################################
-    module Mixins
+    module Aln
   
       ########################################################################################################
       #### methods added to controllers
       ########################################################################################################
-      module SupporterControllerHelper
+      module ConnectionControllerHelper
   
         ######################################################################################################
         def self.included(base) 
-          base.send(:include, Aethyr::Mixins::SupporterControllerHelper::InstanceMethods) 
-          base.extend(Aethyr::Mixins::SupporterControllerHelper::ClassMethods)
+          base.send(:include, InstanceMethods) 
+          base.extend(ClassMethods)
         end
 
         ########################################################################################################
@@ -34,18 +34,16 @@ module Aethyr
         module ClassMethods
 
           ######################################################################################################
-          def has_supported(args = {})
+          def has_egress_connections(args = {})
           
-            args.assert_valid_keys(:model, :sort_column)
-            supported_models = args[:model].to_s.pluralize         
-            column = args[:column] || 'name'
+            args.assert_valid_keys(:from_models)
+            connecteded_models = args[:from_models].to_s         
             model = /(\S+)Controller/.match(self.name).to_a.last.singularize.underscore
       
             class_eval <<-do_eval
 
-              def find_#{supported_models}
-                self.initialize_sortable_table_session(:session_key => :#{supported_models}_sortable_table, :column => '#{column}', :sort => 'sort-up', :force => false)
-                @#{supported_models} = #{supported_models.camelize}Controller.paginate_in_support_hierarchy_by_model(@#{model}, session)
+              def find_connected_#{connecteded_models}
+                @#{connecteded_models} = @#{model}.system_users
               end
                 
             do_eval

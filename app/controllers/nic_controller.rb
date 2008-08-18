@@ -5,7 +5,7 @@ class NicController < ApplicationController
   ######################################################################################################
   #### mixins
   include Aethyr::Mixins::MonomodelControllerHelper
-  include Aethyr::Mixins::SupporterControllerHelper
+  include Aethyr::Aln::SupporterControllerHelper
 
   ######################################################################################################
   #### default layout
@@ -13,7 +13,7 @@ class NicController < ApplicationController
 
   ######################################################################################################
   #### supported models
-  has_supported :model => :network_interface_termination, :sort_column => 'name'
+  has_supported :models => :network_interface_terminations, :sort_column => 'name'
 
   ######################################################################################################
   #### filters
