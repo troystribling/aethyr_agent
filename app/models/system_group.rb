@@ -13,7 +13,7 @@ class SystemGroup < ActiveRecord::Base
 
   ######################################################################################################
   #### virtual attributes
-  attr_accessor :system_users
+  attr_accessor :users
 
   ######################################################################################################
   #### connection relations
@@ -30,7 +30,7 @@ class SystemGroup < ActiveRecord::Base
     supporter << self
 
     #### associated users
-    user_models = supporter.find_supported_by_model(SystemUser, :all).select{|m| self.system_users.include?(m.name) or m.default_gid.eql?(self.gid)}
+    user_models = supporter.find_supported_by_model(SystemUser, :all).select{|m| self.users.include?(m.name) or m.default_gid.eql?(self.gid)}
       
     #### user terminations
     user_models.each{|m| self << SystemUserTermination.new(:name => m.name, :directionality => 'egress')}
