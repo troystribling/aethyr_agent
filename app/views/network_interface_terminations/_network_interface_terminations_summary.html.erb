@@ -1,7 +1,2 @@
-<h1>network interfaces</h1>
-<hr class="display-divide"> 
-
-<div id = "network_interface_terminations-list">
-  <%= render :partial => "network_interface_terminations/network_interface_terminations" unless @network_interface_terminations.empty? %>
-</div>
+<%= display_models_summary :models => @network_interface_terminations, :title => 'network interfaces' %>
   
