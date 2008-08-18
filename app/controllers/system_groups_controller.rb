@@ -16,7 +16,7 @@ class SystemGroupsController < ApplicationController
   responds_to_sortable_table :model => :system_group, :search => true, :paginate => 17
 
   ######################################################################################################
-  #### declare model connection
+  #### declare model connections
   has_egress_connections :from_model => :system_user
 
   ######################################################################################################

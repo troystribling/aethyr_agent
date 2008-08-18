@@ -5,6 +5,7 @@ class SystemUsersController < ApplicationController
   ######################################################################################################
   #### mixins
   include Aethyr::Mixins::MultimodelControllerHelper
+  include Aethyr::Aln::ConnectionControllerHelper
 
   ######################################################################################################
   #### default layout
@@ -13,6 +14,10 @@ class SystemUsersController < ApplicationController
   ######################################################################################################
   #### declare sortable tables
   responds_to_sortable_table :model => :system_user, :search => true, :paginate => 17
+
+  ######################################################################################################
+  #### declare model connections
+  has_ingress_connections :to_model => :system_group
 
   ######################################################################################################
   #### filters

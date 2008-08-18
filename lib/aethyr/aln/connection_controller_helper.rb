@@ -37,6 +37,7 @@ module Aethyr
           def has_egress_connections(args = {})
           
             args.assert_valid_keys(:from_model)
+            
             connecteded_models = args[:from_model].to_s.pluralize         
             model = /(\S+)Controller/.match(self.name).to_a.last.singularize.underscore
       
@@ -51,10 +52,11 @@ module Aethyr
           end
 
           ######################################################################################################
-          def has_inress_connections(args = {})
+          def has_ingress_connections(args = {})
           
-            args.assert_valid_keys(:from_model)
-            connecteded_models = args[:from_model].to_s.pluralize         
+            args.assert_valid_keys(:to_model)
+            
+            connecteded_models = args[:to_model].to_s.pluralize         
             model = /(\S+)Controller/.match(self.name).to_a.last.singularize.underscore
       
             class_eval <<-do_eval
