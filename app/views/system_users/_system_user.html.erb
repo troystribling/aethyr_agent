@@ -1,7 +1,8 @@
 <% display_model(system_user) do |s| %>
+  <% group = s.find_default_group %>
   <%= display_model_attribute link_to_remote_with_load_notifier(s.name, :url => {:controller => 'system_users', :action => 'edit', :system_user_id => s.system_user_id}) %>
   <%= display_model_attribute s.uid %>
-  <%= display_model_attribute 'default group' %>
+  <%= display_model_attribute link_to_remote_with_load_notifier(group.name, :url => {:controller => 'system_groups', :action => 'edit', :system_group_id => group.system_group_id}) %>
   <%= display_model_attribute s.created_at %>
   <%= display_model_attribute s.updated_at %>
 <% end %>

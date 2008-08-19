@@ -1,9 +1,6 @@
 <tr class=<%= cycle("even", "odd") %>>
   <td><%= link_to_remote_with_load_notifier(network_interface_termination.name, :url => {:controller => 'network_interface_terminations', :action => 'edit', :network_interface_termination_id => network_interface_termination.network_interface_termination_id}) %></td>
   <td><%= network_interface_termination.ip_address %></td>
-  <td><%= network_interface_termination.broadcast_address %></td>
-  <td><%= network_interface_termination.mask %></td>
-  <td><%= network_interface_termination.link_encapsulation %></td>
   <td><%= network_interface_termination.created_at %></td>
   <td><%= network_interface_termination.updated_at %></td>
 </tr>

@@ -1,5 +1,5 @@
 <% display_model(system_group) do |m| %>
-  <%= display_model_attribute(link_to_remote_with_load_notifier(m.name, :url => {:action => 'edit', :system_group_id => m.system_group_id})) %>
+  <%= display_model_attribute(link_to_remote_with_load_notifier(m.name, :url => {:controller => 'system_groups', :action => 'edit', :system_group_id => m.system_group_id})) %>
   <%= display_model_attribute(m.gid) %>
   <%= display_model_attribute(m.created_at) %>
   <%= display_model_attribute(m.updated_at) %>

@@ -1,22 +1,16 @@
-<div class="display-control-wrapper">
+<% display_control(@nic) do |model| %>
 
-  <h1>nic</h1>
-  <hr class="display-top"> 
-  <hr class="display-divide"> 
+  <%= display_header(:model => model) %>
 
-  <% display_list(@nic) do |n| %>
+  <% display_list(model) do |n| %>
     <%= display_list_attribute n, :hw_address %>
     <%= display_list_attribute n, :physical_id %>
     <%= display_list_attribute n, :created_at %>
     <%= display_list_attribute n, :updated_at %>
   <% end %>  
   
-  <hr class="display-divide"> 
+  <%= display_buttons %>
 
-  <% unless @network_interface_terminations.blank? %> 
-    <hr class="display-divide">     
-    <%= render :partial => "network_interface_terminations/network_interface_terminations_summary" %>
-    <hr class="display-bottom"> 
-  <% end %>
+  <%= display_table_of_models(:models => @network_interface_terminations) %>
 
-</div>
+<% end %>  

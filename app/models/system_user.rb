@@ -42,6 +42,11 @@ class SystemUser < ActiveRecord::Base
 
   end
 
+  ####################################################################################################
+  def find_default_group
+    SystemGroup.find_by_gid(self.default_gid)
+  end
+
   ######################################################################################################
   #### class methods
   class << self

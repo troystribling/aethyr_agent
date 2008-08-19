@@ -21,10 +21,9 @@ module Aethyr
           Cpu.synchronize(Aethyr::Linux::Interface::Cpu, sys)
 
           #### Nic, NetworkInterfaceTermination
-#          NetworkInterfaceTermination.synchronize(Aethyr::Linux::Interface::NetworkInterfaces, sys)
+          NetworkInterfaceTermination.synchronize(Aethyr::Linux::Interface::NetworkInterfaces, sys)
           
           #### SystemGroup, SystemUser
-#          SystemUser.synchronize(Aethyr::Linux::Interface::SystemUsers, sys)
           SystemGroup.synchronize(Aethyr::Linux::Interface::SystemGroups, sys)
           
 #          ApplicationProcess.synchronize(Aethyr::Linux::Interface::ApplicationProcesses, sys)
