@@ -13,7 +13,7 @@ class ApplicationProcess < ActiveRecord::Base
 
   ######################################################################################################
   #### virtual attributes
-  attr_accessor :user, :ppid, :tt, :user
+  attr_accessor :user, :ppid, :tt
 
   ######################################################################################################
   #### validation

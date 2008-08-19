@@ -76,7 +76,6 @@ class CreateLinuxObjects < ActiveRecord::Migration
       t.boolean  :ni
       t.integer  :sz
       t.integer  :vsz
-      t.integer  :sess
       t.integer  :rss
       t.string   :wchan
       t.string   :stat
@@ -97,7 +96,6 @@ class CreateLinuxObjects < ActiveRecord::Migration
       t.boolean  :ni
       t.integer  :sz
       t.integer  :vsz
-      t.integer  :sess
       t.integer  :rss
       t.string   :wchan
       t.string   :stat

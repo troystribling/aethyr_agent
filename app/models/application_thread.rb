@@ -13,7 +13,7 @@ class ApplicationThread < ActiveRecord::Base
 
   ######################################################################################################
   #### virtual attributes
-  attr_accessor :user, :ppid, :tt, :user, :pid
+  attr_accessor :tt, :sess, :pid
 
   ######################################################################################################
   #### validation
@@ -35,7 +35,13 @@ class ApplicationThread < ActiveRecord::Base
       params[:name]
     end
     
+    ####################################################################################################
+    def synchronize_associations(supporter)
+      Device.synchronize(Aethyr::Linux::Interface::Devices, supporter)
+    end
+    
   end  
+
 
 ######################################################################################################
 protected
