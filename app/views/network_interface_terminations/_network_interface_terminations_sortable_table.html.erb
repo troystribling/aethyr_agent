@@ -1,13 +1,6 @@
-<table class="table-data">
-  <tr>
-    <%= network_interface_terminations_sort_link :column => :name %>
-    <%= network_interface_terminations_sort_link :column => :ip_address %>
-    <%= network_interface_terminations_sort_link :column => :created_at %>
-    <%= network_interface_terminations_sort_link :column => :updated_at %>
-  </tr>
-  <%= render(:partial => "network_interface_terminations/network_interface_termination" , :collection => @network_interface_terminations) %>
-</table>
-
-<div class="bottom-toolbar">
-  <%= will_paginate @network_interface_terminations, :params=> {:controller => 'network_interface_terminations', :action => 'network_interface_terminations_change_page'} %>
-</div> 
+<% display_models(:models => @network_interface_terminations) do %>
+  <%= network_interface_terminations_sort_link :column => :name %>
+  <%= network_interface_terminations_sort_link :column => :ip_address %>
+  <%= network_interface_terminations_sort_link :column => :created_at %>
+  <%= network_interface_terminations_sort_link :column => :updated_at %>
+<% end %>

@@ -1,8 +1,6 @@
-<div class="display-control-wrapper">
+<% display_control(@network_interface_termination) do |model| %>
 
-  <h1>network _interface termination: <em><%= @network_interface_termination.name%></em></h1>
-  <hr class="display-top"> 
-  <hr class="display-divide"> 
+  <%= display_header(:model => model, :title => 'network interface') %>
 
   <% display_list(@network_interface_termination) do |nt| %>
       <%= display_list_attribute nt, :name %>
@@ -22,7 +20,6 @@
       <%= display_list_attribute nt, :updated_at %>
   <% end %>  
   
-  <hr class="display-divide"> 
-  <hr class="display-bottom"> 
+  <%= display_buttons %>
 
-</div>
+<% end %>  
