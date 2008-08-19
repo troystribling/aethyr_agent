@@ -144,16 +144,16 @@ module Aethyr
         ######################################################################################################
         def display_table_of_models(args)
           
-          args.assert_valid_keys(:models, :partial)
+          args.assert_valid_keys(:models, :partial, :title)
 
           models = args[:models]
-          partial = args[:partial] || "#{models_text}_sortable_table"
-
           return if models.empty?
           
           models_text = models.first.class.name.underscore.pluralize
+          partial = args[:partial] || "#{models_text}_sortable_table"
+          title = args[:title] || model_text
 
-          page_out = content_tag(:h2, models_text.humanize.downcase) + tag(:hr, {:class => 'page-divide'})                    
+          page_out = content_tag(:h2, title) + tag(:hr, {:class => 'page-divide'})                    
           page_out << render(:partial => "#{models_text}/#{partial}")
           page_out << tag(:hr, {:class => 'page-divide'})          
           
