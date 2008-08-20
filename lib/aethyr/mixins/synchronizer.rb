@@ -36,8 +36,8 @@ module Aethyr
           end
                      
           ######################################################################################################
-          def synchronize(interface, supporter = nil)
-            self.synchronize_associations(supporter) if self.respond_to?(:synchronize_associations)     
+          def synchronize(interface, supporter = nil, association_sync = true)
+            self.synchronize_associations(supporter) if (self.respond_to?(:synchronize_associations) and association_sync)
             local_models = self.find_local_models(supporter)
             remote_models = interface.find
             self.synchronize_models(supporter, local_models, remote_models)

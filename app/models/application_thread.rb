@@ -37,7 +37,7 @@ class ApplicationThread < ActiveRecord::Base
     
     ####################################################################################################
     def synchronize_associations(supporter)
-      Device.synchronize(Aethyr::Linux::Interface::Devices, supporter)
+      ApplicationProcess.synchronize(Aethyr::Linux::Interface::ApplicationProcesses, supporter)
     end
     
   end  

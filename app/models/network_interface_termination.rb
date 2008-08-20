@@ -24,7 +24,7 @@ class NetworkInterfaceTermination < ActiveRecord::Base
       supporter << self
     else
       nic = supporter.find_supported_by_model(Nic, :first, :conditions => "nics.hw_address = '#{self.hw_address.downcase}'")
-      nic << self
+      nic << self unless nic.nil?
     end        
   end
 

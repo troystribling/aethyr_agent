@@ -20,10 +20,18 @@ class ApplicationProcess < ActiveRecord::Base
   validates_presence_of  :pid
 
   ####################################################################################################
-  def add_associations(supporter)
+  def add_associations(system)
 
-    supporter << self
-
+     if self.ppid.eql?(0)
+       system << self
+     else
+       parent_process = ApplicationProcess.find_by_pid(self.ppid)
+       parent_process << self unless parent_process.nil?
+     end
+   
+      user = supporter.find_supported_by_model(SystemUser, :first, :conditions => "aln_resources.name = '#{self.user}'")
+      dev = supporter.find_supported_by_model(Device, :first, :conditions => "aln_resources.name = '#{self.tt}'")
+   
   end
 
   ######################################################################################################
@@ -36,6 +44,12 @@ class ApplicationProcess < ActiveRecord::Base
       params[:name]
     end
 
+    ####################################################################################################
+    def synchronize_associations(supporter)
+      SystemUser.synchronize(Aethyr::Linux::Interface::SystemUsers, supporter)
+      Devices.synchronize(Aethyr::Linux::Interface::Devices, supporter)
+    end
+    
     ######################################################################################################
     def synchronize_models(supporter, local_models, remote_models)
       new_models = []
