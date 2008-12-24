@@ -4,5 +4,5 @@ build inventory database
 
   rake aethyr:inventory:all
 
-Some commands used in inventory collection are only supported by Debian distributions
+Some shell commands used in inventory collection are only supported by Debian distributions
 
