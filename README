@@ -1,4 +1,4 @@
-aethyr_agent is a Rails implementation of an Ubuntu linux agent. It provides the ability to automatically discover the inventory assets of a linux host and construct a configuration database. A web interface is provided for browsing the database. The agent is intended to act as an interface between the aethyr AWS management application (see http://github.com/troystribling/aethyr/tree/master) and the machine instance.
+aethyr_agent is a Rails implementation of an Ubuntu linux agent. It provides the ability to automatically discover the inventory assets of a linux host and construct a configuration database. A web interface is provided for browsing the database. The agent is intended to act as an interface between the aethyr AWS management application and the machine instance.
 
 build inventory database
 
